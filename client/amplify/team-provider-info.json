@@ -1,0 +1,20 @@
+{
+  "dev": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-imdbclient-dev-0d8fa-authRole",
+      "UnauthRoleArn": "arn:aws:iam::637423178421:role/amplify-imdbclient-dev-0d8fa-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::637423178421:role/amplify-imdbclient-dev-0d8fa-authRole",
+      "Region": "us-east-1",
+      "DeploymentBucketName": "amplify-imdbclient-dev-0d8fa-deployment",
+      "UnauthRoleName": "amplify-imdbclient-dev-0d8fa-unauthRole",
+      "StackName": "amplify-imdbclient-dev-0d8fa",
+      "StackId": "arn:aws:cloudformation:us-east-1:637423178421:stack/amplify-imdbclient-dev-0d8fa/f59b57e0-26fb-11ef-a3c5-0afff9ea8c57",
+      "AmplifyAppId": "d2cqlvazj6nhr8"
+    },
+    "categories": {
+      "auth": {
+        "imdbclientbf80e9ea": {}
+      }
+    }
+  }
+}
