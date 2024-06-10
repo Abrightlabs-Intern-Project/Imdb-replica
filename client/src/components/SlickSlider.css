@@ -1,0 +1,12 @@
+.slick-slider {
+    background-color: black;
+    padding: 20px;
+}
+
+.slick-slide > div {
+    margin: 0 10px;
+}
+
+.slick-list {
+    padding: 0 10px;
+}
