@@ -4,6 +4,8 @@ import { MovieModule } from './movie/movie.module';
 import { join } from 'path';
 import { GraphQLModule } from '@nestjs/graphql';
 import { PrismaService } from './prisma/prisma.service';
+import { AuthModule } from './auth/auth.module';
+import { WatchlistModule } from './watchlist/watchlist.module';
 
 @Module({
   imports: [
@@ -13,6 +15,8 @@ import { PrismaService } from './prisma/prisma.service';
       path: '/api/graphql',
     }),
     MovieModule,
+    AuthModule,
+    WatchlistModule,
   ],
   providers: [PrismaService],
 })

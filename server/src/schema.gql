@@ -31,6 +31,25 @@ type Movie {
   response: String!
 }
 
+type Watchlist {
+  id: ID!
+  user: User!
+  movie: Movie!
+}
+
+type User {
+  id: ID!
+  email: String!
+  watchlist: [Watchlist!]
+}
+
 type Query {
   movies: [Movie!]!
+  getWatchlist(userEmail: String!): [Movie!]!
+}
+
+type Mutation {
+  loginUser(email: String!): User!
+  addToWatchlist(userEmail: String!, imdbID: String!): Movie!
+  removeFromWatchlist(userEmail: String!, imdbID: String!): Boolean!
 }

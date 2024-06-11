@@ -8,7 +8,7 @@ const MovieCard:FC<{props: Movie}> = ({ props }) => {
   return (
     <div className="flex flex-col bg-[#1a1a1a] rounded">
       <Link to={`/movie/${props.imdbID}`}>
-        <img className="w-full object-cover" src={props.poster} alt="" />
+        <img className="w-full object-cover h-72" src={props.poster} alt="" />
       </Link>
       <div className="flex flex-col gap-2 py-2 px-3">
         <div className="flex py-1 gap-2">

@@ -23,6 +23,7 @@ model Movie {
   country     String
   awards      String
   poster      String
+  ratings     String
   metascore   String
   imdbRating  String
   imdbVotes   String
@@ -33,4 +34,21 @@ model Movie {
   production  String
   website     String
   response    String
+  watchlist   Watchlist[]
+}
+
+model User {
+  id       Int      @id @default(autoincrement())
+  email    String   @unique
+  watchlist Watchlist[]
+}
+
+model Watchlist {
+  id          Int    @id @default(autoincrement())
+  userEmail   String
+  user        User   @relation(fields: [userEmail], references: [email])
+  imdbID      String
+  movie       Movie  @relation(fields: [imdbID], references: [imdbID])
+
+  @@unique([userEmail, imdbID])
 }

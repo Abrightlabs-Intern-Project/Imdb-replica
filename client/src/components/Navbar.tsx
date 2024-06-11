@@ -42,7 +42,7 @@ const Navbar: FC = () => {
         </Link>
         <div className="relative">
           <FaUserCircle
-            className="text-white text-3xl cursor-pointer"
+            className="text-white text-2xl cursor-pointer"
             onClick={toggleDropdown}
           />
           {dropdownOpen && (
