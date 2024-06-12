@@ -77,3 +77,66 @@ export const GET_WATCHLIST = gql`
     }
   }
 `;
+
+export const GET_MOVIE = gql`
+  query GetMovie($imdbID: String!) {
+    getMovie(imdbID: $imdbID) {
+      imdbID
+      title
+      year
+      rated
+      released
+      runtime
+      genre
+      director
+      writer
+      actors
+      plot
+      language
+      country
+      awards
+      poster
+      ratings
+      metascore
+      imdbRating
+      imdbVotes
+      type
+      dvd
+      boxOffice
+      production
+      website
+      response
+    }
+  }
+`;
+
+export const GET_REVIEW = gql`
+  query GetReviews($imdbID: String!) {
+    getReviews(imdbID: $imdbID) {
+      rating
+      title
+      description
+      userEmail
+    }
+  }
+`;
+
+export const ADD_REVIEW = gql`
+  mutation AddReview(
+    $userEmail: String!
+    $imdbID: String!
+    $rating: Int!
+    $title: String!
+    $description: String!
+  ) {
+    addReview(
+      userEmail: $userEmail
+      imdbID: $imdbID
+      rating: $rating
+      title: $title
+      description: $description
+    ) {
+      imdbID
+    }
+  }
+`;
