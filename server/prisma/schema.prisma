@@ -35,12 +35,14 @@ model Movie {
   website     String
   response    String
   watchlist   Watchlist[]
+  review      Review[]
 }
 
 model User {
   id       Int      @id @default(autoincrement())
   email    String   @unique
   watchlist Watchlist[]
+  review    Review[]
 }
 
 model Watchlist {
@@ -51,4 +53,15 @@ model Watchlist {
   movie       Movie  @relation(fields: [imdbID], references: [imdbID])
 
   @@unique([userEmail, imdbID])
+}
+
+model Review {
+  id          Int   @id @default(autoincrement())
+  userEmail   String
+  user        User  @relation(fields: [userEmail], references: [email])
+  imdbID      String
+  movie       Movie @relation(fields: [imdbID], references: [imdbID])
+  rating      Int
+  title       String
+  description String
 }

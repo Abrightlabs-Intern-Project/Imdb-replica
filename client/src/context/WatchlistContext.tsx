@@ -62,7 +62,7 @@ export function WatchlistProvider({ children }: WatchlistProviderProps) {
   });
 
   useEffect(() => {
-    if (data && data.getWatchlist) {
+    if (data && data.getWatchlist) {  
       setWatchlist(data.getWatchlist);
     }
   }, [data]);
@@ -72,7 +72,6 @@ export function WatchlistProvider({ children }: WatchlistProviderProps) {
 
   async function handleAddToWatchlist(movie: Movie, userEmail: string) {
     const imdbID = movie.imdbID;
-    console.log(userEmail);
     try {
       await addToWatchlistMutation({ variables: { imdbID, userEmail } });
     } catch (error) {
@@ -83,7 +82,6 @@ export function WatchlistProvider({ children }: WatchlistProviderProps) {
   function addToWatchlist(movie: Movie) {
     if (!watchlist.some((m) => m.imdbID === movie.imdbID)) {
       setWatchlist((prevWatchlist) => [...prevWatchlist, movie]);
-      const userEmail = user.signInDetails?.loginId || "";
       handleAddToWatchlist(movie, userEmail);
     }
   }
@@ -100,7 +98,6 @@ export function WatchlistProvider({ children }: WatchlistProviderProps) {
     setWatchlist((prevWatchlist) =>
       prevWatchlist.filter((movie) => movie.imdbID !== imdbID)
     );
-    const userEmail = user.signInDetails?.loginId || "";
     handleRemoveFromWatchlist(imdbID, userEmail);
   }
 

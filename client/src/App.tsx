@@ -14,6 +14,7 @@ import "./App.css";
 //@ts-ignore
 import awsExports from "./aws-exports";
 import { useAuthenticator } from "@aws-amplify/ui-react";
+import Review from "./pages/Review";
 
 Amplify.configure(awsExports);
 
@@ -67,6 +68,7 @@ const MainApp = () => {
           <Route path="*" element={<h1>Page Not Found!</h1>} />
           <Route path="/movie/:id" element={<MovieDetails />} />
           <Route path="/watchlist" element={<Watchlist />} />
+          <Route path="/movie/:id/review" element={<Review />} />
         </Routes>
         <Footer />
       </BrowserRouter>

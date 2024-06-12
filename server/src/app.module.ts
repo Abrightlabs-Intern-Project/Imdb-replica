@@ -6,6 +6,7 @@ import { GraphQLModule } from '@nestjs/graphql';
 import { PrismaService } from './prisma/prisma.service';
 import { AuthModule } from './auth/auth.module';
 import { WatchlistModule } from './watchlist/watchlist.module';
+import { ReviewModule } from './review/review.module';
 
 @Module({
   imports: [
@@ -17,6 +18,7 @@ import { WatchlistModule } from './watchlist/watchlist.module';
     MovieModule,
     AuthModule,
     WatchlistModule,
+    ReviewModule,
   ],
   providers: [PrismaService],
 })
