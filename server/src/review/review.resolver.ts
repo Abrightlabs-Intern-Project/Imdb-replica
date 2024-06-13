@@ -15,7 +15,7 @@ export class ReviewResolver {
   async addReview(
     @Args('userEmail') userEmail: string,
     @Args('imdbID') imdbID: string,
-    @Args('rating') rating: number,
+    @Args('rating') rating: string,
     @Args('title') title: string,
     @Args('description') description: string,
   ): Promise<Review> {
@@ -26,5 +26,13 @@ export class ReviewResolver {
       title,
       description,
     );
+  }
+
+  @Mutation(() => Boolean)
+  async deleteReview(
+    @Args('userEmail') userEmail: string,
+    @Args('imdbID') imdbID: string,
+  ): Promise<boolean> {
+    return this.reviewService.deleteReview(userEmail, imdbID);
   }
 }

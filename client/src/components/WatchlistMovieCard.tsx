@@ -27,10 +27,10 @@ const WatchlistMovieCard: FC<{ props: Movie }> = ({ props }) => {
         </div>
         <div>
           <button
-            className=" px-2 border border-black rounded bg-gray-200"
+            className="px-4 py-1 rounded-md bg-white text-gray-800 border border-gray-800 hover:bg-gray-200 focus:outline-none"
             onClick={() => removeFromWatchlist(props.imdbID)}
           >
-            X
+            Remove
           </button>
         </div>
       </div>

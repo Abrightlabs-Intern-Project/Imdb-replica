@@ -47,7 +47,7 @@ type Review {
   id: Int!
   userEmail: String!
   imdbID: String!
-  rating: Int!
+  rating: String!
   title: String!
   description: String!
 }
@@ -63,5 +63,6 @@ type Mutation {
   loginUser(email: String!): User!
   addToWatchlist(userEmail: String!, imdbID: String!): Movie!
   removeFromWatchlist(userEmail: String!, imdbID: String!): Boolean!
-  addReview(userEmail: String!, imdbID: String!, rating: Float!, title: String!, description: String!): Review!
+  addReview(userEmail: String!, imdbID: String!, rating: String!, title: String!, description: String!): Review!
+  deleteReview(userEmail: String!, imdbID: String!): Boolean!
 }

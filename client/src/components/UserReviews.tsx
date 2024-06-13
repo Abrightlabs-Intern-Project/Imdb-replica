@@ -7,11 +7,13 @@ import { GET_REVIEW } from "../ApolloClient/queries";
 const UserReviews: FC = () => {
   const { id } = useParams();
 
-  const {loading, error, data} = useQuery(GET_REVIEW, {variables: {imdbID: id}})
+  const { loading, error, data } = useQuery(GET_REVIEW, {
+    variables: { imdbID: id },
+  });
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error: {error.message}</p>;
-  
+
   const reviews = data?.getReviews;
 
   return (
@@ -28,7 +30,7 @@ const UserReviews: FC = () => {
           </Link>
         </div>
         {reviews.map((review: any) => {
-          return <ReviewCard review={review} />;
+          return <ReviewCard key={review.userEmail} review={review} id={id} />;
         })}
       </div>
     </div>
