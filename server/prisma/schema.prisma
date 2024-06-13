@@ -18,7 +18,7 @@ model Movie {
   director    String
   writer      String
   actors      String
-  plot        String
+  plot        String   @db.Text
   language    String
   country     String
   awards      String
@@ -39,8 +39,8 @@ model Movie {
 }
 
 model User {
-  id       Int      @id @default(autoincrement())
-  email    String   @unique
+  id       Int            @id @default(autoincrement())
+  email    String         @unique
   watchlist Watchlist[]
   review    Review[]
 }
@@ -56,12 +56,14 @@ model Watchlist {
 }
 
 model Review {
-  id          Int   @id @default(autoincrement())
+  id          Int    @id @default(autoincrement())
   userEmail   String
-  user        User  @relation(fields: [userEmail], references: [email])
+  user        User   @relation(fields: [userEmail], references: [email])
   imdbID      String
-  movie       Movie @relation(fields: [imdbID], references: [imdbID])
-  rating      Int
+  movie       Movie  @relation(fields: [imdbID], references: [imdbID])
+  rating      String
   title       String
-  description String
+  description String @db.Text
+
+  @@unique([userEmail, imdbID])
 }

@@ -125,7 +125,7 @@ export const ADD_REVIEW = gql`
   mutation AddReview(
     $userEmail: String!
     $imdbID: String!
-    $rating: Int!
+    $rating: String!
     $title: String!
     $description: String!
   ) {
@@ -138,5 +138,12 @@ export const ADD_REVIEW = gql`
     ) {
       imdbID
     }
+  }
+`;
+
+
+export const DELETE_REVIEW = gql`
+  mutation DeleteReview($userEmail: String!, $imdbID: String!) {
+    deleteReview(userEmail: $userEmail, imdbID: $imdbID)
   }
 `;

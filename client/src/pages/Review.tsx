@@ -5,11 +5,12 @@ import { useState } from "react";
 import { useAuthenticator } from "@aws-amplify/ui-react";
 
 const Review = () => {
-  const [rating, setRating] = useState<number>();
+  const [rating, setRating] = useState<string>();
   const [title, setTitle] = useState<string>();
   const [description, setDescription] = useState<string>();
 
   const { user } = useAuthenticator((context) => [context.user]);
+  const email = user.signInDetails?.loginId;
 
   const [addReviewMutation] = useMutation(ADD_REVIEW);
 
@@ -19,7 +20,7 @@ const Review = () => {
   });
 
   const handleRatingChange = (value: string) => {
-    setRating(+value);
+    setRating(value);
   };
 
   const handleTitleChange = (value: string) => {
@@ -32,22 +33,18 @@ const Review = () => {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const result = await addReviewMutation({
-      variables: { userEmail: user, imdbID: id, rating, title, description },
-    });
-    console.log(result);
     try {
       const result = await addReviewMutation({
-        variables: { userEmail: user, imdbID: id, rating, title, description },
+        variables: { userEmail: email, imdbID: id, rating, title, description },
       });
       if (result) {
-        alert("Review submitted successfully!");
-        setRating(0);
+        setRating("");
         setTitle("");
         setDescription("");
       }
+      window.location.reload();
     } catch (error) {
-      console.log("error");
+      console.log("error", error);
     }
   };
 

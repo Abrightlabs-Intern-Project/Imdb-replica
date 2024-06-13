@@ -6,7 +6,7 @@ import "./SlickSlider.css";
 import { FC, useEffect, useState } from "react";
 import { Movie } from "../context/WatchlistContext";
 
-const SlickSlider:FC<{data: Movie[]}> = ({ data }) => {
+const SlickSlider: FC<{ data: Movie[] }> = ({ data }) => {
   const [slidesToShow, setSlidesToShow] = useState(5);
 
   const settings = {
@@ -15,6 +15,8 @@ const SlickSlider:FC<{data: Movie[]}> = ({ data }) => {
     speed: 500,
     slidesToShow: slidesToShow,
     slidesToScroll: 1,
+    autoplay: true,
+    autoplaySpeed: 10000,
   };
 
   useEffect(() => {

@@ -6,7 +6,7 @@ import { FC } from "react";
 const MovieCard:FC<{props: Movie}> = ({ props }) => {
   const { addToWatchlist } = useWatchlist();
   return (
-    <div className="flex flex-col bg-[#1a1a1a] rounded">
+    <div className="flex flex-col bg-[#1a1a1a] rounded pb-3">
       <Link to={`/movie/${props.imdbID}`}>
         <img className="w-full object-cover h-72" src={props.poster} alt="" />
       </Link>
@@ -24,7 +24,6 @@ const MovieCard:FC<{props: Movie}> = ({ props }) => {
         >
           + Watchlist
         </button>
-        <button className="text-white font-semibold">▷ Trailer</button>
       </div>
     </div>
   );

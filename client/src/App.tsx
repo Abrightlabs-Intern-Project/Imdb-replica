@@ -6,7 +6,6 @@ import Home from "./pages/Home";
 import MovieDetails from "./pages/MovieDetails";
 import Watchlist from "./pages/Watchlist";
 import { WatchlistProvider } from "./context/WatchlistContext";
-
 import { Amplify } from "aws-amplify";
 import { Authenticator } from "@aws-amplify/ui-react";
 import "@aws-amplify/ui-react/styles.css";
