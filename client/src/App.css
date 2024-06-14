@@ -3,48 +3,5 @@
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  /* background-color: #201c1c; */
+  background-color: #101c24;
 }
-
-/* .amplify-tabs__list {
-  background-color: #383434;
-}
-
-.amplify-tabs__item {
-  color: white;
-}
-
-.amplify-tabs__item--active {
-  background-color: #383434;
-}
-
-.amplify-tabs__item:not(.amplify-tabs__item--active) {
-  background-color: #383434;
-}
-
-.amplify-tabs__panel {
-  background-color: #383434;
-}
-
-.amplify-field .amplify-label,
-.amplify-field .amplify-input,
-.amplify-passwordfield .amplify-input {
-  color: white;
-}
-
-.amplify-button--primary {
-  background-color: white;
-  color: #383434;
-}
-
-.amplify-button--link {
-  color: white;
-}
-
-.amplify-button--link:hover {
-  color: #383434;
-}
-
-.amplify-field__show-password {
-  background-color: white;
-} */
