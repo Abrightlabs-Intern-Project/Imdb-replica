@@ -7,6 +7,11 @@ import { PrismaService } from './prisma/prisma.service';
 import { AuthModule } from './auth/auth.module';
 import { WatchlistModule } from './watchlist/watchlist.module';
 import { ReviewModule } from './review/review.module';
+import { ActorModule } from './actor/actor.module';
+import { CountryModule } from './country/country.module';
+import { DirectorModule } from './director/director.module';
+import { GenreModule } from './genre/genre.module';
+import { WriterModule } from './writer/writer.module';
 
 @Module({
   imports: [
@@ -19,6 +24,11 @@ import { ReviewModule } from './review/review.module';
     AuthModule,
     WatchlistModule,
     ReviewModule,
+    ActorModule,
+    CountryModule,
+    DirectorModule,
+    GenreModule,
+    WriterModule,
   ],
   providers: [PrismaService],
 })

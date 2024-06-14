@@ -14,13 +14,17 @@ import "./App.css";
 import awsExports from "./aws-exports";
 import { useAuthenticator } from "@aws-amplify/ui-react";
 import Review from "./pages/Review";
+import { ThemeProvider } from "@aws-amplify/ui-react";
+import { components, theme } from "./cognito/config"
 
 Amplify.configure(awsExports);
 
 const App = () => (
-  <Authenticator>
-    <MainApp />
-  </Authenticator>
+  <ThemeProvider theme={theme}>
+    <Authenticator components={components}>
+      <MainApp />
+    </Authenticator>
+  </ThemeProvider>
 );
 
 const MainApp = () => {
@@ -49,8 +53,6 @@ const MainApp = () => {
           },
         }),
       });
-      // const { data } = await response.json();
-      // console.log(data.loginUser);
     }
   };
 

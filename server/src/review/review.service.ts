@@ -36,6 +36,7 @@ export class ReviewService {
         imdbID,
       },
     });
+    if(result)
     return true;
     } catch(error) {
       console.log(error);
