@@ -3,66 +3,24 @@
 # ------------------------------------------------------
 
 type Movie {
-  id: ID!
+  movieId: ID!
   title: String!
   year: String!
   rated: String!
   released: String!
   runtime: String!
-  genre: String!
-  director: String!
-  writer: String!
-  actors: String!
   plot: String!
   language: String!
-  country: String!
   awards: String!
   poster: String!
-  ratings: String!
+  trailer: String!
   metascore: String!
-  imdbRating: String!
-  imdbVotes: String!
-  imdbID: String!
-  type: String!
-  dvd: String!
-  boxOffice: String!
-  production: String!
-  website: String!
-  response: String!
-}
-
-type Watchlist {
-  id: ID!
-  user: User!
-  movie: Movie!
-}
-
-type User {
-  id: ID!
-  email: String!
-  watchlist: [Watchlist!]
-}
-
-type Review {
-  id: Int!
-  userEmail: String!
-  imdbID: String!
   rating: String!
-  title: String!
-  description: String!
+  votes: String!
+  boxOffice: String!
 }
 
 type Query {
   movies: [Movie!]!
-  getMovie(imdbID: String!): Movie!
-  getWatchlist(userEmail: String!): [Movie!]!
-  getReviews(imdbID: String!): [Review!]!
-}
-
-type Mutation {
-  loginUser(email: String!): User!
-  addToWatchlist(userEmail: String!, imdbID: String!): Movie!
-  removeFromWatchlist(userEmail: String!, imdbID: String!): Boolean!
-  addReview(userEmail: String!, imdbID: String!, rating: String!, title: String!, description: String!): Review!
-  deleteReview(userEmail: String!, imdbID: String!): Boolean!
+  getMovie(movieId: String!): Movie!
 }

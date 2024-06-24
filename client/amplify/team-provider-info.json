@@ -9,11 +9,21 @@
       "UnauthRoleName": "amplify-imdbclient-dev-0d8fa-unauthRole",
       "StackName": "amplify-imdbclient-dev-0d8fa",
       "StackId": "arn:aws:cloudformation:us-east-1:637423178421:stack/amplify-imdbclient-dev-0d8fa/f59b57e0-26fb-11ef-a3c5-0afff9ea8c57",
-      "AmplifyAppId": "d2cqlvazj6nhr8"
+      "AmplifyAppId": "d2cqlvazj6nhr8",
+      "AuthTriggerTemplateURL": "https://s3.amazonaws.com/amplify-imdbclient-dev-0d8fa-deployment/amplify-cfn-templates/auth/auth-trigger-cloudformation-template.json"
     },
     "categories": {
+      "function": {
+        "imdbclient760b9d3fCustomMessage": {
+          "REDIRECTURL": "http://localhost:5173",
+          "EMAILSUBJECT": "email confirmed",
+          "EMAILMESSAGE": "Email Verifiation",
+          "deploymentBucketName": "amplify-imdbclient-dev-0d8fa-deployment",
+          "s3Key": "amplify-builds/imdbclient760b9d3fCustomMessage-6861426a544e52303449-build.zip"
+        }
+      },
       "auth": {
-        "imdbclientbf80e9ea": {}
+        "imdbclienta3cfcad8": {}
       }
     }
   }

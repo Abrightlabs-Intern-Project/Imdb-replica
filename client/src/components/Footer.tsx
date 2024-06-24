@@ -10,7 +10,7 @@ const Footer:FC = () => {
       <div className="follow flex flex-col gap-2">
         <span>Follow IMDb on social</span>
         <div className="flex gap-3 px-2">
-          <img className="h-6" src={TwitterLogo} alt="" />
+          <img className="h-6" src={TwitterLogo} alt=""  />
           <img className="h-6" src={FacebookLogo} alt="" />
           <img className="h-6" src={InstaLogo} alt="" />
           <img className="h-6" src={YoutubeLogo} alt="" />

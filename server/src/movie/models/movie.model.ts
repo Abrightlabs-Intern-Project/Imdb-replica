@@ -3,7 +3,7 @@ import { ObjectType, Field, ID } from '@nestjs/graphql';
 @ObjectType()
 export class Movie {
   @Field(() => ID)
-  id: number;
+  movieId: string;
 
   @Field()
   title: string;
@@ -21,25 +21,10 @@ export class Movie {
   runtime: string;
 
   @Field()
-  genre: string;
-
-  @Field()
-  director: string;
-
-  @Field()
-  writer: string;
-
-  @Field()
-  actors: string;
-
-  @Field()
   plot: string;
 
   @Field()
   language: string;
-
-  @Field()
-  country: string;
 
   @Field()
   awards: string;
@@ -48,35 +33,17 @@ export class Movie {
   poster: string;
 
   @Field()
-  ratings: string;
+  trailer: string;
 
   @Field()
   metascore: string;
 
   @Field()
-  imdbRating: string;
+  rating: string;
 
   @Field()
-  imdbVotes: string;
-
-  @Field()
-  imdbID: string;
-
-  @Field()
-  type: string;
-
-  @Field()
-  dvd: string;
+  votes: string;
 
   @Field()
   boxOffice: string;
-
-  @Field()
-  production: string;
-
-  @Field()
-  website: string;
-
-  @Field()
-  response: string;
 }

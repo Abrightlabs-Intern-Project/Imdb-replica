@@ -8,22 +8,21 @@ datasource db {
 }
 
 model Movie {
-  movieId       String     @unique @default(uuid()) @db.Char(36)
+  movieId       String     @id @db.VarChar(10)
   title         String     @db.VarChar(255)
   year          String     @db.VarChar(4)
   rated         String     @db.VarChar(10)
   released      String     @db.VarChar(20)
   runtime       String     @db.VarChar(10)
   plot          String     @db.Text
-  language      String     @db.VarChar(50)
+  language      String     @db.VarChar(150)
   awards        String     @db.VarChar(255)
   poster        String     @db.VarChar(255)
+  trailer       String     @db.VarChar(255)
   metascore     String     @db.VarChar(5)
   rating        String     @db.VarChar(5)
   votes         String     @db.VarChar(15)
   boxOffice     String     @db.VarChar(50)
-  production    String     @db.VarChar(50)
-  website       String     @db.VarChar(255)
   countries     MovieCountry[]
   genres        MovieGenre[]
   directors     MovieDirector[]
@@ -40,7 +39,7 @@ model Country {
 }
 
 model MovieCountry {
-  movieId       String      @db.Char(36)
+  movieId       String      @db.VarChar(10)
   countryId     String      @db.Char(36)
   movie         Movie       @relation(fields: [movieId], references: [movieId])
   country       Country     @relation(fields: [countryId], references: [countryId])
@@ -50,12 +49,13 @@ model MovieCountry {
 
 model Genre {
   genreId       String      @id @default(uuid()) @db.Char(36)
-  gereName      String      @unique @db.VarChar(50)
+  genreName     String      @unique @db.VarChar(50)
   movies        MovieGenre[]
+  users         User[]   
 }
 
 model MovieGenre {
-  movieId       String      @db.Char(36)
+  movieId       String      @db.VarChar(10)
   genreId       String      @db.Char(36)
   movie         Movie       @relation(fields: [movieId], references: [movieId])
   genre         Genre       @relation(fields: [genreId], references: [genreId])
@@ -70,7 +70,7 @@ model Director {
 }
 
 model MovieDirector {
-  movieId       String      @db.Char(36)
+  movieId       String      @db.VarChar(10)
   directorId    String      @db.Char(36)
   movie         Movie       @relation(fields: [movieId], references: [movieId])
   director      Director    @relation(fields: [directorId], references: [directorId])
@@ -85,7 +85,7 @@ model Writer {
 }
 
 model MovieWriter {
-  movieId       String      @db.Char(36)
+  movieId       String      @db.VarChar(10)
   writerId      String      @db.Char(36)
   movie         Movie       @relation(fields: [movieId], references: [movieId])
   writer        Writer      @relation(fields: [writerId], references: [writerId])
@@ -96,11 +96,12 @@ model MovieWriter {
 model Actor {
   actorId       String      @id @default(uuid()) @db.Char(36)
   actorName     String      @unique @db.VarChar(50)
+  imageUrl      String      @db.VarChar(255)
   movies        MovieActor[]
 }
 
 model MovieActor {
-  movieId       String      @db.Char(36)
+  movieId       String      @db.VarChar(10)
   actorId       String      @db.Char(36)
   movie         Movie       @relation(fields: [movieId], references: [movieId])
   actor         Actor       @relation(fields: [actorId], references: [actorId])
@@ -109,35 +110,35 @@ model MovieActor {
 }
 
 model User {
-  userEmail     String      @unique @db.VarChar(255)
-  userName      String      @unique @db.VarChar(50)
-  firstName     String?     @db.VarChar(50)
-  lastName      String?     @db.VarChar(50)
+  userId        String      @id @db.Char(36)
+  userName      String      @unique @db.VarChar(255)
   createdAt     DateTime    @default(now())
-  updatedAt     DateTime    @updatedAt
+  favouriteGenreId String?   @db.Char(36)
+  genre         Genre?      @relation(fields: [favouriteGenreId], references: [genreId])
   watchlist     Watchlist[]
   review        Review[]
 }
 
 model Watchlist {
   watchlistId   String      @id @default(uuid()) @db.Char(36)
-  userName      String      @db.VarChar(50)
-  movieId       String      @db.Char(36)
-  user          User        @relation(fields: [userName], references: [userName])
+  userId        String      @db.Char(36)
+  movieId       String      @db.VarChar(10)
+  user          User        @relation(fields: [userId], references: [userId])
   movie         Movie       @relation(fields: [movieId], references: [movieId])
 
-  @@unique([userName, movieId])
+  @@unique([userId, movieId])
 }
 
 model Review {
   reviewId      String      @id @default(uuid()) @db.Char(36)
-  userName      String      @unique @db.VarChar(50)
-  user          User        @relation(fields: [userName], references: [userName])
-  movieId       String      @db.Char(36)
-  movie         Movie       @relation(fields: [movieId], references: [movieId])
+  userId        String      @db.Char(36)
+  movieId       String      @db.VarChar(10)
   rating        String      @db.VarChar(5)
   title         String      @db.VarChar(255)
   description   String      @db.Text
+  createdAt     DateTime    @default(now())
+  user          User        @relation(fields: [userId], references: [userId])
+  movie         Movie       @relation(fields: [movieId], references: [movieId])
 
-  @@unique([userName, movieId])
+  @@unique([userId, movieId])
 }

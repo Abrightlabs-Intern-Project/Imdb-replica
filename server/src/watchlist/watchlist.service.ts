@@ -1,38 +1,38 @@
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from '../prisma/prisma.service';
-import { Movie } from '@prisma/client';
 
 @Injectable()
 export class WatchlistService {
   constructor(private readonly prisma: PrismaService) {}
 
-  async getWatchlist(userEmail: string): Promise<Movie[]> {
-    const watchlist = await this.prisma.watchlist.findMany({
-      where: { userEmail },
-      include: { movie: true },
-    });
-    return watchlist.map(watchlistItem => watchlistItem.movie);
-  }
-
-  async addToWatchlist(userEmail: string, imdbID: string): Promise<Movie> {
-    await this.prisma.watchlist.create({
+  async add(movieId: string, userId: string) {
+    return await this.prisma.watchlist.create({
       data: {
-        userEmail,
-        imdbID,
-      },
+        movieId: movieId,
+        userId: userId,
+      }
     });
-
-    return this.prisma.movie.findUnique({ where: { imdbID } });
   }
 
-  async removeFromWatchlist(userEmail: string, imdbID: string): Promise<boolean> {
-    await this.prisma.watchlist.deleteMany({
+  async remove(movieId: string, userId: string) {
+    return await this.prisma.watchlist.delete({
       where: {
-        userEmail,
-        imdbID,
+        userId_movieId: {
+          userId: userId,
+          movieId: movieId,
+        },
       },
     });
+  }
 
-    return true;
+  async get(userId: string) {
+    return this.prisma.watchlist.findMany({
+      where: {
+        userId: userId,
+      },
+      include: {
+        movie: true,
+      },
+    });
   }
 }

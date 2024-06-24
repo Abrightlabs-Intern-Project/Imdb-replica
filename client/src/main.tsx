@@ -1,14 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./App.tsx";
+import MainApp from "./App.tsx";
 import "./index.css";
-import client from "./ApolloClient/apolloClient.ts";
-import { ApolloProvider } from "@apollo/client";
+import { BrowserRouter } from "react-router-dom";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
-    <ApolloProvider client={client}>
-      <App />
-    </ApolloProvider>
+    <BrowserRouter>
+        <MainApp />
+    </BrowserRouter>
   </React.StrictMode>
 );

@@ -1,10 +1,10 @@
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { useEffect } from "react";
+import { Routes, Route } from "react-router-dom";
+import { FC, useEffect, useState } from "react";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import Home from "./pages/Home";
 import MovieDetails from "./pages/MovieDetails";
-import Watchlist from "./pages/Watchlist";
+// import Watchlist from "./pages/Watchlist";
 import { WatchlistProvider } from "./context/WatchlistContext";
 import { Amplify } from "aws-amplify";
 import { Authenticator } from "@aws-amplify/ui-react";
@@ -12,47 +12,40 @@ import "@aws-amplify/ui-react/styles.css";
 import "./App.css";
 //@ts-ignore
 import awsExports from "./aws-exports";
-import { useAuthenticator } from "@aws-amplify/ui-react";
 import Review from "./pages/Review";
 import { ThemeProvider } from "@aws-amplify/ui-react";
-import { components, theme } from "./cognito/config"
+import { components, theme } from "./cognito/config";
+import { signOut } from "aws-amplify/auth";
+import MovieFiltering from "./pages/MovieFiltering";
+import axios from "axios";
+import Watchlist from "./pages/Watchlist"
 
 Amplify.configure(awsExports);
 
-const App = () => (
-  <ThemeProvider theme={theme}>
-    <Authenticator components={components}>
-      <MainApp />
-    </Authenticator>
-  </ThemeProvider>
-);
-
 const MainApp = () => {
-  const { user } = useAuthenticator((context) => [context.user]);
+  return (
+    <ThemeProvider theme={theme}>
+      <Authenticator
+        loginMechanisms={["username", "email"]}
+        components={components}
+      >
+        {({ signOut, user }) => <App signOut={signOut} user={user} />}
+      </Authenticator>
+    </ThemeProvider>
+  );
+};
+
+const App: FC<{ signOut: any; user: any }> = ({ signOut, user }) => {
 
   const handleLogin = async () => {
-    if (user) {
-      const email = user.signInDetails?.loginId;
-      const response = await fetch("http://localhost:3000/api/graphql", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${email}`,
-        },
-        body: JSON.stringify({
-          query: `
-            mutation LoginUser($email: String!) {
-              loginUser(email: $email) {
-                id
-                email
-              }
-            }
-          `,
-          variables: {
-            email,
-          },
-        }),
-      });
+    try {
+      const loginData = {
+        userName: user.username,
+        userId: user.userId
+      };
+      const response = await axios.post("http://localhost:3000/user/login", loginData);
+    } catch(error) {
+      console.log(error);
     }
   };
 
@@ -62,19 +55,18 @@ const MainApp = () => {
 
   return (
     <WatchlistProvider>
-      <BrowserRouter>
-        <Navbar />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="*" element={<h1>Page Not Found!</h1>} />
-          <Route path="/movie/:id" element={<MovieDetails />} />
-          <Route path="/watchlist" element={<Watchlist />} />
-          <Route path="/movie/:id/review" element={<Review />} />
-        </Routes>
-        <Footer />
-      </BrowserRouter>
+      <Navbar signOut={signOut} user={user} />
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="*" element={<h1>Page Not Found!</h1>} />
+        <Route path="/movie/:id" element={<MovieDetails />} />
+        <Route path="/watchlist" element={<Watchlist />} />
+        <Route path="/movie/:id/review" element={<Review />} />
+        <Route path="/filter" element={<MovieFiltering />} />
+      </Routes>
+      <Footer />
     </WatchlistProvider>
   );
 };
 
-export default App;
+export default MainApp;

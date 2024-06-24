@@ -1,26 +1,37 @@
-import { useQuery, useMutation } from "@apollo/client";
-import { useParams } from "react-router-dom";
-import { GET_MOVIE, ADD_REVIEW } from "../ApolloClient/queries";
 import { useState } from "react";
 import { useAuthenticator } from "@aws-amplify/ui-react";
+import { useEffect } from "react";
+import axios from "axios";
+import { useParams } from "react-router-dom";
+import { Movie } from "../context/WatchlistContext";
 
 const Review = () => {
+  const { id } = useParams();
+
   const [rating, setRating] = useState<string>();
   const [title, setTitle] = useState<string>();
   const [description, setDescription] = useState<string>();
+  const [movie, setMovie] = useState<Movie>();
+  const [loading, setLoading] = useState<boolean>(true);
 
   const { user } = useAuthenticator((context) => [context.user]);
-  const email = user.signInDetails?.loginId;
+  const userId = user.userId;
 
-  const [addReviewMutation] = useMutation(ADD_REVIEW);
-
-  const { id } = useParams();
-  const { loading, error, data } = useQuery(GET_MOVIE, {
-    variables: { imdbID: id },
-  });
+  useEffect(() => {
+    const getMovieDetails = async () => {
+      try {
+      const movie = await axios.get(`http://localhost:3000/movies/${id}`)
+      setMovie(movie.data);
+      } finally {
+        setLoading(false);
+      }
+    }
+    getMovieDetails();
+  }, []);
 
   const handleRatingChange = (value: string) => {
     setRating(value);
+    console.log(rating)
   };
 
   const handleTitleChange = (value: string) => {
@@ -34,9 +45,8 @@ const Review = () => {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
-      const result = await addReviewMutation({
-        variables: { userEmail: email, imdbID: id, rating, title, description },
-      });
+      const result = await axios.post("http://localhost:3000/review/add", { userId, movieId: id, rating, title, description }
+      );
       if (result) {
         setRating("");
         setTitle("");
@@ -49,15 +59,13 @@ const Review = () => {
   };
 
   if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error.message}</p>;
-
-  const movie = data?.getMovie;
+  ;
   return (
     <div className="px-3 py-10 lg:px-80 bg-[#f8f4f4] flex flex-col gap-4">
       <div className=" flex gap-3 ">
-        <img className=" h-32" src={movie.poster} alt="" />
+        <img className=" h-32" src={movie?.poster} alt="" />
         <div className=" flex flex-col gap-3">
-          <span className=" text-xl font-semibold">{movie.title}</span>
+          <span className=" text-xl font-semibold">{movie?.title}</span>
           <hr />
           <span className=" text-xl font-semibold">Add an item</span>
         </div>
