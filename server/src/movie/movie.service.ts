@@ -6,14 +6,41 @@ import { Movie } from '@prisma/client';
 export class MovieService {
   constructor(private prisma: PrismaService) {}
 
-  async findAll() {
+  async getAllMovies() {
     return this.prisma.movie.findMany();
   }
 
-  async findOne(imdbID: string): Promise<Movie> {
+  async getAllMovieDetails(movieId: string): Promise<Movie> {
     return await this.prisma.movie.findUnique({
       where: {
-        imdbID,
+        movieId,
+      },
+      include: {
+        actors: {
+          include: {
+            actor: true,
+          },
+        },
+        directors: {
+          include: {
+            director: true,
+          },
+        },
+        genres: {
+          include: {
+            genre: true,
+          },
+        },
+        countries: {
+          include: {
+            country: true,
+          },
+        },
+        writers: {
+          include: {
+            writer: true,
+          },
+        },
       },
     });
   }

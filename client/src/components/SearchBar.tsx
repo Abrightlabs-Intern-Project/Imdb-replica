@@ -1,9 +1,8 @@
 import { FC } from "react";
 import { FaSearch } from "react-icons/fa";
-import { useState } from "react";
-import { useQuery } from "@apollo/client";
-import { GET_MOVIES } from "../ApolloClient/queries";
+import { useState, useEffect } from "react";
 import { Movie } from "../context/WatchlistContext";
+import axios from "axios";
 
 interface SearchBarProps {
   setResults: (results: Movie[]) => void;
@@ -12,12 +11,15 @@ interface SearchBarProps {
 const SearchBar: FC<SearchBarProps> = ({ setResults }) => {
   const [input, setInput] = useState<string>("");
 
-  const { loading, error, data } = useQuery(GET_MOVIES);
+  const [movies, setMovies] = useState([]);
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error.message}</p>;
-
-  const movies = data?.movies;
+  useEffect(() => {
+    const fetchMovies = async () => {
+      const response = await axios.get("http://localhost:3000/movies");
+      setMovies(response.data);
+    };
+    fetchMovies();
+  }, []);
 
   const filteringMovies = (): Movie[] => {
     return movies.filter((movie: Movie) => {
@@ -27,13 +29,16 @@ const SearchBar: FC<SearchBarProps> = ({ setResults }) => {
 
   const handleChange = (value: string) => {
     setInput(value);
+  };
+
+  useEffect(() => {
     const filteredResults = filteringMovies();
-    if (!value.trim()) {
+    if (!input) {
       setResults([]);
     } else {
       setResults(filteredResults);
     }
-  };
+  }, [input, setResults]);
 
   return (
     <div className="flex w-full px-10 md:px-0 md:w-[500px] lg:w-[600px]">

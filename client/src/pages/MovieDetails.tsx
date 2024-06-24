@@ -1,38 +1,59 @@
 import { useParams } from "react-router-dom";
 import MovieHeader from "../components/MovieHeader";
 import { Storyline } from "../components/Storyline";
+import Cast from "../components/Cast";
 import Details from "../components/Details";
 import TechnicalSpecs from "../components/TechnicalSpecs";
 import UserReviews from "../components/UserReviews";
 import { FC, useEffect, useState } from "react";
-import { Movie } from "../context/WatchlistContext";
-import { useQuery } from "@apollo/client";
-import { GET_MOVIE } from "../ApolloClient/queries";
+import axios from "axios";
 
 const MovieDetails: FC = () => {
   const { id } = useParams();
-  const { loading, error, data } = useQuery(GET_MOVIE, {
-    variables: { imdbID: id },
-  });
-
-  const [movieData, setMovieData] = useState<Movie | null>(null);
+  const [movieActors, setMovieActors] = useState<[any]>([undefined]);
+  const [movieDirectors, setMovieDirectors] = useState<[any]>([undefined]);
+  const [movieWriters, setMovieWriters] = useState<[any]>([undefined]);
+  const [movieCountries, setMovieCountries] = useState<[any]>([undefined]);
+  const [movieData, setMovieData] = useState<any>();
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<null | unknown>(null);
+  const [movieGenres, setMovieGenre] = useState<[any]>([undefined]);
 
   useEffect(() => {
-    if (!loading && !error && data) {
-      setMovieData(data?.getMovie);
-    }
-  }, [id, loading, error, data]);
-
+    const getData = async (id: string) => {
+      try {
+        const movieData = await axios.get(`http://localhost:3000/movies/${id}`);
+        setMovieGenre(movieData.data.genres);
+        setMovieData(movieData.data);
+        setMovieWriters(movieData.data.writers);
+        setMovieActors(movieData.data.actors);
+        setMovieDirectors(movieData.data.directors);
+        setMovieCountries(movieData.data.countries);
+        console.log(movieData.data)
+      } catch (error) {
+        setError(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+    
+    if (id) getData(id);
+  }, [id]);
+  
   if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error.message}</p>;
-  if (!movieData) return <div>Loading...</div>;
 
   return (
     <div className="">
-      <MovieHeader props={movieData} />
-      <Storyline props={movieData} />
-      <Details props={movieData} />
-      <UserReviews />
+      <MovieHeader
+        movie={movieData}
+        movieActors={movieActors}
+        movieDirectors={movieDirectors}
+        movieWriters={movieWriters}
+      />
+      <Storyline movie={movieData} movieGenres={movieGenres} />
+      <Cast movieActors={movieActors} />
+      <Details movie={movieData} movieCountries={movieCountries} />
+      {/* <UserReviews /> */}
       <TechnicalSpecs props={movieData} />
     </div>
   );

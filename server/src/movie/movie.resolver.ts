@@ -1,6 +1,7 @@
 import { Resolver, Query, Args } from '@nestjs/graphql';
 import { Movie } from './models/movie.model';
 import { MovieService } from './movie.service';
+import { MovieController } from './movie.controller';
 
 @Resolver()
 export class MovieResolver {
@@ -8,11 +9,11 @@ export class MovieResolver {
 
   @Query(() => [Movie])
   async movies() {
-    return this.movieService.findAll();
+    return this.movieService.getAllMovies();
   }
 
   @Query(() => Movie)
-  async getMovie(@Args('imdbID') imdbID: string) {
-    return this.movieService.findOne(imdbID);
+  async getMovie(@Args('movieId') movieId: string) {
+    return this.movieService.getAllMovieDetails(movieId);
   }
 }

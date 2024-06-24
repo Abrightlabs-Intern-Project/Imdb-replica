@@ -4,10 +4,13 @@ import { FaUserCircle } from "react-icons/fa";
 import SearchBar from "./SearchBar";
 import { Movie } from "../context/WatchlistContext";
 import SearchSuggestions from "./SearchSuggestions";
-import { useAuthenticator } from "@aws-amplify/ui-react";
 
-const Navbar: FC = () => {
-  const { user, signOut } = useAuthenticator((context) => [context.user]);
+type NavbarProps = {
+  signOut: any;
+  user: any;
+};
+
+const Navbar: FC<NavbarProps> = ({ signOut, user }) => {
   const [results, setResults] = useState<Movie[]>([]);
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
@@ -48,12 +51,12 @@ const Navbar: FC = () => {
           {dropdownOpen && (
             <div className="absolute bg-[#201c1c] rounded-md mt-2 w-60">
               <span className="text-white block py-2 px-4 hover:bg-[#383434] w-full text-left">
-                {user.signInDetails?.loginId}
+                {user.username}
               </span>
               <button
                 className="text-white block py-2 px-4 hover:bg-[#383434] w-full text-left"
                 onClick={() => {
-                  signOut();
+                  signOut();  
                   setDropdownOpen(false);
                 }}
               >
@@ -63,12 +66,14 @@ const Navbar: FC = () => {
           )}
         </div>
       </div>
-      {results.length !== 0 && (
-        <SearchSuggestions
-          results={results}
-          onHideSuggestions={hideSuggestions}
-        />
-      )}
+      <div className="flex justify-center">
+        {results.length !== 0 && (
+          <SearchSuggestions
+            results={results}
+            onHideSuggestions={hideSuggestions}
+          />
+        )}
+      </div>
     </div>
   );
 };

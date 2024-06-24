@@ -1,6 +1,6 @@
 {
   "auth": {
-    "imdbclientbf80e9ea": {
+    "imdbclienta3cfcad8": {
       "customAuth": false,
       "dependsOn": [],
       "frontendAuthConfig": {
@@ -16,15 +16,62 @@
           "EMAIL"
         ],
         "socialProviders": [],
-        "usernameAttributes": [
-          "EMAIL"
-        ],
+        "usernameAttributes": [],
         "verificationMechanisms": [
           "EMAIL"
         ]
       },
       "providerPlugin": "awscloudformation",
       "service": "Cognito"
+    }
+  },
+  "function": {
+    "imdbclient760b9d3fCustomMessage": {
+      "build": true,
+      "providerPlugin": "awscloudformation",
+      "service": "Lambda"
+    }
+  },
+  "parameters": {
+    "AMPLIFY_function_imdbclient760b9d3fCustomMessage_EMAILMESSAGE": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "imdbclient760b9d3fCustomMessage"
+        }
+      ]
+    },
+    "AMPLIFY_function_imdbclient760b9d3fCustomMessage_EMAILSUBJECT": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "imdbclient760b9d3fCustomMessage"
+        }
+      ]
+    },
+    "AMPLIFY_function_imdbclient760b9d3fCustomMessage_REDIRECTURL": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "imdbclient760b9d3fCustomMessage"
+        }
+      ]
+    },
+    "AMPLIFY_function_imdbclient760b9d3fCustomMessage_deploymentBucketName": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "imdbclient760b9d3fCustomMessage"
+        }
+      ]
+    },
+    "AMPLIFY_function_imdbclient760b9d3fCustomMessage_s3Key": {
+      "usedBy": [
+        {
+          "category": "function",
+          "resourceName": "imdbclient760b9d3fCustomMessage"
+        }
+      ]
     }
   }
 }
