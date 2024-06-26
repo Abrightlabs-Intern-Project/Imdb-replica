@@ -19,6 +19,8 @@ import { signOut } from "aws-amplify/auth";
 import MovieFiltering from "./pages/MovieFiltering";
 import axios from "axios";
 import Watchlist from "./pages/Watchlist"
+import MovieForm from "./pages/AddMovie";
+import RemoveMovie from "./pages/RemoveMovie";
 
 Amplify.configure(awsExports);
 
@@ -63,6 +65,8 @@ const App: FC<{ signOut: any; user: any }> = ({ signOut, user }) => {
         <Route path="/watchlist" element={<Watchlist />} />
         <Route path="/movie/:id/review" element={<Review />} />
         <Route path="/filter" element={<MovieFiltering />} />
+        <Route path="/movie/add" element={<MovieForm />} />
+        <Route path="/movie/remove" element={<RemoveMovie/>} />
       </Routes>
       <Footer />
     </WatchlistProvider>

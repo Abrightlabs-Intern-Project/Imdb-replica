@@ -1,18 +1,38 @@
 import { createContext, ReactNode, useContext, useState } from "react";
-import { useMutation } from "@apollo/client";
 import { useAuthenticator } from "@aws-amplify/ui-react";
-import {
-  ADD_TO_WATCHLIST,
-  REMOVE_FROM_WATCHLIST,
-  GET_WATCHLIST,
-} from "../ApolloClient/queries";
-import { useQuery } from "@apollo/client";
 import { useEffect } from "react";
 import axios from "axios";
 
 type WatchlistProviderProps = {
   children: ReactNode;
 };
+
+export type Actor = {
+  actorId: string;
+  actorName: string;
+  imageUrl: string;
+};
+
+export type Director = {
+  directorId: string;
+  directorName: string;
+};
+
+export type Writer = {
+  writerName: string;
+  writerId: string;
+};
+
+export type Genre = {
+  genreId: string;
+  genreName: string;
+};
+
+export type Country = {
+  countryId: string;
+  countryName: string;
+};
+
 
 export type Movie = {
   movieId: string;
@@ -30,12 +50,18 @@ export type Movie = {
   rating: string;
   votes: string;
   boxOffice: string;
+  actors: Actor[],
+  directors: Director[],
+  writers: Writer[],
+  genres: Genre[],
+  countries: Country[],
 };
 
 type WatchlistContext = {
   watchlist: Movie[];
   addToWatchlist: (movie: Movie) => void;
   removeFromWatchlist: (movieId: string) => void;
+  loading: boolean;
 };
 
 const WatchlistContext = createContext({} as WatchlistContext);
@@ -46,16 +72,24 @@ export function useWatchlist() {
 
 export function WatchlistProvider({ children }: WatchlistProviderProps) {
   const [watchlist, setWatchlist] = useState<Movie[]>([]);
+  const [loading, setLoading] = useState(true);
 
   const { user } = useAuthenticator((context) => [context.user]);
   const userId = user.userId;
 
   useEffect(() => {
     const getWatchlist = async (userId: string) => {
-      const watchlistData = await axios.get(
-        `http://localhost:3000/watchlist?userId=${userId}`
-      );
-      setWatchlist(watchlistData.data);
+      try {
+        const watchlistData = await axios.get(
+          `http://localhost:3000/watchlist?userId=${userId}`
+        );
+        const m = watchlistData.data.map((item: any) => item.movie);
+        setWatchlist(m);
+      } catch (error) {
+        console.error("Error fetching watchlist:", error);
+      } finally {
+        setLoading(false);
+      }
     };
     getWatchlist(userId);
   }, [userId]);
@@ -71,8 +105,8 @@ export function WatchlistProvider({ children }: WatchlistProviderProps) {
 
   function addToWatchlist(movie: Movie) {
     if (!watchlist.some((m) => m.movieId === movie.movieId)) {
-      handleAddToWatchlist(movie, userId);
       setWatchlist((prevWatchlist) => [...prevWatchlist, movie]);
+      handleAddToWatchlist(movie, userId);
     }
   }
 
@@ -93,7 +127,7 @@ export function WatchlistProvider({ children }: WatchlistProviderProps) {
 
   return (
     <WatchlistContext.Provider
-      value={{ watchlist, addToWatchlist, removeFromWatchlist }}
+      value={{ watchlist, addToWatchlist, removeFromWatchlist, loading }}
     >
       {children}
     </WatchlistContext.Provider>

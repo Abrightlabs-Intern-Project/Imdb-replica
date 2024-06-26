@@ -44,9 +44,6 @@ const MovieHeader: FC<{ movie: Movie, movieActors: any, movieDirectors: any, mov
           </div>
         )}
       </div>
-      <div className=" py-5">
-        <span className="text-white">{movie.plot}</span>
-      </div>
       <hr className="border-gray-600" />
       <div className="flex gap-2 py-2">
         <img className="h-6" src={Star} alt="" />

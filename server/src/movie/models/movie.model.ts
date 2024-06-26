@@ -1,49 +1,48 @@
-import { ObjectType, Field, ID } from '@nestjs/graphql';
+import { ApiProperty } from "@nestjs/swagger";
 
-@ObjectType()
 export class Movie {
-  @Field(() => ID)
+  @ApiProperty()
   movieId: string;
 
-  @Field()
+  @ApiProperty()
   title: string;
 
-  @Field()
+  @ApiProperty()
   year: string;
 
-  @Field()
+  @ApiProperty()
   rated: string;
 
-  @Field()
+  @ApiProperty()
   released: string;
 
-  @Field()
+  @ApiProperty()
   runtime: string;
 
-  @Field()
+  @ApiProperty()
   plot: string;
 
-  @Field()
+  @ApiProperty()
   language: string;
 
-  @Field()
+  @ApiProperty()
   awards: string;
 
-  @Field()
+  @ApiProperty()
   poster: string;
 
-  @Field()
+  @ApiProperty()
   trailer: string;
 
-  @Field()
+  @ApiProperty()
   metascore: string;
 
-  @Field()
+  @ApiProperty()
   rating: string;
 
-  @Field()
+  @ApiProperty()
   votes: string;
 
-  @Field()
+  @ApiProperty()
   boxOffice: string;
 }

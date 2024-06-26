@@ -12,17 +12,12 @@ import { ReviewModule } from './review/review.module';
 
 @Module({
   imports: [
-    GraphQLModule.forRoot<ApolloDriverConfig>({
-      driver: ApolloDriver,
-      autoSchemaFile: join(process.cwd(), 'src/schema.gql'),
-      path: 'graphql',
-    }),
     MovieModule,
     ActorModule,
     GenreModule,
     UserModule,
     WatchlistModule,
-    ReviewModule
+    ReviewModule,
   ],
   providers: [PrismaService],
 })

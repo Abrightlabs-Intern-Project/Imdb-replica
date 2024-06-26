@@ -10,32 +10,28 @@ import axios from "axios";
 import { FC } from "react";
 
 const Watchlist: FC = () => {
-  const [watchlist, setWatchlist] = useState<[]>([]);
+  const { watchlist } = useWatchlist();
   const [loading, setLoading] = useState<boolean>(true);
-  const [movies, setMovies] = useState([]);
-
-
+  const [movies, setMovies] = useState<Movie[]>([]);
 
   const { user } = useAuthenticator((context) => [context.user]);
   const userId = user.userId;
 
+  console.log(watchlist)
   useEffect(() => {
-    const getData = async (userId: string) => {
+    const getMovies = async () => {
       try {
-        const watchlistData = await axios.get(
-          `http://localhost:3000/watchlist?userId=${userId}`
-        );
         const movieData = await axios.get("http://localhost:3000/movies");
-        const m = watchlistData.data.map((item: any) => item.movie);
-        setWatchlist(m);
         setMovies(movieData.data);
       } finally {
         setLoading(false);
       }
     };
-    getData(userId);
+    getMovies();
   }, []);
+
   if (loading) return <span>Loading...</span>;
+
   return (
     <div>
       <WatchlistHeader />

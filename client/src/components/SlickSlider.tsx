@@ -10,11 +10,11 @@ const SlickSlider: FC<{ data: Movie[] }> = ({ data }) => {
   const [slidesToShow, setSlidesToShow] = useState(5);
 
   const settings = {
-    dots: true,
+    dots: false,
     infinite: true,
-    speed: 500,
+    speed: 1000,
     slidesToShow: slidesToShow,
-    slidesToScroll: 1,
+    slidesToScroll: 5,
     autoplay: true,
     autoplaySpeed: 10000,
   };
