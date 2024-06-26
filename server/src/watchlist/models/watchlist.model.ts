@@ -1,11 +1,14 @@
-import { ObjectType, Field, ID } from '@nestjs/graphql';
-import { Movie } from 'src/movie/models/movie.model';
+import { ApiProperty } from '@nestjs/swagger';
+// import { Movie } from 'src/movie/models/movie.model';
+// import { User } from 'src/user/models/user.model';
 
-@ObjectType()
 export class Watchlist {
-  @Field(() => ID)
-  id: number;
+  @ApiProperty()
+  watchlistId: string;
 
-  @Field(() => Movie)
-  movie: Movie;
+  @ApiProperty()
+  userId: string;
+
+  @ApiProperty()
+  movieId: string;
 }

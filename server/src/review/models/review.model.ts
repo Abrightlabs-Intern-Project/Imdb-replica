@@ -1,22 +1,32 @@
-import { ObjectType, Field, Int } from '@nestjs/graphql';
+import { ApiProperty } from '@nestjs/swagger';
+import { Movie } from 'src/movie/models/movie.model';
+import { User } from 'src/user/models/user.model';
 
-@ObjectType()
 export class Review {
-  @Field((type) => Int)
-  id: number;
+  @ApiProperty()
+  reviewId: string;
 
-  @Field()
-  userEmail: string;
+  @ApiProperty()
+  userId: string;
 
-  @Field()
-  imdbID: string;
+  @ApiProperty()
+  movieId: string;
 
-  @Field()
+  @ApiProperty()
   rating: string;
 
-  @Field()
+  @ApiProperty()
   title: string;
 
-  @Field()
+  @ApiProperty()
   description: string;
+
+  @ApiProperty()
+  createdAt: Date;
+
+  @ApiProperty()
+  user: User;
+
+  @ApiProperty()
+  movie: Movie;
 }
