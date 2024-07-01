@@ -1,6 +1,6 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Movie } from 'src/movie/models/movie.model';
-import { User } from 'src/user/models/user.model';
+import { Movie } from 'src/movie/entities/movie.entity';
+import { User } from 'src/user/entities/user.entity';
 
 export class Review {
   @ApiProperty()

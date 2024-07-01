@@ -10,9 +10,13 @@ async function bootstrap() {
     .setDescription('API documentation for the IMDb replica application')
     .setVersion('1.0')
     .addTag('movies')
-    .addTag('watchlist')
+    .addTag('actor')
+    .addTag('director')
+    .addTag('writer')
+    .addTag('country')
+    .addTag('genre')
     .addTag('users')
-    .addTag('actors')
+    .addTag('watchlist')
     .build();
   const document = SwaggerModule.createDocument(app, config);
   SwaggerModule.setup('api', app, document);

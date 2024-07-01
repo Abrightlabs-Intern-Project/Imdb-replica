@@ -5,7 +5,7 @@ import { PrismaService } from 'src/prisma/prisma.service';
 export class UserService {
     constructor(private readonly prisma: PrismaService) {}
 
-    async createUser(userName: string, userId) {
+    async create(userName: string, userId) {
         return await this.prisma.user.create({
             data: {
                 userName,
@@ -14,7 +14,7 @@ export class UserService {
         })
     }
 
-    async findUser(userId: string) {
+    async find(userId: string) {
         return await this.prisma.user.findUnique({
             where: {
                 userId

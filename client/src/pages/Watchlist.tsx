@@ -1,13 +1,12 @@
 import { Movie, useWatchlist } from "../context/WatchlistContext";
-import WatchlistMovieCard from "../components/WatchlistMovieCard";
-import { WatchlistHeader } from "../components/WatchlistHeader";
-import SlickSlider from "../components/SlickSlider";
-import { useQuery } from "@apollo/client";
+import WatchlistMovieCard from "../components/Watchlist/WatchlistMovieCard";
+import { WatchlistHeader } from "../components/Watchlist/WatchlistHeader";
+import MovieSlider from "../components/common/MovieSlider";
 import { useAuthenticator } from "@aws-amplify/ui-react";
 import { useEffect, useState } from "react";
 import axios from "axios";
-// import { GET_MOVIES } from "../ApolloClient/queries";
 import { FC } from "react";
+import LoadingLogo from "../components/common/LoadingLogo";
 
 const Watchlist: FC = () => {
   const { watchlist } = useWatchlist();
@@ -17,7 +16,7 @@ const Watchlist: FC = () => {
   const { user } = useAuthenticator((context) => [context.user]);
   const userId = user.userId;
 
-  console.log(watchlist)
+  console.log(watchlist);
   useEffect(() => {
     const getMovies = async () => {
       try {
@@ -30,7 +29,7 @@ const Watchlist: FC = () => {
     getMovies();
   }, []);
 
-  if (loading) return <span>Loading...</span>;
+  if (loading) return <LoadingLogo />
 
   return (
     <div>
@@ -48,7 +47,7 @@ const Watchlist: FC = () => {
         ))}
       </div>
       <div className=" flex justify-center bg-black">
-        <SlickSlider data={movies} />
+        <MovieSlider data={movies} />
       </div>
     </div>
   );

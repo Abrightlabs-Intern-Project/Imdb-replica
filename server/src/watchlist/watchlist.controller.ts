@@ -1,29 +1,29 @@
 import { Body, Controller, Delete, Get, Param, Post, Query } from '@nestjs/common';
 import { WatchlistService } from './watchlist.service';
 import { ApiTags, ApiCreatedResponse, ApiOkResponse } from '@nestjs/swagger';
-import { CreateWatchlistDto } from './create-watchlist.dto';
-import { Watchlist } from './models/watchlist.model';
+import { CreateWatchlistDto } from './dto/create-watchlist.dto';
+import { Watchlist } from './entities/watchlist.entity';
 
 @ApiTags('watchlist')
 @Controller('watchlist')
 export class WatchlistController {
   constructor(private readonly watchlistService: WatchlistService) {}
 
-  @Post('add')
+  @Post()
   @ApiCreatedResponse({ type: Watchlist })
-  async addToWatchlist(@Body() data: CreateWatchlistDto) {
-    return this.watchlistService.add(data.movieId, data.userId);
+  async create(@Body() data: CreateWatchlistDto) {
+    return this.watchlistService.create(data.movieId, data.userId);
   }
 
-  @Delete('remove/:userId/:movieId')
+  @Delete(':userId/:movieId')
   @ApiOkResponse({ type: Watchlist })
-  async removeFromWatchlist(@Param('userId') userId: string, @Param('movieId') movieId: string) {
-    return this.watchlistService.remove(movieId, userId);
+  async delete(@Param('userId') userId: string, @Param('movieId') movieId: string) {
+    return this.watchlistService.delete(movieId, userId);
   }
 
-  @Get('/')
+  @Get()
   @ApiOkResponse({ type: Watchlist, isArray: true })
-  async getWatchlist(@Query('userId') userId: string) {
-    return this.watchlistService.get(userId);
+  async find(@Query('userId') userId: string) {
+    return this.watchlistService.find(userId);
   }
 }

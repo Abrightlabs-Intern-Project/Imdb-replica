@@ -5,7 +5,7 @@ import { PrismaService } from '../prisma/prisma.service';
 export class WatchlistService {
   constructor(private readonly prisma: PrismaService) {}
 
-  async add(movieId: string, userId: string) {
+  async create(movieId: string, userId: string) {
     return await this.prisma.watchlist.create({
       data: {
         movieId: movieId,
@@ -14,7 +14,7 @@ export class WatchlistService {
     });
   }
 
-  async remove(movieId: string, userId: string) {
+  async delete(movieId: string, userId: string) {
     return await this.prisma.watchlist.delete({
       where: {
         userId_movieId: {
@@ -25,7 +25,7 @@ export class WatchlistService {
     });
   }
 
-  async get(userId: string) {
+  async find(userId: string) {
     return this.prisma.watchlist.findMany({
       where: {
         userId: userId,
