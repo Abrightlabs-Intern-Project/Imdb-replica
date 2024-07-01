@@ -1,9 +1,10 @@
-import SlickSlider from "../components/SlickSlider";
+import MovieSlider from "../components/common/MovieSlider";
 import { useEffect, useState } from "react";
 import { FC } from "react";
 import axios from "axios";
-import ActorSlider from "../components/ActorSlider";
+import MovieActor from "../components/Actor/ActorSlider";
 import { Link } from "react-router-dom";
+import LoadingLogo from "../components/common/LoadingLogo";
 
 const Home: FC = () => {
   const [movies, setMovies] = useState([]);
@@ -27,7 +28,7 @@ const Home: FC = () => {
     fetchMovies();
   }, []);
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <LoadingLogo />
 
   return (
     <div className=" bg-black text-white">
@@ -37,7 +38,7 @@ const Home: FC = () => {
           <span className="text-yellow-400">&gt;</span>
         </span>
         <div className=" flex justify-center">
-          <SlickSlider data={movies} />
+          <MovieSlider data={movies} />
         </div>
       </div>
       <div className="flex flex-col pt-6 gap-2  pl-28 md:pl-32 lg:pl-48">
@@ -47,7 +48,7 @@ const Home: FC = () => {
         <span className=" text-gray-400 ">
           IMDb helps you to filter movies based on Genre
         </span>
-        <div> 
+        <div>
           <Link to={`/filter`}>
             <button className="border border-white px-4 py-1 rounded">
               Click here
@@ -61,7 +62,7 @@ const Home: FC = () => {
           <span className="text-yellow-400">&gt;</span>
         </span>
         <div className=" flex justify-center">
-          <SlickSlider data={movies} />
+          <MovieSlider data={movies} />
         </div>
       </div>
       <div className="flex flex-col py-6">
@@ -69,7 +70,7 @@ const Home: FC = () => {
           <span className="text-yellow-400">|</span> Most Popular Actors{" "}
         </span>
         <div className=" flex justify-center">
-          <ActorSlider actors={actors} />
+          <MovieActor actors={actors} />
         </div>
       </div>
       <div className="flex flex-col py-6">
@@ -78,7 +79,7 @@ const Home: FC = () => {
           <span className="text-yellow-400">&gt;</span>
         </span>
         <div className=" flex justify-center">
-          <SlickSlider data={movies} />
+          <MovieSlider data={movies} />
         </div>
       </div>
     </div>

@@ -9,6 +9,9 @@ import { PrismaService } from './prisma/prisma.service';
 import { UserModule } from './user/user.module';
 import { WatchlistModule } from './watchlist/watchlist.module';
 import { ReviewModule } from './review/review.module';
+import { DirectorModule } from './director/director.module';
+import { CountryModule } from './country/country.module';
+import { WriterModule } from './writer/writer.module';
 
 @Module({
   imports: [
@@ -18,6 +21,9 @@ import { ReviewModule } from './review/review.module';
     UserModule,
     WatchlistModule,
     ReviewModule,
+    DirectorModule,
+    CountryModule,
+    WriterModule,
   ],
   providers: [PrismaService],
 })

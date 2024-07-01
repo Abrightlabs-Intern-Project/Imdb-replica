@@ -164,7 +164,10 @@ export const trailers = [
     movie: 'Harry Potter and the Half-Blood Prince',
     trailer: 'https://www.youtube.com/watch?v=jpCPvHJ6p90',
   },
-  { movie: 'Shazam!', trailer: 'https://www.youtube.com/watch?v=-oD7B7oiBtw' },
+  {
+    movie: 'Shazam!',
+    trailer: 'https://www.youtube.com/watch?v=-oD7B7oiBtw',
+  },
   {
     movie: 'Wonder Woman',
     trailer: 'https://www.youtube.com/watch?v=VSB4wGIdDwo',

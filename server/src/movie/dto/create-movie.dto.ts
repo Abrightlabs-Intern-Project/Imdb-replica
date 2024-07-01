@@ -1,66 +1,87 @@
-import { ApiProperty } from "@nestjs/swagger";
-import { Country, Director, Writer } from "@prisma/client";
-import { Actor } from "src/actor/models/actor.model";
-import { Genre } from "src/genre/models/genre.model";
+import { ApiProperty } from '@nestjs/swagger';
+import { Country, Director, Writer } from '@prisma/client';
+import { Actor } from 'src/actor/entities/actor.entity';
+import { Genre } from 'src/genre/entities/genre.entity';
+import { IsArray, IsString, IsUrl } from 'class-validator';
 
 export class CreateMovieDto {
-    @ApiProperty()
-    movieId: string;
+  @ApiProperty()
+  @IsString()
+  movieId: string;
 
-    @ApiProperty()
-    title: string;
+  @ApiProperty()
+  @IsString()
+  title: string;
 
-    @ApiProperty()
-    year: string;
+  @ApiProperty()
+  @IsString()
+  year: string;
 
-    @ApiProperty()
-    rated: string;
+  @ApiProperty()
+  @IsString()
+  rated: string;
 
-    @ApiProperty()
-    released: string;
+  @ApiProperty()
+  @IsString()
+  released: string;
 
-    @ApiProperty()
-    runtime: string;
+  @ApiProperty()
+  @IsString()
+  runtime: string;
 
-    @ApiProperty()
-    plot: string;
+  @ApiProperty()
+  @IsString()
+  plot: string;
 
-    @ApiProperty()
-    language: string;
+  @ApiProperty()
+  @IsString()
+  language: string;
 
-    @ApiProperty()
-    awards: string;
+  @ApiProperty()
+  @IsString()
+  awards: string;
 
-    @ApiProperty()
-    poster: string;
+  @ApiProperty()
+  @IsString()
+  poster: string;
 
-    @ApiProperty()
-    trailer: string;
+  @ApiProperty()
+  @IsUrl()
+  trailer: string;
 
-    @ApiProperty()
-    metascore: string;
+  @ApiProperty()
+  @IsString()
+  metascore: string;
 
-    @ApiProperty()
-    rating: string;
+  @ApiProperty()
+  @IsString()
+  rating: string;
 
-    @ApiProperty()
-    votes: string;
+  @ApiProperty()
+  @IsString()
+  votes: string;
 
-    @ApiProperty()
-    boxOffice: string
+  @ApiProperty()
+  @IsString()
+  boxOffice: string;
 
-    @ApiProperty()
-    actors: Actor[]
+  @ApiProperty()
+  @IsArray()
+  actors: string[];
 
-    @ApiProperty()
-    directors: Director[]
+  @ApiProperty()
+  @IsArray()
+  directors: string[];
 
-    @ApiProperty()
-    writers: Writer[]
+  @ApiProperty()
+  @IsArray()
+  writers: string[];
 
-    @ApiProperty()
-    genres: Genre[]
+  @ApiProperty()
+  @IsArray()
+  genres: string[];
 
-    @ApiProperty()  
-    countries: Country[]
+  @ApiProperty()
+  @IsArray()
+  countries: string[];
 }

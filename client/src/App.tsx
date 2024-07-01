@@ -1,10 +1,9 @@
 import { Routes, Route } from "react-router-dom";
-import { FC, useEffect, useState } from "react";
-import Navbar from "./components/Navbar";
-import Footer from "./components/Footer";
+import { FC, useEffect } from "react";
+import Navbar from "./components/Layout/Navbar";
+import Footer from "./components/Layout/Footer";
 import Home from "./pages/Home";
 import MovieDetails from "./pages/MovieDetails";
-// import Watchlist from "./pages/Watchlist";
 import { WatchlistProvider } from "./context/WatchlistContext";
 import { Amplify } from "aws-amplify";
 import { Authenticator } from "@aws-amplify/ui-react";
@@ -15,12 +14,13 @@ import awsExports from "./aws-exports";
 import Review from "./pages/Review";
 import { ThemeProvider } from "@aws-amplify/ui-react";
 import { components, theme } from "./cognito/config";
-import { signOut } from "aws-amplify/auth";
 import MovieFiltering from "./pages/MovieFiltering";
 import axios from "axios";
-import Watchlist from "./pages/Watchlist"
-import MovieForm from "./pages/AddMovie";
+import Watchlist from "./pages/Watchlist";
 import RemoveMovie from "./pages/RemoveMovie";
+import AddMovie from "./pages/AddMovie";
+import UpdateMovie from "./pages/UpdateMovie";
+import ThankYou from "./pages/ThankYou";
 
 Amplify.configure(awsExports);
 
@@ -38,15 +38,14 @@ const MainApp = () => {
 };
 
 const App: FC<{ signOut: any; user: any }> = ({ signOut, user }) => {
-
   const handleLogin = async () => {
     try {
       const loginData = {
         userName: user.username,
-        userId: user.userId
+        userId: user.userId,
       };
-      const response = await axios.post("http://localhost:3000/user/login", loginData);
-    } catch(error) {
+      await axios.post("http://localhost:3000/user/login", loginData);
+    } catch (error) {
       console.log(error);
     }
   };
@@ -65,8 +64,10 @@ const App: FC<{ signOut: any; user: any }> = ({ signOut, user }) => {
         <Route path="/watchlist" element={<Watchlist />} />
         <Route path="/movie/:id/review" element={<Review />} />
         <Route path="/filter" element={<MovieFiltering />} />
-        <Route path="/movie/add" element={<MovieForm />} />
-        <Route path="/movie/remove" element={<RemoveMovie/>} />
+        <Route path="/movie/add" element={<AddMovie />} />
+        <Route path="/movie/delete" element={<RemoveMovie />} />
+        <Route path="/movie/update" element={<UpdateMovie />} />
+        <Route path="/movie/:id/review/redirect" element={<ThankYou />} />
       </Routes>
       <Footer />
     </WatchlistProvider>

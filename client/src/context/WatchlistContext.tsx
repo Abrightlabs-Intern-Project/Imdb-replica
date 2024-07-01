@@ -10,7 +10,7 @@ type WatchlistProviderProps = {
 export type Actor = {
   actorId: string;
   actorName: string;
-  imageUrl: string;
+  image: string;
 };
 
 export type Director = {
@@ -35,7 +35,7 @@ export type Country = {
 
 
 export type Movie = {
-  movieId: string;
+  movieId: string
   title: string;
   year: string;
   rated: string;
@@ -97,7 +97,7 @@ export function WatchlistProvider({ children }: WatchlistProviderProps) {
   async function handleAddToWatchlist(movie: Movie, userId: string) {
     const movieId = movie.movieId;
     try {
-      await axios.post(`http://localhost:3000/watchlist/add`, { movieId, userId });
+      await axios.post(`http://localhost:3000/watchlist`, { movieId, userId });
     } catch (error) {
       console.error("Error adding to watchlist:", error);
     }
@@ -112,7 +112,7 @@ export function WatchlistProvider({ children }: WatchlistProviderProps) {
 
   async function handleRemoveFromWatchlist(movieId: string, userId: string) {
     try {
-      await axios.delete(`http://localhost:3000/watchlist/remove/${userId}/${movieId}`);
+      await axios.delete(`http://localhost:3000/watchlist/${userId}/${movieId}`);
     } catch (error) {
       console.error("Error removing from watchlist:", error);
     }

@@ -6,7 +6,18 @@ import { PrismaService } from 'src/prisma/prisma.service';
 export class ReviewService {
   constructor(private readonly prisma: PrismaService) {}
 
-  async addReview(userId: string, movieId: string, rating: string, title: string, description: string) {
+  async find(movieId: string) {
+    return await this.prisma.review.findMany({
+      where: {
+        movieId
+      },
+      include: {
+        user: true
+      }
+    })
+  } 
+
+  async create(userId: string, movieId: string, rating: string, title: string, description: string) {
     return await this.prisma.review.create({
       data: {
         userId,
@@ -15,6 +26,17 @@ export class ReviewService {
         title,
         description
       }, 
+    })
+  }
+
+  async delete(userId: string, movieId: string) {
+    return await this.prisma.review.delete({
+      where: {
+        userId_movieId: {
+          movieId,
+          userId
+        }
+      }
     })
   }
 }

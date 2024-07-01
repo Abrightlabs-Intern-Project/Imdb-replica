@@ -1,4 +1,4 @@
-import { useTheme, View, Image, Text, Heading, Placeholder } from "@aws-amplify/ui-react";
+import { useTheme, View, Image, Text, Heading } from "@aws-amplify/ui-react";
 import { Theme } from "@aws-amplify/ui-react";
 
 export const theme: Theme = {

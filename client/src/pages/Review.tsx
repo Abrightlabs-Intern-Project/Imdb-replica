@@ -2,11 +2,13 @@ import { useState } from "react";
 import { useAuthenticator } from "@aws-amplify/ui-react";
 import { useEffect } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Movie } from "../context/WatchlistContext";
+import LoadingLogo from "../components/common/LoadingLogo";
 
 const Review = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
 
   const [rating, setRating] = useState<string>();
   const [title, setTitle] = useState<string>();
@@ -20,18 +22,17 @@ const Review = () => {
   useEffect(() => {
     const getMovieDetails = async () => {
       try {
-      const movie = await axios.get(`http://localhost:3000/movies/${id}`)
-      setMovie(movie.data);
+        const movie = await axios.get(`http://localhost:3000/movies/${id}`);
+        setMovie(movie.data);
       } finally {
         setLoading(false);
       }
-    }
+    };
     getMovieDetails();
-  }, []);
+  }, [id]);
 
   const handleRatingChange = (value: string) => {
     setRating(value);
-    console.log(rating)
   };
 
   const handleTitleChange = (value: string) => {
@@ -45,36 +46,39 @@ const Review = () => {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
-      const result = await axios.post("http://localhost:3000/review/add", { userId, movieId: id, rating, title, description }
-      );
-      if (result) {
-        setRating("");
-        setTitle("");
-        setDescription("");
-      }
-      window.location.reload();
+      await axios.post("http://localhost:3000/review", {
+        userId,
+        movieId: id,
+        rating,
+        title,
+        description,
+      });
+      setRating("");
+      setTitle("");
+      setDescription("");
+      navigate("redirect");
     } catch (error) {
       console.log("error", error);
     }
   };
 
-  if (loading) return <p>Loading...</p>;
-  ;
+  if (loading) return <LoadingLogo />
+
   return (
     <div className="px-3 py-10 lg:px-80 bg-[#f8f4f4] flex flex-col gap-4">
-      <div className=" flex gap-3 ">
-        <img className=" h-32" src={movie?.poster} alt="" />
-        <div className=" flex flex-col gap-3">
-          <span className=" text-xl font-semibold">{movie?.title}</span>
+      <div className="flex gap-3">
+        <img className="h-32" src={`data:image/jpeg;base64,${movie?.poster}`} alt="" />
+        <div className="flex flex-col gap-3">
+          <span className="text-xl font-semibold">{movie?.title}</span>
           <hr />
-          <span className=" text-xl font-semibold">Add an item</span>
+          <span className="text-xl font-semibold">Add a review</span>
         </div>
       </div>
       <form className="form flex flex-col gap-3" onSubmit={handleSubmit}>
-        <span className=" text-gray-700">YOUR RATING</span>
+        <span className="text-gray-700">YOUR RATING</span>
         <div>
           <input
-            className=" border border-gray-700 rounded px-2 py-1"
+            className="border border-gray-700 rounded px-2 py-1"
             type="number"
             id="quantity"
             name="quantity"
@@ -85,10 +89,10 @@ const Review = () => {
             }}
           />
         </div>
-        <span className=" text-gray-700">YOUR REVIEW</span>
-        <div className=" flex flex-col gap-4">
+        <span className="text-gray-700">YOUR REVIEW</span>
+        <div className="flex flex-col gap-4">
           <input
-            className=" px-2 py-1 border border-gray-500 rounded"
+            className="px-2 py-1 border border-gray-500 rounded"
             type="text"
             placeholder="Write a headline for your review here"
             onChange={(event) => {
@@ -105,7 +109,7 @@ const Review = () => {
             }}
           ></textarea>
         </div>
-        <button className=" border border-gray-500 bg-white px-2 py-1 rounded w-full">
+        <button className="border border-gray-500 bg-white px-2 py-1 rounded w-full">
           Submit
         </button>
       </form>
