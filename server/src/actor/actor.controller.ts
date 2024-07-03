@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Post, UploadedFile, UseInterceptors } from '@nestjs/common';
+import { BadRequestException, Body, Controller, Delete, Get, HttpException, HttpStatus, NotFoundException, Param, Post, UploadedFile, UseInterceptors } from '@nestjs/common';
 import { ActorService } from './actor.service';
 import { ApiTags, ApiOkResponse } from '@nestjs/swagger';
 import { Actor } from './entities/actor.entity';
@@ -21,19 +21,25 @@ export class ActorController {
     }
     const key = `actorImage/${Date.now()}_${file.originalname}`;
     await this.actorService.upload(file, key);
-    const actorId = await this.actorService.create(actorName, key)
+    const actorId = await this.actorService.create(actorName, key);
     return actorId
   }
 
   @Get()
   @ApiOkResponse({ type: Actor, isArray: true })
   async findAll() {
-    const actors = await this.actorService.findAll();
-    for(let i=0; i<actors.length; i++) {
-        const actorKey = actors[i].imageUrl; 
-        const imageBuffer = await this.awsService.getImage(actorKey);
-        actors[i].imageUrl = imageBuffer.toString('base64'); 
+    return this.actorService.findAll();
+  }
+
+  @Delete(':actorId')
+  async deleteActor(@Param('actorId') actorId: string): Promise<{ message: string }> {
+    try {
+      await this.actorService.delete(actorId);
+      return { message: 'Actor successfully deleted' };
+    } catch (error) {
+      if (error instanceof BadRequestException) {
+        throw new HttpException({ message: error.message }, HttpStatus.BAD_REQUEST);
+      }
     }
-    return actors
   }
 }

@@ -9,6 +9,7 @@ const MovieHeader: FC<{
   movieDirectors: any;
   movieWriters: any;
 }> = ({ movie, movieActors, movieDirectors, movieWriters }) => {
+
   function getYouTubeVideoId(url: string) {
     const urlObj = new URL(url);
     let videoId = urlObj.searchParams.get("v");
@@ -28,6 +29,8 @@ const MovieHeader: FC<{
     // }, 
   };
 
+  const posterUrl = `https://movie-assets.s3.amazonaws.com/${movie.poster}`
+
   return (
     <div className="bg-[#262a29] p-4 sm:px-32 md:px-28 lg:px-40">
       <div className="flex flex-col gap-2">
@@ -37,7 +40,7 @@ const MovieHeader: FC<{
         </span>
       </div>
       <div className="flex flex-col py-2 gap-8 md:flex-row">
-        <img className="w-72" src={`data:image/jpeg;base64,${movie.poster}`} alt="" />
+        <img className="w-72" src={posterUrl} alt="" />
         {videoId && (
           <div style={{ width: "100%" }}>
             <YouTube

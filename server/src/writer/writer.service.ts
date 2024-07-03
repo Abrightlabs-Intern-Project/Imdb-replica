@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { CreateWriterDto } from './dto/create-writer.dto';
 import { UpdateWriterDto } from './dto/update-writer.dto';
 import { Writer } from '@prisma/client';
@@ -29,5 +29,22 @@ export class WriterService {
     return await this.prisma.writer.create({
       data: createWriterDto
     })
+  }
+
+  async findAll() {
+    return await this.prisma.writer.findMany()
+  }
+
+  async delete(writerId: string) {
+    const writer = await this.prisma.writer.findUnique({
+      where: { writerId },
+      include: { movies: true },
+    });
+    if (writer.movies.length > 0) {
+      throw new BadRequestException(`Writer with ID ${writerId} is associated with movies and cannot be deleted`);
+    }
+    await this.prisma.writer.delete({
+      where: { writerId },
+    });
   }
 }

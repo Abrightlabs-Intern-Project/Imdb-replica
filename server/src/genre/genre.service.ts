@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { Genre } from '@prisma/client';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { v4 as uuidv4 } from 'uuid';
@@ -35,6 +35,19 @@ export class GenreService {
       include: {
         movies: true,
       },
+    });
+  }
+
+  async delete(genreId: string) {
+    const genre = await this.prisma.genre.findUnique({
+      where: { genreId },
+      include: { movies: true },
+    });
+    if (genre.movies.length > 0) {
+      throw new BadRequestException(`Genre with ID ${genreId} is associated with movies and cannot be deleted`);
+    }
+    await this.prisma.genre.delete({
+      where: { genreId },
     });
   }
 }

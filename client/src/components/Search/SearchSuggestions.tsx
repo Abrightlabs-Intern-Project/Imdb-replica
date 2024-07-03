@@ -11,6 +11,8 @@ const SearchSuggestions: FC<SearchSuggestionsProps> = ({
   results,
   onHideSuggestions,
 }) => {
+
+   const posterUrl = ``
   return (
     <div className="absolute rounded-md mt-2 z-10 flex flex-col md:mr-16">
       {results.slice(0, 7).map((movie: Movie) => (
@@ -20,7 +22,7 @@ const SearchSuggestions: FC<SearchSuggestionsProps> = ({
           onClick={() => onHideSuggestions()}
         >
           <div className=" flex border border-black">
-            <img src={`data:image/jpeg;base64,${movie.poster}`}  className=" h-20 w-14" alt="" />
+            <img src={`https://movie-assets.s3.amazonaws.com/${movie.poster}`}  className=" h-20 w-14" alt="" />
             <div className="py- bg-[#201c1c]  hover:bg-[#383434] text-white text-lg px-4 flex flex-col w-full md:w-[400px] lg:w-[500px] text-start">
               <div>{movie.title}</div>
               <div className="text-sm">{movie.year}</div>

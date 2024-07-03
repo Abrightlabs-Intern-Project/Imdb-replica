@@ -5,13 +5,14 @@ import { Link } from "react-router-dom";
 
 const WatchlistMovieCard: FC<{ props: Movie }> = ({ props }) => {
   const { removeFromWatchlist } = useWatchlist();
+  const posterUrl = `https://movie-assets.s3.amazonaws.com/${props.poster}`
 
   return (
     <div className=" border border-gray-500 p-2 rounded flex flex-col gap-3 w-full md:w-[800px]">
       <div className=" flex justify-between">
         <div className=" flex gap-3">
           <Link to={`/movie/${props.movieId}`}>
-            <img className=" w-16" src={`data:image/jpeg;base64,${props?.poster}`} alt="" />
+            <img className=" w-16" src={posterUrl} alt="" />
           </Link>
           <div className=" flex flex-col gap-1">
             <span className=" font-bold px-1">{props.title}</span>

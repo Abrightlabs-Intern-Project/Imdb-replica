@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable, NotFoundException } from '@nestjs/common';
 import { Actor } from '@prisma/client';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { v4 as uuidv4 } from 'uuid';
@@ -33,5 +33,18 @@ export class ActorService {
         actorName
       }
     })
+  }
+
+  async delete(actorId: string) {
+    const actor = await this.prisma.actor.findUnique({
+      where: { actorId },
+      include: { movies: true },
+    });
+    if (actor.movies.length > 0) {
+      throw new BadRequestException(`Actor with ID ${actorId} is associated with movies and cannot be deleted`);
+    }
+    await this.prisma.actor.delete({
+      where: { actorId },
+    });
   }
 }

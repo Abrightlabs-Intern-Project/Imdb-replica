@@ -16,7 +16,6 @@ const Watchlist: FC = () => {
   const { user } = useAuthenticator((context) => [context.user]);
   const userId = user.userId;
 
-  console.log(watchlist);
   useEffect(() => {
     const getMovies = async () => {
       try {
