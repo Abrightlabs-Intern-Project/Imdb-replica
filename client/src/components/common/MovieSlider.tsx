@@ -43,7 +43,7 @@ const MovieSlider: FC<{ data: Movie[] }> = ({ data }) => {
     <Slider {...settings} className=" w-[80%]">
       {data.map((movie: any, index: number) => (
         <div key={index}>
-          <MovieCard props={movie} />
+          <MovieCard movie={movie} />
         </div>
       ))}
     </Slider>

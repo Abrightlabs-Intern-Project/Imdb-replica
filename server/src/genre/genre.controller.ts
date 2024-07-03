@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { BadRequestException, Body, Controller, Delete, Get, HttpException, HttpStatus, Param, Post } from '@nestjs/common';
 import { GenreService } from './genre.service';
 import { ApiTags, ApiOkResponse } from '@nestjs/swagger';
 import { Genre } from './entities/genre.entity';
@@ -18,19 +18,25 @@ export class GenreController {
 
   @Get()
   @ApiOkResponse({ type: Genre, isArray: true })
-  async getAllGenres() {
+  async findAll() {
     return this.genreService.findAll();
   }
 
   @Get(':genreId')
   @ApiOkResponse({ type: Genre })
-  async getMovie(@Param('genreId') genreId: string) {
-    const genres = await this.genreService.find(genreId);
-    for(let i=0;i<genres.movies.length;i++) {
-      const posterKey = genres.movies[i].poster; 
-      const posterBuffer = await this.awsService.getImage(posterKey);
-      genres.movies[i].poster = posterBuffer.toString('base64');
+  async find(@Param('genreId') genreId: string) {
+    return this.genreService.find(genreId);
+  }
+
+  @Delete(":genreId")
+  async delete(@Param("genreId") genreId: string) {
+    try {
+      await this.genreService.delete(genreId);
+      return { message: 'Genre successfully deleted' };
+    } catch (error) {
+      if (error instanceof BadRequestException) {
+        throw new HttpException({ message: error.message }, HttpStatus.BAD_REQUEST);
+      }
     }
-    return genres
   }
 }

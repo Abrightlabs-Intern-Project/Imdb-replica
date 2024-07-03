@@ -64,10 +64,12 @@ const Review = () => {
 
   if (loading) return <LoadingLogo />
 
+  const posterUrl = `https://movie-assets.s3.amazonaws.com/${movie?.poster}`
+
   return (
     <div className="px-3 py-10 lg:px-80 bg-[#f8f4f4] flex flex-col gap-4">
       <div className="flex gap-3">
-        <img className="h-32" src={`data:image/jpeg;base64,${movie?.poster}`} alt="" />
+        <img className="h-32" src={posterUrl} alt="" />
         <div className="flex flex-col gap-3">
           <span className="text-xl font-semibold">{movie?.title}</span>
           <hr />

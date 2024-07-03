@@ -17,10 +17,10 @@ import { components, theme } from "./cognito/config";
 import MovieFiltering from "./pages/MovieFiltering";
 import axios from "axios";
 import Watchlist from "./pages/Watchlist";
-import RemoveMovie from "./pages/RemoveMovie";
-import AddMovie from "./pages/AddMovie";
-import UpdateMovie from "./pages/UpdateMovie";
+import AddMovie from "./pages/admin/AddMovie";
 import ThankYou from "./pages/ThankYou";
+import Admin from "./pages/admin/Admin";
+import EditMovie from "./pages/admin/EditMovie";
 
 Amplify.configure(awsExports);
 
@@ -54,24 +54,31 @@ const App: FC<{ signOut: any; user: any }> = ({ signOut, user }) => {
     handleLogin();
   }, [user]);
 
-  return (
-    <WatchlistProvider>
-      <Navbar signOut={signOut} user={user} />
+  if (user.username !== "admin")
+    return (
+      <WatchlistProvider>
+        <Navbar signOut={signOut} user={user} />
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="*" element={<h1>Page Not Found!</h1>} />
+          <Route path="/movie/:id" element={<MovieDetails />} />
+          <Route path="/watchlist" element={<Watchlist />} />
+          <Route path="/movie/:id/review" element={<Review />} />
+          <Route path="/filter" element={<MovieFiltering />} />
+          <Route path="/movie/:id/review/redirect" element={<ThankYou />} />
+          <Route path="/movie/add" element={<AddMovie />} />
+        </Routes>
+        <Footer />
+      </WatchlistProvider>
+    );
+  else
+    return (
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="*" element={<h1>Page Not Found!</h1>} />
-        <Route path="/movie/:id" element={<MovieDetails />} />
-        <Route path="/watchlist" element={<Watchlist />} />
-        <Route path="/movie/:id/review" element={<Review />} />
-        <Route path="/filter" element={<MovieFiltering />} />
-        <Route path="/movie/add" element={<AddMovie />} />
-        <Route path="/movie/delete" element={<RemoveMovie />} />
-        <Route path="/movie/update" element={<UpdateMovie />} />
-        <Route path="/movie/:id/review/redirect" element={<ThankYou />} />
+        <Route path="/" element={<Admin logout={signOut} />} />
+        <Route path="/add" element={<AddMovie />} />
+        <Route path="/edit/:id" element={<EditMovie />} />
       </Routes>
-      <Footer />
-    </WatchlistProvider>
-  );
+    );
 };
 
 export default MainApp;

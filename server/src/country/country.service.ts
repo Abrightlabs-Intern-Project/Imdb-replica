@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { CreateCountryDto } from './dto/create-country.dto';
 import { UpdateCountryDto } from './dto/update-country.dto';
 import { PrismaService } from 'src/prisma/prisma.service';
@@ -34,6 +34,19 @@ export class CountryService {
       where: {
         countryName,
       },
+    });
+  }
+
+  async delete(countryId: string) {
+    const country = await this.prisma.country.findUnique({
+      where: { countryId },
+      include: { movies: true },
+    });
+    if (country.movies.length > 0) {
+      throw new BadRequestException(`Country with ID ${countryId} is associated with movies and cannot be deleted`);
+    }
+    await this.prisma.country.delete({
+      where: { countryId },
     });
   }
 }

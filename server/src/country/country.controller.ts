@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, BadRequestException, HttpStatus, HttpException } from '@nestjs/common';
 import { CountryService } from './country.service';
 import { CreateCountryDto } from './dto/create-country.dto';
 import { UpdateCountryDto } from './dto/update-country.dto';
@@ -12,5 +12,22 @@ export class CountryController {
   @Post()
   create(@Body() createCountryDto: CreateCountryDto) {
     return this.countryService.createOrGet(createCountryDto);
+  }
+
+  @Get()
+  findAll() {
+    return this.countryService.findAll()
+  }
+
+  @Delete(":countryId")
+  async delete(@Param("countryId") countryId: string) {
+    try {
+      await this.countryService.delete(countryId);
+      return { message: 'Country successfully deleted' };
+    } catch (error) {
+      if (error instanceof BadRequestException) {
+        throw new HttpException({ message: error.message }, HttpStatus.BAD_REQUEST);
+      }
+    }
   }
 }

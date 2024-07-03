@@ -12,14 +12,12 @@ export class UserController {
   @Post('login')
   @ApiResponse({ type: User })
   async loginUser(@Body() loginData: LoginDto) {
-    const existingUser = await this.userService.find(loginData.userId);
+    const {userName, userId} = loginData
+    const existingUser = await this.userService.find(userId);
     if (existingUser) {
       return existingUser;
     }
-    const newUser = await this.userService.create(
-      loginData.userName,
-      loginData.userId,
-    );
+    const newUser = await this.userService.create(userName, userId);
     return newUser;
   }
 }

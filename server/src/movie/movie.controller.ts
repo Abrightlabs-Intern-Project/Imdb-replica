@@ -1,13 +1,4 @@
-import {
-  Body,
-  Controller,
-  Delete,
-  Get,
-  Param,
-  Post,
-  UploadedFile,
-  UseInterceptors,
-} from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, UploadedFile, UseInterceptors } from '@nestjs/common';
 import { MovieService } from './movie.service';
 import { Movie } from './entities/movie.entity';
 import { ApiTags, ApiOkResponse } from '@nestjs/swagger';
@@ -34,45 +25,21 @@ export class MovieController {
   @Get()
   @ApiOkResponse({ type: [Movie] })
   async findAll(): Promise<Movie[]> {
-    const movies = await this.movieService.findAll();
-    await Promise.all(
-      movies.map(async (movie) => {
-        const posterKey = movie.poster;
-        const posterBuffer = await this.awsService.getImage(posterKey);
-        movie.poster = posterBuffer.toString('base64');
-      })
-    );
-    return movies;
+    return this.movieService.findAll();
   }
 
- 
   @Get(':movieId')
-async find(@Param('movieId') movieId: string): Promise<Movie> {
-  const movie = await this.movieService.find(movieId);
-  const posterKey = movie.poster;
-  const posterBuffer = await this.awsService.getImage(posterKey);
-  movie.poster = posterBuffer.toString('base64');
-  await Promise.all(
-    movie.actors.map(async (actor) => {
-      const actorKey = actor.imageUrl;
-      const actorImg = await this.awsService.getImage(actorKey);
-      actor.imageUrl = actorImg.toString('base64');
-    })
-  );
-
-  return movie;
-}
+  async find(@Param('movieId') movieId: string): Promise<Movie> {
+    return this.movieService.find(movieId);
+  }
 
   @Post()
-  async create(@Body() createUserDto: CreateMovieDto) {
-    return this.movieService.create(createUserDto);
+  async create(@Body() createMovieDto: CreateMovieDto) {
+    return this.movieService.create(createMovieDto);
   }
 
-  @Delete(':movieId/:title')
-  async delete(
-    @Param('movieId') movieId: string,
-    @Param('title') title: string,
-  ) {
+  @Delete(':movieId')
+  async delete(@Param('movieId') movieId: string) {
     return this.movieService.delete(movieId);
   }
 }

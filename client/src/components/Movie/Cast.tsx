@@ -11,7 +11,7 @@ const Cast: FC<{ movieActors: any }> = ({ movieActors }) => {
           </span>
         </div>
         <hr className="border-gray-400" />
-        <div className=" flex flex-col gap-16 px-5 py-5 lg:flex-row">
+        <div className="flex gap-16 px-5 py-5 flex-wrap">
           {movieActors.map((actor: any) => {
             return <ActorProfile url={actor.imageUrl} name={actor.actorName} />;
           })}

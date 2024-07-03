@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { BadRequestException, Injectable } from '@nestjs/common';
 import { CreateDirectorDto } from './dto/create-director.dto';
 import { UpdateDirectorDto } from './dto/update-director.dto';
 import { v4 as uuidv4 } from 'uuid';
@@ -23,5 +23,22 @@ export class DirectorService {
       });
     }
     return director.directorId;
+  }
+
+  async findAll() {
+    return await this.prisma.director.findMany()
+  }
+
+  async delete(directorId: string) {
+    const director = await this.prisma.director.findUnique({
+      where: { directorId },
+      include: { movies: true },
+    });
+    if (director.movies.length > 0) {
+      throw new BadRequestException(`Director with ID ${directorId} is associated with movies and cannot be deleted`);
+    }
+    await this.prisma.director.delete({
+      where: { directorId },
+    });
   }
 }
