@@ -3,7 +3,7 @@ import ActorProfile from "./MovieActor";
 
 const Cast: FC<{ movieActors: any }> = ({ movieActors }) => {
   return (
-    <div className="py-5 sm:px-32 md:px-28 lg:px-40">
+    <div className="py-5">
       <div className=" px-2 flex flex-col gap-2">
         <div className=" text-2xl font-bold md:text-3xl">
           <span>
@@ -11,9 +11,9 @@ const Cast: FC<{ movieActors: any }> = ({ movieActors }) => {
           </span>
         </div>
         <hr className="border-gray-400" />
-        <div className="flex gap-16 px-5 py-5 flex-wrap">
+        <div className="grid grid-cols-2 md:grid-cols-3 gap-10 py-5">
           {movieActors.map((actor: any) => {
-            return <ActorProfile url={actor.imageUrl} name={actor.actorName} />;
+            return <ActorProfile url={actor.imageUrl} name={actor.actorName} actorId={actor.actorId} />;
           })}
         </div>
         <hr className="border-gray-400" />

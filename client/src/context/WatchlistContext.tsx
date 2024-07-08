@@ -10,7 +10,7 @@ type WatchlistProviderProps = {
 export type Actor = {
   actorId: string;
   actorName: string;
-  image: string;
+  imageUrl: string;
 };
 
 export type Director = {

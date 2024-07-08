@@ -65,7 +65,7 @@ const MovieFiltering: FC = () => {
       <div className="mt-4 text-white flex flex-wrap gap-5 justify-center">
         {movies.map((movie) => (
           <div key={movie.movieId} className="w-[200px]">
-            <MovieCard props={movie} />
+            <MovieCard movie={movie} />
           </div>
         ))}
       </div>

@@ -43,10 +43,21 @@ export class CountryService {
       include: { movies: true },
     });
     if (country.movies.length > 0) {
-      throw new BadRequestException(`Country with ID ${countryId} is associated with movies and cannot be deleted`);
+      throw new BadRequestException(`Country ${country.countryName} is associated with movies and cannot be deleted`);
     }
     await this.prisma.country.delete({
       where: { countryId },
     });
+  }
+
+  async update(countryId, countryName) {
+    return this.prisma.country.update({
+      where: {
+        countryId
+      },
+      data: {
+        countryName
+      }
+    })
   }
 }

@@ -1,4 +1,4 @@
-import { BadRequestException, Body, Controller, Delete, Get, HttpException, HttpStatus, Param, Post } from '@nestjs/common';
+import { BadRequestException, Body, Controller, Delete, Get, HttpException, HttpStatus, Param, Patch, Post } from '@nestjs/common';
 import { GenreService } from './genre.service';
 import { ApiTags, ApiOkResponse } from '@nestjs/swagger';
 import { Genre } from './entities/genre.entity';
@@ -38,5 +38,10 @@ export class GenreController {
         throw new HttpException({ message: error.message }, HttpStatus.BAD_REQUEST);
       }
     }
+  }
+  
+  @Patch(":genreId")
+  async update(@Param("genreId") genreId: string, @Body("genreName") genreName: string) {
+    return this.genreService.update(genreId, genreName);
   }
 }

@@ -17,7 +17,7 @@ const ReviewCard: FC<{ review: any; id: any }> = ({ review, id }) => {
 
   return (
     <div className="">
-      <div className="rounded-lg border border-gray-500 shadow p-3 w-full md:w-[700px] flex flex-col gap-2">
+      <div className="rounded-lg border border-gray-100 shadow p-3 w-full flex flex-col gap-2">
         <div className="flex flex-col gap-2">
           <div className="flex justify-between">
             <span className=" text-xl font-bold">{review.title}</span>
@@ -31,10 +31,12 @@ const ReviewCard: FC<{ review: any; id: any }> = ({ review, id }) => {
         <div className=" flex justify-between">
         </div>
       </div>
-      <div className="flex">
-        <span className="text-blue-600 text-md px-2">{review.user.userName} • </span>
-        <span>{review.createdAt.split("T")[0]}</span>
-      </div>
+      {id !== null && 
+        <div className="flex">
+          <span className="text-blue-600 text-md px-2">{review.user.userName} • </span>
+          <span>{review.createdAt.split("T")[0]}</span>
+        </div>
+      }
     </div>
   );
 };

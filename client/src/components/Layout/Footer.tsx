@@ -10,10 +10,10 @@ const Footer:FC = () => {
       <div className="follow flex flex-col gap-2">
         <span>Follow IMDb on social</span>
         <div className="flex gap-3 px-2">
-          <img className="h-6" src={TwitterLogo} alt=""  />
-          <img className="h-6" src={FacebookLogo} alt="" />
-          <img className="h-6" src={InstaLogo} alt="" />
-          <img className="h-6" src={YoutubeLogo} alt="" />
+          <a href="https://twitter.com/imdb"><img className="h-6" src={TwitterLogo} alt=""  /></a>
+          <a href="https://www.facebook.com/imdb"><img className="h-6" src={FacebookLogo} alt="" /></a>
+          <a href="https://www.instagram.com/imdb"><img className="h-6" src={InstaLogo} alt="" /></a>
+          <a href="https://www.youtube.com/imdb"><img className="h-6" src={YoutubeLogo} alt="" /></a>
         </div>
       </div>
       <div className=" flex flex-col items-center gap-5 sm:flex-row">

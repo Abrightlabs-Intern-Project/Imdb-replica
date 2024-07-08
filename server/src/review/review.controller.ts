@@ -10,13 +10,18 @@ export class ReviewController {
         return this.reviewService.find(movieId);
     }
 
+    @Get("user/:userId")
+    async findUserReviews(@Param("userId") userId: string) {
+        return this.reviewService.findUserReviws(userId);
+    }
+
     @Post()
     async create(@Body() data: {userId, movieId, rating, title, description}) {
         return this.reviewService.create(data.userId, data.movieId, data.rating, data.title, data.description);
     }
 
-    @Delete(":userId/:movieId")
-    async delete(@Param("userId") userId: string, @Param("movieId") movieId: string) {
-        return this.reviewService.delete(userId, movieId)
+    @Delete(":reviewId")
+    async delete(@Param("reviewId") reviewId: string) {
+        return this.reviewService.delete(reviewId)
     }
 }

@@ -30,4 +30,9 @@ export class WriterController {
       }
     }
   }
+
+  @Patch(":writerId")
+  async update(@Param("writerId") writerId, @Body("writerName") writerName: string) {
+    return this.writerService.update(writerId, writerName);
+  }
 }

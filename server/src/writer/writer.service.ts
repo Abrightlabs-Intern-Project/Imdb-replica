@@ -3,7 +3,6 @@ import { CreateWriterDto } from './dto/create-writer.dto';
 import { UpdateWriterDto } from './dto/update-writer.dto';
 import { Writer } from '@prisma/client';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { v4 as uuidv4 } from 'uuid';
 
 @Injectable()
 export class WriterService {
@@ -41,10 +40,21 @@ export class WriterService {
       include: { movies: true },
     });
     if (writer.movies.length > 0) {
-      throw new BadRequestException(`Writer with ID ${writerId} is associated with movies and cannot be deleted`);
+      throw new BadRequestException(`Writer ${writer.writerName} is associated with movies and cannot be deleted`);
     }
     await this.prisma.writer.delete({
       where: { writerId },
     });
+  }
+
+  async update(writerId: string, writerName: string) {
+    return await this.prisma.writer.update({
+      where: {
+        writerId
+      },
+      data: {
+        writerName
+      }
+    })
   }
 }

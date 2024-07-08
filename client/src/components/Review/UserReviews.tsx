@@ -23,9 +23,9 @@ const UserReviews: FC = () => {
   if (loading) return <p>Loading...</p>;
 
   return (
-    <div className="sm:px-32 md:px-28 lg:px-40 py-5">
+    <div className="py-5">
       <div className=" flex flex-col gap-4 px-1">
-        <div className=" flex justify-between w-full md:w-[700px]">
+        <div className=" flex justify-between w-full">
           <span className=" text-2xl font-bold md:text-3xl">
             <span className=" text-yellow-400">|</span> User Review &gt;
           </span>

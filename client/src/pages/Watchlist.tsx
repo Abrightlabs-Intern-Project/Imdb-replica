@@ -2,7 +2,6 @@ import { Movie, useWatchlist } from "../context/WatchlistContext";
 import WatchlistMovieCard from "../components/Watchlist/WatchlistMovieCard";
 import { WatchlistHeader } from "../components/Watchlist/WatchlistHeader";
 import MovieSlider from "../components/common/MovieSlider";
-import { useAuthenticator } from "@aws-amplify/ui-react";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { FC } from "react";
@@ -12,9 +11,6 @@ const Watchlist: FC = () => {
   const { watchlist } = useWatchlist();
   const [loading, setLoading] = useState<boolean>(true);
   const [movies, setMovies] = useState<Movie[]>([]);
-
-  const { user } = useAuthenticator((context) => [context.user]);
-  const userId = user.userId;
 
   useEffect(() => {
     const getMovies = async () => {
@@ -42,7 +38,7 @@ const Watchlist: FC = () => {
       </div>
       <div className="px-2 sm:px-32 lg:px-40 flex flex-col gap-3 py-5">
         {watchlist.map((movie: Movie) => (
-          <WatchlistMovieCard key={movie.movieId} props={movie} />
+          <WatchlistMovieCard key={movie.movieId} movie={movie} />
         ))}
       </div>
       <div className=" flex justify-center bg-black">

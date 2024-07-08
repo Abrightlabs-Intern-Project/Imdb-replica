@@ -30,4 +30,9 @@ export class DirectorController {
       }
     }
   }
+
+  @Patch(":directorId")
+  async update(@Param("directorId") directorId: string, @Body("directorName") directorName: string) {
+    return this.directorService.update(directorId, directorName);
+  }
 }

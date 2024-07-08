@@ -1,10 +1,11 @@
-import { Body, Controller, Delete, Get, Param, Post, UploadedFile, UseInterceptors } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post, Put, UploadedFile, UseInterceptors } from '@nestjs/common';
 import { MovieService } from './movie.service';
 import { Movie } from './entities/movie.entity';
 import { ApiTags, ApiOkResponse } from '@nestjs/swagger';
 import { CreateMovieDto } from './dto/create-movie.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
 import { AwsS3Service } from '../aws/aws.service';
+import { UpdateMovieDto } from './dto/update-movie.dto';
 
 @ApiTags('movies')
 @Controller('movies')
@@ -41,5 +42,10 @@ export class MovieController {
   @Delete(':movieId')
   async delete(@Param('movieId') movieId: string) {
     return this.movieService.delete(movieId);
+  }
+
+  @Put(":movieId")
+  async update(@Param('movieId') movieId: string, @Body() updateMovieDto: UpdateMovieDto) {
+    return this.movieService.update(movieId, updateMovieDto)
   }
 }

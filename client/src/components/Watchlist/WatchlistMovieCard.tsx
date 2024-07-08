@@ -3,36 +3,37 @@ import Star from "../../../public/starr.png";
 import { Movie, useWatchlist } from "../../context/WatchlistContext";
 import { Link } from "react-router-dom";
 
-const WatchlistMovieCard: FC<{ props: Movie }> = ({ props }) => {
+const WatchlistMovieCard: FC<{ movie: Movie, actor: boolean }> = ({ movie, actor=false }) => {
   const { removeFromWatchlist } = useWatchlist();
-  const posterUrl = `https://movie-assets.s3.amazonaws.com/${props.poster}`
+  const posterUrl = `https://movie-assets.s3.amazonaws.com/${movie.poster}`
 
   return (
-    <div className=" border border-gray-500 p-2 rounded flex flex-col gap-3 w-full md:w-[800px]">
+    <div className=" border border-gray-500 rounded flex flex-col gap-3 w-full md:w-[500px]">
       <div className=" flex justify-between">
         <div className=" flex gap-3">
-          <Link to={`/movie/${props.movieId}`}>
+          <Link to={`/movie/${movie.movieId}`}>
             <img className=" w-16" src={posterUrl} alt="" />
           </Link>
-          <div className=" flex flex-col gap-1">
-            <span className=" font-bold px-1">{props.title}</span>
+          <div className=" flex flex-col gap-1 p-1">
+            <span className=" font-bold px-1">{movie.title}</span>
             <div className=" flex gap-3 px-1">
-              <span>{props.released}</span>
-              <span>{props.runtime}</span>
+              <span>{movie.released}</span>
+              <span>{movie.runtime}</span>
             </div>
             <div className=" flex gap-1">
               <img className=" w-6 h-6" src={Star} alt="" />
-              <span>{props.rating}</span>
+              <span>{movie.rating}</span>
             </div>
           </div>
         </div>
-        <div>
-          <button
-            className="px-4 py-1 rounded-md bg-white text-gray-800 border border-gray-800 hover:bg-gray-200 focus:outline-none"
-            onClick={() => removeFromWatchlist(props.movieId)}
+        <div className="p-2">
+
+         {(!actor) && <button
+            className="px-1 rounded bg-white text-gray-500 border border-gray-500 hover:bg-gray-200 focus:outline-none"
+            onClick={() => removeFromWatchlist(movie.movieId)}
           >
-            Remove
-          </button>
+            &#x2715;
+          </button>}
         </div>
       </div>
       {/* <div className=" flex flex-col gap-2">

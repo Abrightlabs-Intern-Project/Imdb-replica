@@ -44,10 +44,21 @@ export class GenreService {
       include: { movies: true },
     });
     if (genre.movies.length > 0) {
-      throw new BadRequestException(`Genre with ID ${genreId} is associated with movies and cannot be deleted`);
+      throw new BadRequestException(`${genre.genreName} genre is associated with movies and cannot be deleted`);
     }
     await this.prisma.genre.delete({
       where: { genreId },
     });
+  }
+
+  async update(genreId: string, genreName: string) {
+    return await this.prisma.genre.update({
+      where: {
+        genreId
+      },
+      data: {
+        genreName
+      }
+    })
   }
 }
