@@ -1,4 +1,4 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete, BadRequestException, HttpStatus, HttpException } from '@nestjs/common';
+import { Controller, Get, Post, Body, Patch, Param, Delete, BadRequestException, HttpStatus, HttpException, Put } from '@nestjs/common';
 import { CountryService } from './country.service';
 import { CreateCountryDto } from './dto/create-country.dto';
 import { UpdateCountryDto } from './dto/update-country.dto';
@@ -29,5 +29,10 @@ export class CountryController {
         throw new HttpException({ message: error.message }, HttpStatus.BAD_REQUEST);
       }
     }
+  }
+
+  @Patch(":countryId")
+  async update(@Param("countryId") countryId: string, @Body("countryName") countryName: string) {
+    return this.countryService.update(countryId, countryName)
   }
 }

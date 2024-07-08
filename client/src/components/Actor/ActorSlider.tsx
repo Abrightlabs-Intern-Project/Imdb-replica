@@ -42,7 +42,7 @@ const ActorSlider: FC<{ actors: any }> = ({ actors }) => {
     <Slider {...settings} className=" w-[80%]">
       {actors.map((actor: any, index: number) => (
         <div key={index}>
-          <ActorCard url={actor.imageUrl} name={actor.actorName} />
+          <ActorCard url={actor.imageUrl} name={actor.actorName} actorId={actor.actorId}/>
         </div>
       ))}
     </Slider>

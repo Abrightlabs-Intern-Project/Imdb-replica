@@ -4,6 +4,7 @@ import { PrismaService } from 'src/prisma/prisma.service';
 import { v4 as uuidv4 } from 'uuid';
 import { CreateActorDto } from './dto/create-actor.dto';
 import { AwsS3Service } from 'src/aws/aws.service';
+import { actors } from 'data/actor';
 
 @Injectable()
 export class ActorService {
@@ -27,10 +28,13 @@ export class ActorService {
     return this.prisma.actor.findMany();
   }
 
-  async find(actorName: string) {
+  async find(actorId: string) {
     return this.prisma.actor.findUnique({
       where: {
-        actorName
+        actorId
+      },
+      include: {
+        movies: true
       }
     })
   }
@@ -41,10 +45,21 @@ export class ActorService {
       include: { movies: true },
     });
     if (actor.movies.length > 0) {
-      throw new BadRequestException(`Actor with ID ${actorId} is associated with movies and cannot be deleted`);
+      throw new BadRequestException(`Actor ${actor.actorName} is associated with movies and cannot be deleted`);
     }
     await this.prisma.actor.delete({
       where: { actorId },
     });
+  }
+
+  async update(actorId: string, actorName: string) {
+    return await this.prisma.actor.update({
+      where: {
+        actorId
+      },
+      data: {
+        actorName
+      }
+    })
   }
 }

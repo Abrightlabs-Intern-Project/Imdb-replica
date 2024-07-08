@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { Movie } from '@prisma/client';
 import { CreateMovieDto } from './dto/create-movie.dto';
+import { UpdateMovieDto } from './dto/update-movie.dto';
 
 @Injectable()
 export class MovieService {
@@ -36,9 +37,32 @@ export class MovieService {
     });
   }
 
+  async update(movieId: string, updateMovieDto: UpdateMovieDto) {
+    return await this.prisma.movie.update({
+      where: {
+        movieId
+      },
+      data: {
+        title: updateMovieDto.title,
+        year: updateMovieDto.year,
+        rated: updateMovieDto.rated,
+        released: updateMovieDto.released,
+        runtime: updateMovieDto.runtime,
+        plot: updateMovieDto.plot,
+        language: updateMovieDto.language,
+        awards: updateMovieDto.awards,
+        poster: updateMovieDto.poster,
+        trailer: updateMovieDto.trailer,
+        metascore: updateMovieDto.metascore,
+        rating: updateMovieDto.rating,
+        votes: updateMovieDto.votes,
+        boxOffice: updateMovieDto.boxOffice
+      }
+    })
+  }
+
   async create(createMovieDto: CreateMovieDto) {
     const {
-      movieId,
       title,
       year,
       rated,
@@ -62,7 +86,6 @@ export class MovieService {
 
     await this.prisma.movie.create({
       data: {
-        movieId,
         title,
         year,
         rated,
@@ -94,6 +117,5 @@ export class MovieService {
         },
       },
     });
-    return { movieId };
   }
 }

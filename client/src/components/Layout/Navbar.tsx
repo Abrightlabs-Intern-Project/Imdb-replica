@@ -1,5 +1,5 @@
 import { FC, useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { FaUserCircle } from "react-icons/fa";
 import SearchBar from "../Search/SearchBar";
 import { Movie } from "../../context/WatchlistContext";
@@ -13,6 +13,8 @@ type NavbarProps = {
 const Navbar: FC<NavbarProps> = ({ signOut, user }) => {
   const [results, setResults] = useState<Movie[]>([]);
   const [dropdownOpen, setDropdownOpen] = useState(false);
+
+  const navigate = useNavigate()
 
   const hideSuggestions = () => {
     setResults([]);
@@ -53,6 +55,14 @@ const Navbar: FC<NavbarProps> = ({ signOut, user }) => {
               <span className="text-white block py-2 px-4 hover:bg-[#383434] w-full text-left">
                 {user.username}
               </span>
+              <button className="text-white block py-2 px-4 hover:bg-[#383434] w-full text-left" onClick={() => {
+                navigate('/my-reviews')
+                setDropdownOpen(false)
+              }}>
+                <span>
+                  My Reviews
+                </span>
+              </button>
               <button
                 className="text-white block py-2 px-4 hover:bg-[#383434] w-full text-left"
                 onClick={() => {

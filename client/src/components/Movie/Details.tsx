@@ -6,7 +6,7 @@ const Details: FC<{ movie: Movie; movieCountries: any }> = ({
   movieCountries,
 }) => {
   return (
-    <div className=" py-5 sm:px-32 md:px-28 lg:px-40">
+    <div className="py-5">
       <div className=" px-2 flex flex-col gap-2">
         <div className=" text-2xl font-bold md:text-3xl">
           <span>
@@ -28,9 +28,9 @@ const Details: FC<{ movie: Movie; movieCountries: any }> = ({
             Country of Orgin
           </span>
           <span className=" text-blue-500 text-sm md:text-base">
-            {movieCountries.map((country: any) => {
+            {movieCountries.map((country: any, index: number) => {
               return (
-                <span key={country.countryId}>{country.countryName} • </span>
+                <span key={country.countryId}>{country.countryName} {index !== movieCountries.length - 1 && <span>•</span>} </span>
               );
             })}
           </span>

@@ -17,6 +17,17 @@ export class ReviewService {
     })
   } 
 
+  async findUserReviws(userId: string) {
+    return await this.prisma.review.findMany({
+      where: {
+        userId
+      },
+      include: {
+        movie: true
+      }
+    })
+  } 
+
   async create(userId: string, movieId: string, rating: string, title: string, description: string) {
     return await this.prisma.review.create({
       data: {
@@ -29,13 +40,10 @@ export class ReviewService {
     })
   }
 
-  async delete(userId: string, movieId: string) {
+  async delete(reviewId) {
     return await this.prisma.review.delete({
       where: {
-        userId_movieId: {
-          movieId,
-          userId
-        }
+        reviewId
       }
     })
   }

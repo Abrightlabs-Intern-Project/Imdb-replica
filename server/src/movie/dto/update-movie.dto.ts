@@ -64,24 +64,4 @@ export class UpdateMovieDto {
     @ApiProperty()
     @IsString()
     boxOffice: string;
-  
-    @ApiProperty()
-    @IsArray()
-    actors: Actor[];
-  
-    @ApiProperty()
-    @IsArray()
-    directors: Director[];
-  
-    @ApiProperty()
-    @IsArray()
-    writers: Writer[];
-  
-    @ApiProperty()
-    @IsArray()
-    genres: Genre[];
-  
-    @ApiProperty()
-    @IsArray()
-    countries: Country[];
 }

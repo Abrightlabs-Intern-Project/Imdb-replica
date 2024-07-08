@@ -4,7 +4,7 @@ import { Movie } from "../../context/WatchlistContext";
 const TechnicalSpecs:FC<{props: Movie}> = ({props}) => {
 
   return (
-    <div className=" py-5 sm:px-32 lg:px-40">
+    <div className="py-5">
       <div>
         <div className=" pb-2">
           <span className=" text-2xl font-bold md:text-3xl">

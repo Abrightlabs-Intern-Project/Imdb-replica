@@ -19,8 +19,8 @@ export const Storyline: FC<{ movie: Movie; movieGenres: any }> = ({
       <div className=" flex gap-2 px-3 py-2">
         <span className=" text-sm font-semibold">Genres</span>
         <span className=" text-sm text-blue-500">
-          {movieGenres.map((genre: any) => {
-            return <span>{genre.genreName} • </span>;
+          {movieGenres.map((genre: any, index: number) => {
+            return <span>{genre.genreName} {index !== movieGenres.length - 1 && <span>•</span>} </span>;
           })}
         </span>
       </div>

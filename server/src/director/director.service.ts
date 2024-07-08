@@ -35,10 +35,21 @@ export class DirectorService {
       include: { movies: true },
     });
     if (director.movies.length > 0) {
-      throw new BadRequestException(`Director with ID ${directorId} is associated with movies and cannot be deleted`);
+      throw new BadRequestException(`Director ${director.directorName} is associated with movies and cannot be deleted`);
     }
     await this.prisma.director.delete({
       where: { directorId },
     });
+  }
+
+  async update(directorId: string, directorName: string) {
+    return await this.prisma.director.update({
+      where: {
+        directorId
+      },
+      data: {
+        directorName
+      }
+    })
   }
 }

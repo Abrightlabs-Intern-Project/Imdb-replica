@@ -59,9 +59,9 @@ const MovieHeader: FC<{
       <hr className="border-gray-600" />
       <div className="flex gap-2 py-2 px-1">
         <span className="text-white text-sm font-semibold">Director</span>
-        <span className="text-blue-500 text-sm">
-          {movieDirectors.map((director: any) => {
-            return <span>{director.directorName} • </span>;
+        <span className="text-[#5799EF] text-sm">
+          {movieDirectors.map((director: any, index: number) => {
+            return <span>{director.directorName} {index !== movieDirectors.length - 1 && <span>•</span>} </span>;
           })}
         </span>
       </div>
@@ -69,8 +69,8 @@ const MovieHeader: FC<{
       <div className="flex gap-2 py-2 px-1">
         <span className="text-white text-sm font-semibold">Writer</span>
         <span className="text-blue-500 text-sm">
-          {movieWriters.map((writer: any) => {
-            return <span>{writer.writerName} • </span>;
+          {movieWriters.map((writer: any, index: number) => {
+            return <span>{writer.writerName} {index !== movieWriters.length - 1 && <span>•</span>} </span>;
           })}
         </span>
       </div>
@@ -78,8 +78,8 @@ const MovieHeader: FC<{
       <div className="flex gap-2 py-2 px-1">
         <span className="text-gray-400 text-sm font-semibold">Stars</span>
         <span className="text-blue-500 text-sm">
-          {movieActors.map((actor: any) => {
-            return <span>{actor.actorName} • </span>;
+          {movieActors.map((actor: any, index: number) => {
+            return <span>{actor.actorName} {index !== movieActors.length - 1 && <span>•</span>} </span>;
           })}
         </span>
       </div>

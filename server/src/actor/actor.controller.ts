@@ -1,15 +1,14 @@
-import { BadRequestException, Body, Controller, Delete, Get, HttpException, HttpStatus, NotFoundException, Param, Post, UploadedFile, UseInterceptors } from '@nestjs/common';
+import { BadRequestException, Body, Controller, Delete, Get, HttpException, HttpStatus, NotFoundException, Param, Patch, Post, Put, UploadedFile, UseInterceptors } from '@nestjs/common';
 import { ActorService } from './actor.service';
 import { ApiTags, ApiOkResponse } from '@nestjs/swagger';
 import { Actor } from './entities/actor.entity';
 import { CreateActorDto } from './dto/create-actor.dto';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { AwsS3Service } from 'src/aws/aws.service';
 
 @ApiTags('actor')
 @Controller('actor')
 export class ActorController {
-  constructor(private readonly actorService: ActorService, private awsService: AwsS3Service) {}
+  constructor(private readonly actorService: ActorService) {}
 
   @Post()
   @UseInterceptors(FileInterceptor('image'))
@@ -31,8 +30,13 @@ export class ActorController {
     return this.actorService.findAll();
   }
 
+  @Get(":actorId")
+  async find(@Param("actorId") actorId) {
+    return this.actorService.find(actorId)
+  }
+
   @Delete(':actorId')
-  async deleteActor(@Param('actorId') actorId: string): Promise<{ message: string }> {
+  async delete(@Param('actorId') actorId: string): Promise<{ message: string }> {
     try {
       await this.actorService.delete(actorId);
       return { message: 'Actor successfully deleted' };
@@ -41,5 +45,10 @@ export class ActorController {
         throw new HttpException({ message: error.message }, HttpStatus.BAD_REQUEST);
       }
     }
+  }
+
+  @Patch(":actorId")
+  async update(@Param("actorId") actorId: string, @Body("actorName") actorName: string) {
+    return this.actorService.update(actorId, actorName);
   }
 }

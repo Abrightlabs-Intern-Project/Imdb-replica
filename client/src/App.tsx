@@ -21,6 +21,8 @@ import AddMovie from "./pages/admin/AddMovie";
 import ThankYou from "./pages/ThankYou";
 import Admin from "./pages/admin/Admin";
 import EditMovie from "./pages/admin/EditMovie";
+import MyReviews from "./pages/MyReviews";
+import ActorDetails from "./pages/ActorDetails";
 
 Amplify.configure(awsExports);
 
@@ -67,6 +69,8 @@ const App: FC<{ signOut: any; user: any }> = ({ signOut, user }) => {
           <Route path="/filter" element={<MovieFiltering />} />
           <Route path="/movie/:id/review/redirect" element={<ThankYou />} />
           <Route path="/movie/add" element={<AddMovie />} />
+          <Route path="/my-reviews" element={<MyReviews />} />
+          <Route path="/actor/:id" element={<ActorDetails />} />
         </Routes>
         <Footer />
       </WatchlistProvider>

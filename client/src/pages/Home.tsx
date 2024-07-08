@@ -2,7 +2,7 @@ import MovieSlider from "../components/common/MovieSlider";
 import { useEffect, useState } from "react";
 import { FC } from "react";
 import axios from "axios";
-import MovieActor from "../components/Actor/ActorSlider";
+import ActorSlider from "../components/Actor/ActorSlider";
 import { Link } from "react-router-dom";
 import LoadingLogo from "../components/common/LoadingLogo";
 
@@ -70,7 +70,7 @@ const Home: FC = () => {
           <span className="text-yellow-400">|</span> Most Popular Actors{" "}
         </span>
         <div className=" flex justify-center">
-          <MovieActor actors={actors} />
+          <ActorSlider actors={actors} />
         </div>
       </div>
       <div className="flex flex-col py-6">

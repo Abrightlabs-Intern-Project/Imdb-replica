@@ -1,14 +1,18 @@
 import { FC } from "react";
+import { Link, useNavigate } from "react-router-dom";
 
-const MovieActor: FC<{ url: string; name: string }> = ({ url, name }) => {
+const MovieActor: FC<{ url: string; name: string; actorId: string }> = ({ url, name, actorId }) => {
   const imageUrl = `https://movie-assets.s3.amazonaws.com/${url}`
+  const navigate = useNavigate()
   return (
     <div className="flex items-center flex-col justify-center gap-3">
+      <Link to={`http://localhost:5173/actor/${actorId}`}>
         <img
           src={imageUrl}
-          className="object-cover w-[70px] h-[70px] lg:w-[100px] lg:h-[100px] rounded-full"
+          className="object-cover w-[70px] h-[70px] lg:w-[100px] lg:h-[100px] rounded-full hover:cursor-pointer"
         />
-        <span className=" text-lg font-semibold">{name}</span>
+      </Link>
+      <span className=" text-lg font-semibold">{name}</span>
     </div>
   );
 };
