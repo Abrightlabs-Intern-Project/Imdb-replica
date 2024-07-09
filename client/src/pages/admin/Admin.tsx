@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { Movie } from "../../context/WatchlistContext";
 import EntitySection from "./EntitySection";
 
-const Admin = ({ logout }: any) => {
+const Admin = () => {
   const [movies, setMovies] = useState<Movie[]>([]);
   const [actors, setActors] = useState([]);
   const [directors, setDirectors] = useState([]);
@@ -106,12 +106,11 @@ const Admin = ({ logout }: any) => {
       )}
       <div className="flex justify-between p-3 ">
         <span className="text-2xl font-semibold">Admin Dashboard</span>
-        <button className="bg-gray-900 text-white text-lg px-3 py-1 rounded hover:bg-gray-800" onClick={() => logout()}>
+        {/* <button className="bg-gray-900 text-white text-lg px-3 py-1 rounded hover:bg-gray-800" onClick={() => logout()}>
           Logout
-        </button>
+        </button> */}
       </div>
-
-      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 px-3 ">
+      <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4 px-3 mb-10">
         <div className="p-3 border border-gray-300 rounded">
           <h2 className="text-xl mb-3 font-semibold">Movies</h2>
           <input type="text" placeholder="Search Movies..." value={movieSearchTerm} onChange={(e) => setMovieSearchTerm(e.target.value)} className="w-full p-2 border rounded mb-3 outline-none"
@@ -120,14 +119,14 @@ const Admin = ({ logout }: any) => {
             <div key={movie.movieId} className="flex justify-between items-center p-2 border-b">
               <span>{movie.title}</span>
               <div>
-                <Link to={{ pathname: `/edit/${movie.movieId}` }}>
+                <Link to={{ pathname: `edit/${movie.movieId}` }}>
                   <button className="bg-[#1E90FF] text-white px-3 py-1 rounded hover:bg-[#2a76c3] mr-2">Edit</button>
                 </Link>
                 <button onClick={() => handleDelete(movie.movieId, "movies")} className="bg-[#1E90FF] text-white px-3 py-1 rounded hover:bg-[#2a76c3]"> Delete </button>
               </div>
             </div>
           ))}
-          <Link to="/add">
+          <Link to="add">
             <button className="bg-[#1E90FF] text-white px-3 py-1 rounded mt-3 w-full hover:bg-[#2a76c3]">ADD</button>
           </Link>
         </div>

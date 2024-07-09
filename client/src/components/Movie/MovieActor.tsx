@@ -1,9 +1,8 @@
 import { FC } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const MovieActor: FC<{ url: string; name: string; actorId: string }> = ({ url, name, actorId }) => {
   const imageUrl = `https://movie-assets.s3.amazonaws.com/${url}`
-  const navigate = useNavigate()
   return (
     <div className="flex items-center flex-col justify-center gap-3">
       <Link to={`http://localhost:5173/actor/${actorId}`}>

@@ -31,7 +31,6 @@ const MovieDetails: FC = () => {
         setMovieActors(movieData.data.actors);
         setMovieDirectors(movieData.data.directors);
         setMovieCountries(movieData.data.countries);
-        console.log(movieData.data);
       } catch (error) {
         setError(error);
       } finally {
@@ -70,7 +69,7 @@ const MovieDetails: FC = () => {
             {imdbTop10.map((movie, index: number) => {
               return (
                 <>
-                <div className="flex justify-between py-2">
+                <div key={index} className="flex justify-between py-2">
                   <span>
                     <span className="font-bold">{index+1}</span>. <span className="text-gray-700 hover:underline hover:cursor-pointer">{movie.title}</span>
                   </span>
