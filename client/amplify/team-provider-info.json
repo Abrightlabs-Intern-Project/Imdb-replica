@@ -23,7 +23,8 @@
         }
       },
       "auth": {
-        "imdbclienta3cfcad8": {}
+        "imdbclienta3cfcad8": {},
+        "userPoolGroups": {}
       }
     }
   }

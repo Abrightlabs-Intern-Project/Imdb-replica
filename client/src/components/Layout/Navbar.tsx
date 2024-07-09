@@ -4,6 +4,8 @@ import { FaUserCircle } from "react-icons/fa";
 import SearchBar from "../Search/SearchBar";
 import { Movie } from "../../context/WatchlistContext";
 import SearchSuggestions from "../Search/SearchSuggestions";
+import useIsAdmin from "../../pages/admin/useIsAdmin";
+import Gear from "../../../public/user-setting.png";
 
 type NavbarProps = {
   signOut: any;
@@ -14,7 +16,9 @@ const Navbar: FC<NavbarProps> = ({ signOut, user }) => {
   const [results, setResults] = useState<Movie[]>([]);
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
-  const navigate = useNavigate()
+  const { isAdmin, loading } = useIsAdmin();
+
+  const navigate = useNavigate();
 
   const hideSuggestions = () => {
     setResults([]);
@@ -27,6 +31,16 @@ const Navbar: FC<NavbarProps> = ({ signOut, user }) => {
   return (
     <div>
       <div className="bg-[#181414] flex flex-col gap-2 py-4 items-center md:flex-row md:justify-center md:gap-3 relative z-50">
+        {isAdmin && (
+          <button
+            className="font-semibold"
+            onClick={() => {
+              navigate("/admin");
+            }}
+          >
+            <img className="w-8" src={Gear} alt="" />
+          </button>
+        )}
         <Link to="/">
           <img
             className="h-8"
@@ -55,13 +69,14 @@ const Navbar: FC<NavbarProps> = ({ signOut, user }) => {
               <span className="text-white block py-2 px-4 hover:bg-[#383434] w-full text-left">
                 {user.username}
               </span>
-              <button className="text-white block py-2 px-4 hover:bg-[#383434] w-full text-left" onClick={() => {
-                navigate('/my-reviews')
-                setDropdownOpen(false)
-              }}>
-                <span>
-                  My Reviews
-                </span>
+              <button
+                className="text-white block py-2 px-4 hover:bg-[#383434] w-full text-left"
+                onClick={() => {
+                  navigate("/my-reviews");
+                  setDropdownOpen(false);
+                }}
+              >
+                <span>my reviews</span>
               </button>
               <button
                 className="text-white block py-2 px-4 hover:bg-[#383434] w-full text-left"
@@ -70,7 +85,7 @@ const Navbar: FC<NavbarProps> = ({ signOut, user }) => {
                   setDropdownOpen(false);
                 }}
               >
-                Log Out
+                logout
               </button>
             </div>
           )}

@@ -12,6 +12,7 @@ const Home: FC = () => {
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<null | unknown>(null);
 
+
   useEffect(() => {
     const fetchMovies = async () => {
       try {

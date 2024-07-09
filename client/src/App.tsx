@@ -9,7 +9,7 @@ import { Amplify } from "aws-amplify";
 import { Authenticator } from "@aws-amplify/ui-react";
 import "@aws-amplify/ui-react/styles.css";
 import "./App.css";
-//@ts-ignore
+// @ts-ignore
 import awsExports from "./aws-exports";
 import Review from "./pages/Review";
 import { ThemeProvider } from "@aws-amplify/ui-react";
@@ -23,6 +23,7 @@ import Admin from "./pages/admin/Admin";
 import EditMovie from "./pages/admin/EditMovie";
 import MyReviews from "./pages/MyReviews";
 import ActorDetails from "./pages/ActorDetails";
+import withAdminCheck from "./pages/admin/withAdminCheck";
 
 Amplify.configure(awsExports);
 
@@ -56,33 +57,32 @@ const App: FC<{ signOut: any; user: any }> = ({ signOut, user }) => {
     handleLogin();
   }, [user]);
 
-  if (user.username !== "admin")
-    return (
-      <WatchlistProvider>
-        <Navbar signOut={signOut} user={user} />
-        <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="*" element={<h1>Page Not Found!</h1>} />
-          <Route path="/movie/:id" element={<MovieDetails />} />
-          <Route path="/watchlist" element={<Watchlist />} />
-          <Route path="/movie/:id/review" element={<Review />} />
-          <Route path="/filter" element={<MovieFiltering />} />
-          <Route path="/movie/:id/review/redirect" element={<ThankYou />} />
-          <Route path="/movie/add" element={<AddMovie />} />
-          <Route path="/my-reviews" element={<MyReviews />} />
-          <Route path="/actor/:id" element={<ActorDetails />} />
-        </Routes>
-        <Footer />
-      </WatchlistProvider>
-    );
-  else
-    return (
+  const AdminComponent = withAdminCheck(Admin);
+  const AddMovieComponent = withAdminCheck(AddMovie);
+  const EditMovieComponent = withAdminCheck(EditMovie);
+
+  return (
+    <WatchlistProvider>
+      <Navbar signOut={signOut} user={user} />
       <Routes>
-        <Route path="/" element={<Admin logout={signOut} />} />
-        <Route path="/add" element={<AddMovie />} />
-        <Route path="/edit/:id" element={<EditMovie />} />
+        <Route path="/" element={<Home />} />
+        <Route path="*" element={<h1>Page Not Found!</h1>} />
+        <Route path="/movie/:id" element={<MovieDetails />} />
+        <Route path="/watchlist" element={<Watchlist />} />
+        <Route path="/movie/:id/review" element={<Review />} />
+        <Route path="/filter" element={<MovieFiltering />} />
+        <Route path="/movie/:id/review/redirect" element={<ThankYou />} />
+        <Route path="/movie/add" element={<AddMovie />} />
+        <Route path="/my-reviews" element={<MyReviews />} />
+        <Route path="/actor/:id" element={<ActorDetails />} />
+
+        <Route path="/admin" element={<AdminComponent />} />
+        <Route path="/admin/add" element={<AddMovieComponent />} />
+        <Route path="/admin/edit/:id" element={<EditMovieComponent />} />
       </Routes>
-    );
+      <Footer />
+    </WatchlistProvider>
+  );
 };
 
 export default MainApp;
