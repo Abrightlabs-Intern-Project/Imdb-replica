@@ -1,6 +1,6 @@
 # IMDb Replica Project
 
-This project replicates IMDb, focusing on building a full-stack application with NestJS, Prisma, AWS S3, TypeScript, React, AWS Cognito, and Vite.
+This project replicates IMDb, focusing on building a full-stack application with NestJS, Prisma, AWS S3, TypeScript, React, AWS Cognito.
 
 ## Features
 
@@ -21,7 +21,7 @@ This project replicates IMDb, focusing on building a full-stack application with
 
 - Node.js
 - npm or yarn
-- PostgreSQL database
+- MySQL database
 - AWS account with configured Cognito User Pool
 - AWS S3 bucket (for file storage)
 
@@ -59,10 +59,6 @@ This project replicates IMDb, focusing on building a full-stack application with
 ### Contributing
 
     Contributions are welcome! If you have any ideas or improvements, feel free to fork the repository and submit a pull request.
-
-### License
-
-    This project is licensed under the MIT License - see the LICENSE file for details.
 
 ### Notes:
 
