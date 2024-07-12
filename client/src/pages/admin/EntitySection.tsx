@@ -23,6 +23,22 @@ const EntitySection = ({ entity, entityNameKey, fetchEntities, handleAdd, handle
     fetchEntities();
   };
 
+  const handleEditEntity = async (id: string) => {
+    if (entity === "actor" && image) {
+      const form = new FormData();
+      form.append(`${entityNameKey}`, editEntityName);
+      form.append("image", image[0]);
+      await axios.patch(`http://localhost:3000/${entity}/${id}`, form, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+    } else {
+      await handleEdit(entity, id, editEntityName);
+    }
+    fetchEntities();
+  };
+
   return (
     <div className="p-3 border border-gray-300 rounded">
       <h2 className="text-xl font-semibold mb-3">{entity.charAt(0).toUpperCase() + entity.slice(1)}</h2>
@@ -35,11 +51,18 @@ const EntitySection = ({ entity, entityNameKey, fetchEntities, handleAdd, handle
           <div className="flex items-center gap-2 w-full" >
             <input className="border rounded outline-none px-2 py-1 w-full" type="text" value={editEntityName} onChange={(e) => {setEditEntityName(e.target.value)}} onKeyDown={(e) => {
               if(e.key === "Enter") {
-                handleEdit(entity, item[`${entity}Id`], editEntityName)
+                handleEditEntity(item[`${entity}Id`])
                 setEditEntityId(null)
-
               }
             }}/>
+            {entity === "actor" && (
+              <input className=" px-2 py-1 border rounded outline-none w-32" type="file" onChange={(e) => {
+                  if (e.target.files && e.target.files[0]) {
+                    setImage(e.target.files);
+                  }
+                }}
+              />
+            )}
             <div className="flex gap-2">
               {/* <button className=" bg-blue-500 text-white px-4 py-1 rounded" onClick={()=>{handleEdit(entity, item[`${entity}Id`], editEntityName); setEditEntityId(null)}}>Save</button> */}
               <button className="bg-[#A9A9A9] text-white px-4 py-1 rounded" onClick={()=>setEditEntityId(null)}>Cancel</button>

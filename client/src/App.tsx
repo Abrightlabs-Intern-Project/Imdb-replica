@@ -14,7 +14,6 @@ import awsExports from "./aws-exports";
 import Review from "./pages/Review";
 import { ThemeProvider } from "@aws-amplify/ui-react";
 import { components, theme } from "./cognito/config";
-import MovieFiltering from "./pages/MovieFiltering";
 import axios from "axios";
 import Watchlist from "./pages/Watchlist";
 import AddMovie from "./pages/admin/AddMovie";
@@ -24,6 +23,11 @@ import EditMovie from "./pages/admin/EditMovie";
 import MyReviews from "./pages/MyReviews";
 import ActorDetails from "./pages/ActorDetails";
 import withAdminCheck from "./pages/admin/withAdminCheck";
+import Movies from "./pages/Movies";
+import Actors from "./pages/Actors";
+import GenreFiltering from "./pages/GenreFiltering";
+import AdvancedFiltering from "./components/filters/AdvancedFiltering";
+import PageNotFound from "./pages/PageNotFound";
 
 Amplify.configure(awsExports);
 
@@ -66,15 +70,18 @@ const App: FC<{ signOut: any; user: any }> = ({ signOut, user }) => {
       <Navbar signOut={signOut} user={user} />
       <Routes>
         <Route path="/" element={<Home />} />
-        <Route path="*" element={<h1>Page Not Found!</h1>} />
+        <Route path="*" element={<PageNotFound/>} />
         <Route path="/movie/:id" element={<MovieDetails />} />
         <Route path="/watchlist" element={<Watchlist />} />
         <Route path="/movie/:id/review" element={<Review />} />
-        <Route path="/filter" element={<MovieFiltering />} />
+        <Route path="/genre-filter" element={<GenreFiltering />} />
+        <Route path="/advanced-filter" element={<AdvancedFiltering />} />
         <Route path="/movie/:id/review/redirect" element={<ThankYou />} />
         <Route path="/movie/add" element={<AddMovie />} />
         <Route path="/my-reviews" element={<MyReviews />} />
         <Route path="/actor/:id" element={<ActorDetails />} />
+        <Route path="/movies" element={<Movies />} />
+        <Route path="/actors" element={<Actors />} />
 
         <Route path="/admin" element={<AdminComponent />} />
         <Route path="/admin/add" element={<AddMovieComponent />} />

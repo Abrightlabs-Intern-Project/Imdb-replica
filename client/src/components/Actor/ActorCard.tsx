@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { Link } from "react-router-dom";
 
-const ActorCard: FC<{ url: string; name: string; actorId: string }> = ({ url, name, actorId }) => {
+const ActorCard: FC<{ url: string; name: string; actorId: string, page: boolean }> = ({ url, name, actorId, page }) => {
   const actorImageUrl = `https://movie-assets.s3.amazonaws.com/${url}`;
 
   return (
@@ -9,10 +9,10 @@ const ActorCard: FC<{ url: string; name: string; actorId: string }> = ({ url, na
       <Link to={`http://localhost:5173/actor/${actorId}`}>
         <img
           src={actorImageUrl}
-          className="object-cover w-[70px] h-[70px] lg:w-[170px] lg:h-[170px] rounded-full object-top"
+          className={`${page ? 'rounded-md h-[70px] w-[70px] lg:w-[200px] lg:h-[200px]' : 'rounded-full w-[70px] h-[70px] lg:w-[170px] lg:h-[170px]'} object-cover  object-top`}
         />
-      </Link>
-      <span className=" text-lg font-semibold">{name}</span>
+      </Link> 
+      <span className={`${page ? 'text-white' : 'text-black'}`}>{name}</span>
     </div>
   );
 };

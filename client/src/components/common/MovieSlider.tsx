@@ -7,7 +7,7 @@ import { FC, useEffect, useState } from "react";
 import { Movie } from "../../context/WatchlistContext";
 
 const MovieSlider: FC<{ data: Movie[] }> = ({ data }) => {
-  const [slidesToShow, setSlidesToShow] = useState(5);
+  const [slidesToShow, setSlidesToShow] = useState(1);
 
   const settings = {
     dots: false,
@@ -43,7 +43,7 @@ const MovieSlider: FC<{ data: Movie[] }> = ({ data }) => {
     <Slider {...settings} className=" w-[80%]">
       {data.map((movie: any, index: number) => (
         <div key={index}>
-          <MovieCard movie={movie} />
+          <MovieCard movie={movie} bg_color={"white"} />
         </div>
       ))}
     </Slider>
