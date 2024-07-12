@@ -38,7 +38,7 @@ const Watchlist: FC = () => {
       </div>
       <div className="px-2 sm:px-32 lg:px-40 flex flex-col gap-3 py-5">
         {watchlist.map((movie: Movie) => (
-          <WatchlistMovieCard key={movie.movieId} movie={movie} />
+          <WatchlistMovieCard key={movie.movieId} movie={movie} actor={false} />
         ))}
       </div>
       <div className=" flex justify-center bg-black">

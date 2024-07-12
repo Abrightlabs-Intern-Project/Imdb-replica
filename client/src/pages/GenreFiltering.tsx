@@ -4,7 +4,7 @@ import MovieCard from "../components/common/MovieCard";
 import { Movie } from "../context/WatchlistContext";
 import LoadingLogo from "../components/common/LoadingLogo";
 
-const MovieFiltering: FC = () => {
+const GenreFiltering: FC = () => {
   const [genres, setGenres] = useState<any[]>([]);
   const [movies, setMovies] = useState<Movie[]>([]);
   const [loading, setLoading] = useState(true);
@@ -65,7 +65,7 @@ const MovieFiltering: FC = () => {
       <div className="mt-4 text-white flex flex-wrap gap-5 justify-center">
         {movies.map((movie) => (
           <div key={movie.movieId} className="w-[200px]">
-            <MovieCard movie={movie} />
+            <MovieCard movie={movie} bg_color={undefined} />
           </div>
         ))}
       </div>
@@ -73,4 +73,4 @@ const MovieFiltering: FC = () => {
   );
 };
 
-export default MovieFiltering;
+export default GenreFiltering;

@@ -25,12 +25,15 @@ export class AwsS3Service {
     await this.s3.upload(params).promise();
   }
 
-  async getImage(key: string): Promise<Buffer> {
+  // AWS charges for this when it exceeds certain limit 
+  // Alternate: Make the image as public url to directly get it from aws with the image key
+
+  /* async getImage(key: string): Promise<Buffer> {
     const params = {
       Bucket: process.env.BUCKET_NAME,
       Key: key,
     };
     const data = await this.s3.getObject(params).promise();
     return data.Body as Buffer;
-  }
+  } */
 }

@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, Param, Post, Put, UploadedFile, UseInterceptors } from '@nestjs/common';
+import {Body, Controller, Delete, Get, Param, Post, Put, Query, UploadedFile,UseInterceptors} from '@nestjs/common';
 import { MovieService } from './movie.service';
 import { Movie } from './entities/movie.entity';
 import { ApiTags, ApiOkResponse } from '@nestjs/swagger';
@@ -10,10 +10,7 @@ import { UpdateMovieDto } from './dto/update-movie.dto';
 @ApiTags('movies')
 @Controller('movies')
 export class MovieController {
-  constructor(
-    private movieService: MovieService,
-    private awsService: AwsS3Service,
-  ) {}
+  constructor(private movieService: MovieService, private awsService: AwsS3Service) {}
 
   @Post('upload')
   @UseInterceptors(FileInterceptor('poster'))
@@ -23,15 +20,16 @@ export class MovieController {
     return { posterKey: key };
   }
 
+  @Get('search')
+  async search(@Query('title') title: string, @Query('rated') rated: string, @Query('selectedGenre') selectedGenre: string,
+    @Query('minRating') minRating: string, @Query('maxRating') maxRating: string, @Query('releaseYearFrom') releaseYearFrom: string, @Query('releaseYearTo') releaseYearTo: string): Promise<Movie[]> {
+    return this.movieService.search(title, rated, selectedGenre, minRating, maxRating, releaseYearFrom, releaseYearTo);
+  }
+
   @Get()
   @ApiOkResponse({ type: [Movie] })
   async findAll(): Promise<Movie[]> {
     return this.movieService.findAll();
-  }
-
-  @Get(':movieId')
-  async find(@Param('movieId') movieId: string): Promise<Movie> {
-    return this.movieService.find(movieId);
   }
 
   @Post()
@@ -39,13 +37,18 @@ export class MovieController {
     return this.movieService.create(createMovieDto);
   }
 
+  @Get(':movieId')
+  async find(@Param('movieId') movieId: string): Promise<Movie> {
+    return this.movieService.find(movieId);
+  }
+
+  @Put(':movieId')
+  async update(@Param('movieId') movieId: string, @Body() updateMovieDto: UpdateMovieDto) {
+    return this.movieService.update(movieId, updateMovieDto);
+  }
+
   @Delete(':movieId')
   async delete(@Param('movieId') movieId: string) {
     return this.movieService.delete(movieId);
-  }
-
-  @Put(":movieId")
-  async update(@Param('movieId') movieId: string, @Body() updateMovieDto: UpdateMovieDto) {
-    return this.movieService.update(movieId, updateMovieDto)
   }
 }

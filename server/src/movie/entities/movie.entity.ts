@@ -1,4 +1,6 @@
 import { ApiProperty } from "@nestjs/swagger";
+import { IsArray } from "class-validator";
+import { Actor } from "src/actor/entities/actor.entity";
 
 export class Movie {
   @ApiProperty()
@@ -45,4 +47,5 @@ export class Movie {
 
   @ApiProperty()
   boxOffice: string;
+
 }
