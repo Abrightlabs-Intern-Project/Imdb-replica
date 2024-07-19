@@ -1,4 +1,4 @@
-import YouTube from "react-youtube"
+// import YouTube from "react-youtube"
 import WatchlistMovieCard from "../components/Watchlist/WatchlistMovieCard";
 import { useParams } from "react-router-dom";
 import { useEffect } from "react";
@@ -23,19 +23,19 @@ const ActorDetails = () => {
     get()
   }, [id])
 
-  function getYouTubeVideoId(url: string) {
-    const urlObj = new URL(url);
-    let videoId = urlObj.searchParams.get("v");
-    if (!videoId && urlObj.hostname === "youtu.be") {
-      videoId = urlObj.pathname.substring(1);
-    }
-    return videoId;
-  }
+  // function getYouTubeVideoId(url: string) {
+  //   const urlObj = new URL(url);
+  //   let videoId = urlObj.searchParams.get("v");
+  //   if (!videoId && urlObj.hostname === "youtu.be") {
+  //     videoId = urlObj.pathname.substring(1);
+  //   }
+  //   return videoId;
+  // }
 
-  const opts = {
-    width: "100%",
-    height: "100%",
-  };
+  // const opts = {
+  //   width: "100%",
+  //   height: "100%",
+  // };
 
   return (
     <div className="">
@@ -44,11 +44,11 @@ const ActorDetails = () => {
             <span>Actor</span>
             <div className="flex gap-10">
                 <img className="object-cover w-[150px] h-[150px] lg:w-[360px] lg:h-[360px] object-top" src={`https://movie-assets.s3.amazonaws.com/${actor && actor.imageUrl}`} alt="" />
-                <YouTube
-                videoId={movies && getYouTubeVideoId(movies[0].trailer)}
+                {/* {movies&&<YouTube
+                videoId={getYouTubeVideoId(movies[0].trailer)}
                 style={{ width: "100%"}}
                 opts={opts}
-                />
+                />} */}
             </div>
         </header>
         <div className="px-1 text-3xl font-semibold sm:px-32 md:px-28 lg:px-40 py-5">
