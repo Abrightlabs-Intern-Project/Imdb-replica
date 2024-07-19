@@ -6,7 +6,7 @@ import LoadingLogo from "../components/common/LoadingLogo";
 
 const Movies = () => {
   const [movies, setMovies] = useState<Movie[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -29,7 +29,7 @@ const Movies = () => {
     <div className="bg-black flex flex-wrap gap-10 px-40 py-10">
       {movies.map((movie) => (
         <div key={movie.movieId} className="w-[200px]">
-          <MovieCard movie={movie} bg_color={undefined} />
+          <MovieCard movie={movie} />
         </div>
       ))}
     </div>

@@ -16,7 +16,7 @@ const Navbar: FC<NavbarProps> = ({ signOut, user }) => {
   const [results, setResults] = useState<Movie[]>([]);
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
-  const { isAdmin, loading } = useIsAdmin();
+  const { isAdmin } = useIsAdmin();
 
   const navigate = useNavigate();
 

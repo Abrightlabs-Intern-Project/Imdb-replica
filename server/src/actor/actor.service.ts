@@ -21,7 +21,18 @@ export class ActorService {
     return this.prisma.actor.findMany();
   }
 
-  async find(actorName: string) {
+  async find(actorId: string) {
+    return this.prisma.actor.findUnique({
+      where: {
+        actorId
+      },
+      include: {
+        movies: true
+      }
+    })
+  }
+
+  async findWithName(actorName: string) {
     return this.prisma.actor.findUnique({
       where: {
         actorName

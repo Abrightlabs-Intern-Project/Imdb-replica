@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { Movie, useWatchlist } from "../../context/WatchlistContext";
 import { FC } from "react";
 
-const MovieCard: FC<{ movie: Movie, bg_color: any }> = ({ movie, bg_color }) => {
+const MovieCard: FC<{ movie: Movie }> = ({ movie }) => {
   const { addToWatchlist } = useWatchlist();
   const navigate = useNavigate()
 

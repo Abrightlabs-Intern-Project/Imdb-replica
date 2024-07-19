@@ -4,8 +4,9 @@ import "slick-carousel/slick/slick-theme.css";
 import "../common/SlickSlider.css";
 import { FC, useEffect, useState } from "react";
 import ActorCard from "./ActorCard";
+import { Actor } from "../../context/WatchlistContext";
 
-const ActorSlider: FC<{ actors: any }> = ({ actors }) => {
+const ActorSlider: FC<{ actors: Actor[] }> = ({ actors }) => {
   const [slidesToShow, setSlidesToShow] = useState(5);
 
   const settings = {
@@ -40,7 +41,7 @@ const ActorSlider: FC<{ actors: any }> = ({ actors }) => {
   
   return (
     <Slider {...settings} className=" w-[80%]">
-      {actors.map((actor: any, index: number) => (
+      {actors.map((actor: Actor, index: number) => (
         <div key={index}>
           <ActorCard url={actor.imageUrl} name={actor.actorName} actorId={actor.actorId} page={false}/>
         </div>

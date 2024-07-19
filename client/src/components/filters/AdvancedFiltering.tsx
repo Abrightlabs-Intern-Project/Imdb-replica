@@ -35,6 +35,7 @@ const AdvancedFiltering = () => {
   if (releaseYearFrom) params.append('releaseYearFrom', releaseYearFrom);
   if (releaseYearTo) params.append('releaseYearTo', releaseYearTo);
 
+  console.log(params.toString())
   const res = await axios.get(`http://localhost:3000/movies/search?${params.toString()}`);
   setFilteredMovies(res.data);
 };
@@ -69,11 +70,11 @@ const AdvancedFiltering = () => {
               onChange={(e: any) => setRated(e.target.value)}
             >
               <option value=''>None</option>
-              <option value='G'>G</option>
+              <option value='TV-14'>TV-14</option>
               <option value='PG'>PG</option>
               <option value='PG-13'>PG-13</option>
               <option value='R'>R</option>
-              <option value='NC-17'>NC-17</option>
+              <option value='TV-MA'>TV-MA</option>
             </select>
           </label>
           <label>

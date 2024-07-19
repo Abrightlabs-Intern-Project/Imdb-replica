@@ -1,6 +1,6 @@
 import { FC } from "react";
-import { Movie } from "../../context/WatchlistContext";
-export const Storyline: FC<{ movie: Movie; movieGenres: any }> = ({
+import { Genre, Movie } from "../../context/WatchlistContext";
+export const Storyline: FC<{ movie: Movie; movieGenres: Genre[] }> = ({
   movie,
   movieGenres,
 }) => {
@@ -19,7 +19,7 @@ export const Storyline: FC<{ movie: Movie; movieGenres: any }> = ({
       <div className=" flex gap-2 px-3 py-2">
         <span className=" text-sm font-semibold">Genres</span>
         <span className=" text-sm text-blue-500">
-          {movieGenres.map((genre: any, index: number) => {
+          {movieGenres.map((genre: Genre, index: number) => {
             return <span>{genre.genreName} {index !== movieGenres.length - 1 && <span>•</span>} </span>;
           })}
         </span>

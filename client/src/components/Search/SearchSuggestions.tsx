@@ -12,7 +12,6 @@ const SearchSuggestions: FC<SearchSuggestionsProps> = ({
   onHideSuggestions,
 }) => {
 
-   const posterUrl = ``
   return (
     <div className="absolute rounded-md mt-2 z-10 flex flex-col md:mr-16">
       {results.slice(0, 7).map((movie: Movie) => (

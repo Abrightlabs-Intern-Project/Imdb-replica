@@ -1,7 +1,7 @@
 import { FC } from "react";
-import { Movie } from "../../context/WatchlistContext";
+import { Country, Movie } from "../../context/WatchlistContext";
 
-const Details: FC<{ movie: Movie; movieCountries: any }> = ({
+const Details: FC<{ movie: Movie; movieCountries: Country[] }> = ({
   movie,
   movieCountries,
 }) => {

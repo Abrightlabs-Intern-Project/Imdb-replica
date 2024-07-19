@@ -92,11 +92,13 @@ export class MovieService {
       ...(title && { title: { contains: title } }),
       ...(rated && { rated: { equals: rated } }),
       ...(selectedGenre && { genres: { some: { genreId: selectedGenre } } }),
-      ...(minRating && { rating: { gte: minRating.toString() } }),
-      ...(maxRating && { rating: { lte: maxRating.toString() } }),
-      ...(releaseYearFrom && { year: { gte: releaseYearFrom.toString() } }),
-      ...(releaseYearTo && { year: { lte: releaseYearTo.toString() } }),
+      ...(minRating && { rating: { gte: minRating } }),
+      ...(maxRating && { rating: { lte: maxRating } }),
+      ...(releaseYearFrom && { year: { gte: releaseYearFrom } }),
+      ...(releaseYearTo && { year: { lte: releaseYearTo } }),
     };
+
+    console.log(searchFilters);
 
     const movies = await this.prisma.movie.findMany({
       where: searchFilters,

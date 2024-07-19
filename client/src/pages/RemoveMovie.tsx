@@ -2,7 +2,7 @@ import axios from "axios";
 import { useState } from "react"
 
 const RemoveMovie = () => {
-  const [movieId, setMovieId] = useState<string>('');
+  const [movieId, setMovieId] = useState<string>("");
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     try {

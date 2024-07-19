@@ -18,6 +18,7 @@ const ActorDetails = () => {
       const res = await axios.get(`http://localhost:3000/actor/${id}`)
       setMovies(res.data.movies)
       setActor(res.data)
+      console.log(res.data, "---", res.data.movies)
     }
     get()
   }, [id])

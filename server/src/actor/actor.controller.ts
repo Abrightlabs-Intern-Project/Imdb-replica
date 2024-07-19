@@ -20,9 +20,9 @@ export class ActorController {
   @UseInterceptors(FileInterceptor('image'))
   async create(@UploadedFile() file: Express.Multer.File, @Body("actorName") actorName: string)
   {
-    let actor = await this.actorService.find(actorName);
+    let actor = await this.actorService.findWithName(actorName);
     if (actor) {
-      return actor.actorId;
+      return actor.actorId; 
     }
     else {
     const key = `actorImage/${Date.now()}_${file.originalname}`;
@@ -31,28 +31,6 @@ export class ActorController {
     return actorId
     }
   }
-
-  // It is Good for efficient creation of array of actors
-
-  /* @Post('batch')
-  @UseInterceptors(FileInterceptor('image'))
-  @ApiOkResponse({ type: [String] })
-  async createOrGetActorsBatch(@UploadedFile() file: Express.Multer.File, @Body() actorNames: string[]): Promise<string[]> {
-    const actorIds: string[] = [];
-    for (const actorName of actorNames) {
-        let actor = await this.actorService.find(actorName);
-        let actorId: string;
-        if (actor) {
-          actorId = actor.actorId;
-        } else {
-          const key = `actorImage/${Date.now()}_${file.originalname}`;
-          await this.awsService.upload(file, key);
-          actorId = await this.actorService.create(actorName, key);
-        }
-        actorIds.push(actorId);
-    }
-    return actorIds;
-  } */
 
   @Get(":actorId")
   @ApiOkResponse()
@@ -82,5 +60,10 @@ export class ActorController {
       return this.actorService.update(actorId, actorName, key);
     }
     return this.actorService.update(actorId, actorName);
+  }
+
+  @Patch()
+  async getActor(actorId: string) {
+    return this
   }
 }

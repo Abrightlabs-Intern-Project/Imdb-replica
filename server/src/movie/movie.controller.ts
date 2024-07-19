@@ -23,6 +23,7 @@ export class MovieController {
   @Get('search')
   async search(@Query('title') title: string, @Query('rated') rated: string, @Query('selectedGenre') selectedGenre: string,
     @Query('minRating') minRating: string, @Query('maxRating') maxRating: string, @Query('releaseYearFrom') releaseYearFrom: string, @Query('releaseYearTo') releaseYearTo: string): Promise<Movie[]> {
+      console.log(1)
     return this.movieService.search(title, rated, selectedGenre, minRating, maxRating, releaseYearFrom, releaseYearTo);
   }
 
