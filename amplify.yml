@@ -9,9 +9,9 @@ frontend:
       commands:
         - npm run build
   artifacts:
-    baseDirectory: client/build
+    baseDirectory: client/dist
     files:
       - '**/*'
   cache:
     paths:
-      - node_modules/**/*
+      - client/node_modules/**/*
