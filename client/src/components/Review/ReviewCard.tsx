@@ -1,19 +1,19 @@
 import Star from "../../../public/starr.png";
 import { useAuthenticator } from "@aws-amplify/ui-react";
-import axios from "axios";
+// import axios from "axios";
 import { FC } from "react";
 
 const ReviewCard: FC<{ review: any; id: any }> = ({ review, id }) => {
-  const { user } = useAuthenticator();
-  const userId = user.userId;
+  // const { user } = useAuthenticator();
+  // const userId = user.userId;
 
-  const deleteReview = async() => {
-    try {
-      await axios.delete(`http://localhost:3000/review/${userId}/${id}`)
-    } catch (error) {
-      console.log("error deleting review", error)
-    }
-  }
+  // const deleteReview = async() => {
+  //   try {
+  //     await axios.delete(`http://localhost:3000/review/${userId}/${id}`)
+  //   } catch (error) {
+  //     console.log("error deleting review", error)
+  //   }
+  // }
 
   return (
     <div className="">

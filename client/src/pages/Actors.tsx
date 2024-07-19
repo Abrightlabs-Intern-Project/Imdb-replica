@@ -1,10 +1,11 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react'
+import { FC, useEffect, useState } from 'react'
 import LoadingLogo from '../components/common/LoadingLogo';
 import ActorCard from '../components/Actor/ActorCard';
+import { Actor } from '../context/WatchlistContext';
 
-const Actors = () => {
-  const [actors, setActors] = useState([]);
+const Actors: FC = () => {
+  const [actors, setActors] = useState<Actor[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
 
   useEffect(() => {
@@ -22,7 +23,7 @@ const Actors = () => {
   if (loading) return <LoadingLogo />
   return (
     <div className='bg-black flex flex-wrap gap-10 px-40 py-10 justify-around'>
-        {actors.map((actor: any, index: number) => (
+        {actors.map((actor: Actor, index: number) => (
         <div key={index}>
           <ActorCard url={actor.imageUrl} name={actor.actorName} actorId={actor.actorId} page={true}/>
         </div>

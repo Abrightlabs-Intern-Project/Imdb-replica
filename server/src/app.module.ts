@@ -4,7 +4,6 @@ import { MovieModule } from './movie/movie.module';
 import { ActorModule } from './actor/actor.module';
 import { GenreModule } from './genre/genre.module';
 import { join } from 'path';
-import { GraphQLModule } from '@nestjs/graphql';
 import { PrismaService } from './prisma/prisma.service';
 import { UserModule } from './user/user.module';
 import { WatchlistModule } from './watchlist/watchlist.module';

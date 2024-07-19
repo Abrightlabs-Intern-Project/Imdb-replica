@@ -1,11 +1,11 @@
 import axios from "axios";
 import { FC, useEffect, useState } from "react";
 import MovieCard from "../components/common/MovieCard";
-import { Movie } from "../context/WatchlistContext";
+import { Genre, Movie } from "../context/WatchlistContext";
 import LoadingLogo from "../components/common/LoadingLogo";
 
 const GenreFiltering: FC = () => {
-  const [genres, setGenres] = useState<any[]>([]);
+  const [genres, setGenres] = useState<Genre[]>([]);
   const [movies, setMovies] = useState<Movie[]>([]);
   const [loading, setLoading] = useState(true);
   const [selectedGenre, setSelectedGenre] = useState<any>(null);
@@ -39,7 +39,7 @@ const GenreFiltering: FC = () => {
     }
   };  
 
-  const handleGenreClick = (genre: any) => {
+  const handleGenreClick = (genre: Genre) => {
     setSelectedGenre(genre);
     fetchMoviesByGenre(genre.genreId);
   };
@@ -49,7 +49,7 @@ const GenreFiltering: FC = () => {
   return (
     <div className="bg-black flex flex-col py-5 px-28 gap-4">
       <div className="flex gap-2 justify-center flex-wrap">
-        {genres.map((genre: any) => {
+        {genres.map((genre: Genre) => {
           const isSelected = selectedGenre && selectedGenre.genreId === genre.genreId;
           return (
             <button
@@ -65,7 +65,7 @@ const GenreFiltering: FC = () => {
       <div className="mt-4 text-white flex flex-wrap gap-5 justify-center">
         {movies.map((movie) => (
           <div key={movie.movieId} className="w-[200px]">
-            <MovieCard movie={movie} bg_color={undefined} />
+            <MovieCard movie={movie} />
           </div>
         ))}
       </div>

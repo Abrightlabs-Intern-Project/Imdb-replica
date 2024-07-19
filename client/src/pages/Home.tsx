@@ -5,12 +5,12 @@ import axios from "axios";
 import ActorSlider from "../components/Actor/ActorSlider";
 import { Link, useNavigate } from "react-router-dom";
 import LoadingLogo from "../components/common/LoadingLogo";
+import { Actor, Movie } from "../context/WatchlistContext";
 
 const Home: FC = () => {
-  const [movies, setMovies] = useState([]);
-  const [actors, setActors] = useState([]);
+  const [movies, setMovies] = useState<Movie[]>([]);
+  const [actors, setActors] = useState<Actor[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<null | unknown>(null);
 
   const navigate = useNavigate()
   useEffect(() => {
@@ -20,8 +20,6 @@ const Home: FC = () => {
         const actorsData = await axios.get("http://localhost:3000/actor");
         setMovies(response.data);
         setActors(actorsData.data);
-      } catch (error) {
-        setError(error);
       } finally {
         setLoading(false);
       }

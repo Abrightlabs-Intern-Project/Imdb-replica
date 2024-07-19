@@ -1,7 +1,8 @@
 import { FC } from "react";
 import ActorProfile from "./MovieActor";
+import { Actor } from "../../context/WatchlistContext";
 
-const Cast: FC<{ movieActors: any }> = ({ movieActors }) => {
+const Cast: FC<{ movieActors: Actor[] }> = ({ movieActors }) => {
   return (
     <div className="py-5">
       <div className=" px-2 flex flex-col gap-2">

@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { Movie } from "../../context/WatchlistContext";
 
-const TechnicalSpecs:FC<{props: Movie}> = ({props}) => {
+const TechnicalSpecs:FC<{movie: Movie}> = ({movie}) => {
 
   return (
     <div className="py-5">
@@ -14,7 +14,7 @@ const TechnicalSpecs:FC<{props: Movie}> = ({props}) => {
         <hr className="border-gray-400" />
         <div className=" flex gap-2 p-2">
           <span className=" text-sm md:text-base font-semibold">Runtime</span>
-          <span className=" text-sm md:text-base">{props.runtime}</span>
+          <span className=" text-sm md:text-base">{movie.runtime}</span>
         </div>
         <hr className="border-gray-400" />
         <div className=" flex gap-2 p-2">
@@ -27,7 +27,7 @@ const TechnicalSpecs:FC<{props: Movie}> = ({props}) => {
             Box Office
           </span>
           <span className=" text-sm md:text-base text-blue-500">
-            {props.boxOffice}
+            {movie.boxOffice}
           </span>
         </div>
         <hr className="border-gray-400" />

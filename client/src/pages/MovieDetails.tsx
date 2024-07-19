@@ -9,17 +9,18 @@ import { FC, useEffect, useState } from "react";
 import axios from "axios";
 import LoadingLogo from "../components/common/LoadingLogo";
 import { imdbTop10 } from "../__data__/top10Imdb";
+import { Actor, Country, Director, Genre, Movie, Writer } from "../context/WatchlistContext";
 
 const MovieDetails: FC = () => {
   const { id } = useParams();
-  const [movieActors, setMovieActors] = useState<[any]>([undefined]);
-  const [movieDirectors, setMovieDirectors] = useState<[any]>([undefined]);
-  const [movieWriters, setMovieWriters] = useState<[any]>([undefined]);
-  const [movieCountries, setMovieCountries] = useState<[any]>([undefined]);
-  const [movieData, setMovieData] = useState<any>();
+  const [movieActors, setMovieActors] = useState<Actor[]>([]);
+  const [movieDirectors, setMovieDirectors] = useState<Director[]>([]);
+  const [movieWriters, setMovieWriters] = useState<Writer[]>([]);
+  const [movieCountries, setMovieCountries] = useState<Country[]>([]);
+  const [movieData, setMovieData] = useState<Movie>();
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<null | unknown>(null);
-  const [movieGenres, setMovieGenre] = useState<[any]>([undefined]);
+  const [movieGenres, setMovieGenre] = useState<Genre[]>([]);
 
   useEffect(() => {
     const getData = async (id: string) => {
@@ -43,7 +44,8 @@ const MovieDetails: FC = () => {
   if (loading) return <LoadingLogo />;
 
   return (
-    <div className="">
+    <div>
+    {movieData && <div className="">
       <MovieHeader
         movie={movieData}
         movieActors={movieActors}
@@ -56,7 +58,7 @@ const MovieDetails: FC = () => {
           <Cast movieActors={movieActors} />
           <Details movie={movieData} movieCountries={movieCountries} />
           <UserReviews />
-          <TechnicalSpecs props={movieData} />
+          <TechnicalSpecs movie={movieData} />
         </div>
         <div className="col-span-1 pt-5 flex flex-col gap-5">
           <span className="font-bold text-3xl">
@@ -82,6 +84,7 @@ const MovieDetails: FC = () => {
           </div>
         </div>
       </div>
+    </div>}
     </div>
   );
 };
