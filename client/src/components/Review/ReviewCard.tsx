@@ -1,5 +1,4 @@
 import Star from "../../../public/starr.png";
-import { useAuthenticator } from "@aws-amplify/ui-react";
 // import axios from "axios";
 import { FC } from "react";
 

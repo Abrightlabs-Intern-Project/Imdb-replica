@@ -19,7 +19,6 @@ const MovieDetails: FC = () => {
   const [movieCountries, setMovieCountries] = useState<Country[]>([]);
   const [movieData, setMovieData] = useState<Movie>();
   const [loading, setLoading] = useState<boolean>(true);
-  const [error, setError] = useState<null | unknown>(null);
   const [movieGenres, setMovieGenre] = useState<Genre[]>([]);
 
   useEffect(() => {
@@ -33,7 +32,6 @@ const MovieDetails: FC = () => {
         setMovieDirectors(movieData.data.directors);
         setMovieCountries(movieData.data.countries);
       } catch (error) {
-        setError(error);
       } finally {
         setLoading(false);
       }
