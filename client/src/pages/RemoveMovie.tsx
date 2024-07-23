@@ -1,5 +1,6 @@
 import axios from "axios";
 import { useState } from "react"
+import { api_url } from "../context/WatchlistContext";
 
 const RemoveMovie = () => {
   const [movieId, setMovieId] = useState<string>("");
@@ -7,7 +8,7 @@ const RemoveMovie = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     try {
       e.preventDefault();
-      await axios.delete(`http://localhost:3000/movies/${movieId}`)
+      await axios.delete(`${api_url}/movies/${movieId}`)
       alert("Movie Deleted Successfully")
     } catch (err) {
       console.log(err);

@@ -2,7 +2,7 @@ import axios from 'axios';
 import { FC, useEffect, useState } from 'react'
 import LoadingLogo from '../components/common/LoadingLogo';
 import ActorCard from '../components/Actor/ActorCard';
-import { Actor } from '../context/WatchlistContext';
+import { Actor, api_url } from '../context/WatchlistContext';
 
 const Actors: FC = () => {
   const [actors, setActors] = useState<Actor[]>([]);
@@ -11,7 +11,7 @@ const Actors: FC = () => {
   useEffect(() => {
     const fetchMovies = async () => {
       try {
-        const actorsData = await axios.get("http://localhost:3000/actor");
+        const actorsData = await axios.get(`${api_url}/actor`);
         setActors(actorsData.data);
       } finally {
         setLoading(false);

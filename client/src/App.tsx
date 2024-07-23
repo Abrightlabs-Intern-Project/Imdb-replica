@@ -4,7 +4,7 @@ import Navbar from "./components/Layout/Navbar";
 import Footer from "./components/Layout/Footer";
 import Home from "./pages/Home";
 import MovieDetails from "./pages/MovieDetails";
-import { WatchlistProvider } from "./context/WatchlistContext";
+import { api_url, WatchlistProvider } from "./context/WatchlistContext";
 import { Amplify } from "aws-amplify";
 import { Authenticator } from "@aws-amplify/ui-react";
 import "@aws-amplify/ui-react/styles.css";
@@ -51,7 +51,7 @@ const App: FC<{ signOut: any; user: any }> = ({ signOut, user }) => {
         userName: user.username,
         userId: user.userId,
       };
-      await axios.post("http://localhost:3000/user/login", loginData);
+      await axios.post(`${api_url}/user/login`, loginData);
     } catch (error) {
       console.log(error);
     }

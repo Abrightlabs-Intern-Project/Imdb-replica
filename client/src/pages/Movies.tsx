@@ -1,6 +1,6 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { Movie } from "../context/WatchlistContext";
+import { api_url, Movie } from "../context/WatchlistContext";
 import MovieCard from "../components/common/MovieCard";
 import LoadingLogo from "../components/common/LoadingLogo";
 
@@ -11,7 +11,7 @@ const Movies = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const moviesResponse = await axios.get(`http://localhost:3000/movies`);
+        const moviesResponse = await axios.get(`${api_url}/movies`);
         setMovies(moviesResponse.data);
       } catch (error) {
         console.error("Error fetching data:", error);

@@ -1,4 +1,4 @@
-import { Movie, useWatchlist } from "../context/WatchlistContext";
+import { api_url, Movie, useWatchlist } from "../context/WatchlistContext";
 import WatchlistMovieCard from "../components/Watchlist/WatchlistMovieCard";
 import { WatchlistHeader } from "../components/Watchlist/WatchlistHeader";
 import MovieSlider from "../components/common/MovieSlider";
@@ -15,7 +15,7 @@ const Watchlist: FC = () => {
   useEffect(() => {
     const getMovies = async () => {
       try {
-        const movieData = await axios.get("http://localhost:3000/movies");
+        const movieData = await axios.get(`${api_url}/movies`);
         setMovies(movieData.data);
       } finally {
         setLoading(false);
