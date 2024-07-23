@@ -1,7 +1,7 @@
 import { FC } from "react";
 import { FaSearch } from "react-icons/fa";
 import { useState, useEffect } from "react";
-import { Movie } from "../../context/WatchlistContext";
+import { api_url, Movie } from "../../context/WatchlistContext";
 import axios from "axios";
 
 interface SearchBarProps {
@@ -15,7 +15,7 @@ const SearchBar: FC<SearchBarProps> = ({ setResults }) => {
 
   useEffect(() => {
     const fetchMovies = async () => {
-      const response = await axios.get("http://localhost:3000/movies");
+      const response = await axios.get(`${api_url}/movies`);
       setMovies(response.data);
     };
     fetchMovies();

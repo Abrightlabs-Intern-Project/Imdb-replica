@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { Actor, Director, Writer, Genre, Country } from "../../context/WatchlistContext";
+import { Actor, Director, Writer, Genre, Country, api_url } from "../../context/WatchlistContext";
 
 const AddMovie = () => {
   const [formState, setFormState] = useState<any>({
@@ -94,7 +94,7 @@ const AddMovie = () => {
         const actorForm = new FormData();
         actorForm.append("image", actor.image);
         actorForm.append("actorName", actor.actorName);
-        const res = await axios.post("http://localhost:3000/actor", actorForm, {
+        const res = await axios.post(`${api_url}/actor`, actorForm, {
           headers: {
             "Content-Type": "multipart/form-data",
           },

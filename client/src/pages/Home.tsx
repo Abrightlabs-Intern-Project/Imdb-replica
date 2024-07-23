@@ -5,7 +5,7 @@ import axios from "axios";
 import ActorSlider from "../components/Actor/ActorSlider";
 import { Link, useNavigate } from "react-router-dom";
 import LoadingLogo from "../components/common/LoadingLogo";
-import { Actor, Movie } from "../context/WatchlistContext";
+import { Actor, api_url, Movie } from "../context/WatchlistContext";
 
 const Home: FC = () => {
   const [movies, setMovies] = useState<Movie[]>([]);
@@ -16,8 +16,8 @@ const Home: FC = () => {
   useEffect(() => {
     const fetchMovies = async () => {
       try {
-        const response = await axios.get("http://localhost:3000/movies");
-        const actorsData = await axios.get("http://localhost:3000/actor");
+        const response = await axios.get(`${api_url}/movies`);
+        const actorsData = await axios.get(`${api_url}/actor`);
         setMovies(response.data);
         setActors(actorsData.data);
       } finally {

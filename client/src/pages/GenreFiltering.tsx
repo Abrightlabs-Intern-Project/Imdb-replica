@@ -1,7 +1,7 @@
 import axios from "axios";
 import { FC, useEffect, useState } from "react";
 import MovieCard from "../components/common/MovieCard";
-import { Genre, Movie } from "../context/WatchlistContext";
+import { api_url, Genre, Movie } from "../context/WatchlistContext";
 import LoadingLogo from "../components/common/LoadingLogo";
 
 const GenreFiltering: FC = () => {
@@ -13,8 +13,8 @@ const GenreFiltering: FC = () => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const genresResponse = await axios.get(`http://localhost:3000/genre`);
-        const moviesResponse = await axios.get(`http://localhost:3000/movies`);
+        const genresResponse = await axios.get(`${api_url}/genre`);
+        const moviesResponse = await axios.get(`${api_url}/movies`);
         setGenres(genresResponse.data);
         setMovies(moviesResponse.data);
       } catch (error) {
@@ -30,7 +30,7 @@ const GenreFiltering: FC = () => {
   const fetchMoviesByGenre = async (genreId: string) => {
     try {
       setLoading(true);
-      const response = await axios.get(`http://localhost:3000/genre/${genreId}`);
+      const response = await axios.get(`${api_url}/genre/${genreId}`);
       setMovies(response.data.movies);
     } catch (error) {
       console.error("Error fetching movies by genre:", error);

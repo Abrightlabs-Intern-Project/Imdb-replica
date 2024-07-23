@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import axios from "axios";
 import { Link } from "react-router-dom";
-import { Movie } from "../../context/WatchlistContext";
+import { api_url, Movie } from "../../context/WatchlistContext";
 import EntitySection from "./EntitySection";
 
 const Admin = () => {
@@ -30,39 +30,39 @@ const Admin = () => {
   }, []);
 
   const fetchMovies = async () => {
-    const response = await axios.get("http://localhost:3000/movies");
+    const response = await axios.get(`${api_url}/movies`);
     setMovies(response.data);
     console.log(response.data)
   };
 
   const fetchActors = async () => {
-    const response = await axios.get("http://localhost:3000/actor");
+    const response = await axios.get(`${api_url}/actor`);
     setActors(response.data);
   };
 
   const fetchDirectors = async () => {
-    const response = await axios.get("http://localhost:3000/director");
+    const response = await axios.get(`${api_url}/director`);
     setDirectors(response.data);
   };
 
   const fetchWriters = async () => {
-    const response = await axios.get("http://localhost:3000/writer");
+    const response = await axios.get(`${api_url}/writer`);
     setWriters(response.data);
   };
 
   const fetchGenres = async () => {
-    const response = await axios.get("http://localhost:3000/genre");
+    const response = await axios.get(`${api_url}/genre`);
     setGenres(response.data);
   };
 
   const fetchCountries = async () => {
-    const response = await axios.get("http://localhost:3000/country");
+    const response = await axios.get(`${api_url}/country`);
     setCountries(response.data);
   };
 
   const handleDelete = async (id: any, type: string) => {
     try {
-      await axios.delete(`http://localhost:3000/${type}/${id}`).then((res) => {
+      await axios.delete(`${api_url}/${type}/${id}`).then((res) => {
         setAlert(res.data.message);
       });
       if (type === "movies") fetchMovies();
@@ -77,13 +77,13 @@ const Admin = () => {
   };
 
   const handleAdd = async (field: string, value: string) => {
-    await axios.post(`http://localhost:3000/${field}`, {
+    await axios.post(`${api_url}/${field}`, {
       [`${field}Name`]: value,
     });
   };
 
   const handleEdit = async (field: string, id: string, value: string) => {
-    await axios.patch(`http://localhost:3000/${field}/${id}`, {
+    await axios.patch(`${api_url}/${field}/${id}`, {
       [`${field}Name`]: value,
     });
   }

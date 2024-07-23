@@ -3,6 +3,8 @@ import { useAuthenticator } from "@aws-amplify/ui-react";
 import { useEffect } from "react";
 import axios from "axios";
 
+export const api_url = "ec2-3-87-232-233.compute-1.amazonaws.com";
+
 type WatchlistProviderProps = {
   children: ReactNode;
 };
@@ -81,7 +83,7 @@ export function WatchlistProvider({ children }: WatchlistProviderProps) {
     const getWatchlist = async (userId: string) => {
       try {
         const watchlistData = await axios.get(
-          `http://localhost:3000/watchlist?userId=${userId}`
+          `${api_url}/watchlist?userId=${userId}`
         );
         const m = watchlistData.data.map((item: any) => item.movie);
         setWatchlist(m);
@@ -97,7 +99,7 @@ export function WatchlistProvider({ children }: WatchlistProviderProps) {
   async function handleAddToWatchlist(movie: Movie, userId: string) {
     const movieId = movie.movieId;
     try {
-      await axios.post(`http://localhost:3000/watchlist`, { movieId, userId });
+      await axios.post(`${api_url}/watchlist`, { movieId, userId });
     } catch (error) {
       console.error("Error adding to watchlist:", error);
     }
@@ -112,7 +114,7 @@ export function WatchlistProvider({ children }: WatchlistProviderProps) {
 
   async function handleRemoveFromWatchlist(movieId: string, userId: string) {
     try {
-      await axios.delete(`http://localhost:3000/watchlist/${userId}/${movieId}`);
+      await axios.delete(`${api_url}/watchlist/${userId}/${movieId}`);
     } catch (error) {
       console.error("Error removing from watchlist:", error);
     }

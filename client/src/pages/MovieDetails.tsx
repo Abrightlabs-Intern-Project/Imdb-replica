@@ -9,7 +9,7 @@ import { FC, useEffect, useState } from "react";
 import axios from "axios";
 import LoadingLogo from "../components/common/LoadingLogo";
 import { imdbTop10 } from "../__data__/top10Imdb";
-import { Actor, Country, Director, Genre, Movie, Writer } from "../context/WatchlistContext";
+import { Actor, api_url, Country, Director, Genre, Movie, Writer } from "../context/WatchlistContext";
 
 const MovieDetails: FC = () => {
   const { id } = useParams();
@@ -24,7 +24,7 @@ const MovieDetails: FC = () => {
   useEffect(() => {
     const getData = async (id: string) => {
       try {
-        const movieData = await axios.get(`http://localhost:3000/movies/${id}`);
+        const movieData = await axios.get(`${api_url}/movies/${id}`);
         setMovieGenre(movieData.data.genres);
         setMovieData(movieData.data);
         setMovieWriters(movieData.data.writers);

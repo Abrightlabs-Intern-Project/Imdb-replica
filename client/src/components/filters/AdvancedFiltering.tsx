@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import Img from "../../../public/image.png";
-import { Genre, Movie } from '../../context/WatchlistContext';
+import { api_url, Genre, Movie } from '../../context/WatchlistContext';
 import axios from 'axios';
 import WatchlistMovieCard from '../Watchlist/WatchlistMovieCard';
 
@@ -35,8 +35,7 @@ const AdvancedFiltering = () => {
   if (releaseYearFrom) params.append('releaseYearFrom', releaseYearFrom);
   if (releaseYearTo) params.append('releaseYearTo', releaseYearTo);
 
-  console.log(params.toString())
-  const res = await axios.get(`http://localhost:3000/movies/search?${params.toString()}`);
+  const res = await axios.get(`${api_url}/movies/search?${params.toString()}`);
   setFilteredMovies(res.data);
 };
 

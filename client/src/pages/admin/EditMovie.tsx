@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { api_url } from "../../context/WatchlistContext";
 
 const EditMovie = () => {
   const { id } = useParams();
@@ -23,7 +24,7 @@ const EditMovie = () => {
   });
 
   useEffect(() => {
-    axios.get(`http://localhost:3000/movies/${id}`).then((response) => {
+    axios.get(`${api_url}/movies/${id}`).then((response) => {
       setFormState(response.data);
     });
   }, [id]);
@@ -40,7 +41,7 @@ const EditMovie = () => {
   const handleSubmit = async (e: any) => {
     e.preventDefault();
     console.log(formState)
-    await axios.put(`http://localhost:3000/movies/${id}`, formState);
+    await axios.put(`${api_url}/movies/${id}`, formState);
     navigate("/");
   };
 

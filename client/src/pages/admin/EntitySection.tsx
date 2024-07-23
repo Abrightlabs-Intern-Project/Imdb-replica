@@ -1,5 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
+import { api_url } from "../../context/WatchlistContext";
 
 const EntitySection = ({ entity, entityNameKey, fetchEntities, handleAdd, handleDelete, handleEdit, filterItems, entitySearchTerm, setEntitySearchTerm, additionalFields }: any) => {
   const [newEntityName, setNewEntityName] = useState("");
@@ -12,7 +13,7 @@ const EntitySection = ({ entity, entityNameKey, fetchEntities, handleAdd, handle
       const form = new FormData();
       form.append(`${entityNameKey}`, newEntityName);
       form.append("image", image[0]);
-      await axios.post(`http://localhost:3000/${entity}`, form, {
+      await axios.post(`${api_url}/${entity}`, form, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
@@ -28,7 +29,7 @@ const EntitySection = ({ entity, entityNameKey, fetchEntities, handleAdd, handle
       const form = new FormData();
       form.append(`${entityNameKey}`, editEntityName);
       form.append("image", image[0]);
-      await axios.patch(`http://localhost:3000/${entity}/${id}`, form, {
+      await axios.patch(`${api_url}/${entity}/${id}`, form, {
         headers: {
           "Content-Type": "multipart/form-data",
         },

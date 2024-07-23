@@ -2,6 +2,7 @@ import { FC, useEffect, useState } from "react";
 import ReviewCard from "./ReviewCard";
 import { Link, useParams } from "react-router-dom";
 import axios from "axios";
+import { api_url } from "../../context/WatchlistContext";
 
 const UserReviews: FC = () => {
   const { id } = useParams();
@@ -10,7 +11,7 @@ const UserReviews: FC = () => {
   useEffect(() => {
     async function getReviews() {
       try {
-        const res = await axios.get(`http://localhost:3000/review/${id}`);
+        const res = await axios.get(`${api_url}/review/${id}`);
         setReviews(res.data);
       } catch (err) {
         console.log(err);

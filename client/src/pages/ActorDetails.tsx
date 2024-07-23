@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import { useEffect } from "react";
 import { useState } from "react";
 import axios from "axios";
-import { Actor, Movie } from "../context/WatchlistContext";
+import { Actor, api_url, Movie } from "../context/WatchlistContext";
 
 const ActorDetails = () => {
 
@@ -15,7 +15,7 @@ const ActorDetails = () => {
   
   useEffect(() => {
     const get = async() => {
-      const res = await axios.get(`http://localhost:3000/actor/${id}`)
+      const res = await axios.get(`${api_url}/actor/${id}`)
       setMovies(res.data.movies)
       setActor(res.data)
       console.log(res.data, "---", res.data.movies)

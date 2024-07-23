@@ -3,7 +3,7 @@ import { useAuthenticator } from "@aws-amplify/ui-react";
 import { useEffect } from "react";
 import axios from "axios";
 import { useNavigate, useParams } from "react-router-dom";
-import { Movie } from "../context/WatchlistContext";
+import { api_url, Movie } from "../context/WatchlistContext";
 import LoadingLogo from "../components/common/LoadingLogo";
 
 const Review = () => {
@@ -22,7 +22,7 @@ const Review = () => {
   useEffect(() => {
     const getMovieDetails = async () => {
       try {
-        const movie = await axios.get(`http://localhost:3000/movies/${id}`);
+        const movie = await axios.get(`${api_url}/movies/${id}`);
         setMovie(movie.data);
       } finally {
         setLoading(false);
@@ -46,7 +46,7 @@ const Review = () => {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     try {
-      await axios.post("http://localhost:3000/review", {
+      await axios.post(`${api_url}/review`, {
         userId,
         movieId: id,
         rating,

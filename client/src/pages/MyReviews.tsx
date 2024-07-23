@@ -2,6 +2,7 @@ import { useAuthenticator } from "@aws-amplify/ui-react";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import ReviewCard from "../components/Review/ReviewCard";
+import { api_url } from "../context/WatchlistContext";
 
 const MyReviews = () => {
   const [reviews, setReviews] = useState([]);
@@ -10,12 +11,12 @@ const MyReviews = () => {
   const userId = user.userId;
 
   const handleDelete = async (reviewId: string) => {
-    axios.delete(`http://localhost:3000/review/${reviewId}`);
+    axios.delete(`${api_url}/review/${reviewId}`);
   }
 
   const getReviews = async () => {
     try {
-      const response = await axios.get(`http://localhost:3000/review/user/${userId}`);
+      const response = await axios.get(`${api_url}/review/user/${userId}`);
       setReviews(response.data);
     } catch (err) {
       console.log("Error fetching reviews:", err);
