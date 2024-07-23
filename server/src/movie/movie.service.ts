@@ -98,8 +98,6 @@ export class MovieService {
       ...(releaseYearTo && { year: { lte: releaseYearTo } }),
     };
 
-    console.log(searchFilters);
-
     const movies = await this.prisma.movie.findMany({
       where: searchFilters,
     });
