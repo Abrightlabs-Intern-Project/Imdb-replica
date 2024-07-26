@@ -1,9 +1,7 @@
 import { Module } from '@nestjs/common';
-import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { MovieModule } from './movie/movie.module';
 import { ActorModule } from './actor/actor.module';
 import { GenreModule } from './genre/genre.module';
-import { join } from 'path';
 import { PrismaService } from './prisma/prisma.service';
 import { UserModule } from './user/user.module';
 import { WatchlistModule } from './watchlist/watchlist.module';
@@ -11,6 +9,7 @@ import { ReviewModule } from './review/review.module';
 import { DirectorModule } from './director/director.module';
 import { CountryModule } from './country/country.module';
 import { WriterModule } from './writer/writer.module';
+import { AppController } from './app.controller';
 
 @Module({
   imports: [
@@ -25,5 +24,6 @@ import { WriterModule } from './writer/writer.module';
     WriterModule,
   ],
   providers: [PrismaService],
+  controllers: [AppController],
 })
 export class AppModule {}

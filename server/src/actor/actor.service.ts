@@ -1,7 +1,7 @@
 import { BadRequestException, Injectable } from '@nestjs/common';
-import { PrismaService } from 'src/prisma/prisma.service';
+import { PrismaService } from '../prisma/prisma.service';
 import { CreateActorDto } from './dto/create-actor.dto';
-import { AwsS3Service } from 'src/aws/aws.service';
+import { AwsS3Service } from '../aws/aws.service';
 
 @Injectable()
 export class ActorService {
