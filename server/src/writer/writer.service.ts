@@ -2,7 +2,7 @@ import { BadRequestException, Injectable } from '@nestjs/common';
 import { CreateWriterDto } from './dto/create-writer.dto';
 import { UpdateWriterDto } from './dto/update-writer.dto';
 import { Writer } from '@prisma/client';
-import { PrismaService } from 'src/prisma/prisma.service';
+import { PrismaService } from '../prisma/prisma.service';
 
 @Injectable()
 export class WriterService {

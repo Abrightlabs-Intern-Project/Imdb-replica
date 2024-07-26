@@ -1,18 +1,14 @@
 import { PrismaClient } from '@prisma/client';
-import { movies } from '../data/data';
-import { actors as actorImages } from '../data/actor';
-import { trailers } from '../data/trailer';
-import { v4 as uuidv4 } from 'uuid';
 
 const prisma = new PrismaClient();
 
 async function main() {
-  await prisma.movie.deleteMany();
-  await prisma.country.deleteMany();
-  await prisma.genre.deleteMany();
-  await prisma.director.deleteMany();
-  await prisma.writer.deleteMany();
-  await prisma.actor.deleteMany();
+  // await prisma.movie.deleteMany();
+  // await prisma.country.deleteMany();
+  // await prisma.genre.deleteMany();
+  // await prisma.director.deleteMany();
+  // await prisma.writer.deleteMany();
+  // await prisma.actor.deleteMany();
 
 //   const actorImageMap = actorImages.reduce((map, actor) => {
 //     map[actor.name] = actor.imageUrl;

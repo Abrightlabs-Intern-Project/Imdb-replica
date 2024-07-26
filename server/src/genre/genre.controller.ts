@@ -2,9 +2,8 @@ import { BadRequestException, Body, Controller, Delete, Get, HttpException, Http
 import { GenreService } from './genre.service';
 import { ApiTags, ApiOkResponse } from '@nestjs/swagger';
 import { Genre } from './entities/genre.entity';
-import { Movie } from 'src/movie/entities/movie.entity';
 import { CreateGenreDto } from './dto/create-genre.dto';
-import { AwsS3Service } from 'src/aws/aws.service';
+import { AwsS3Service } from '../aws/aws.service';
 
 @ApiTags('genre')
 @Controller('genre')

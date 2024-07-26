@@ -1,0 +1,29 @@
+service: imdb-server
+
+provider:
+  name: aws
+  runtime: nodejs18.x
+  timeout: 30
+  memorySize: 256
+  region: ${opt:region, 'us-east-1'}
+
+functions:
+  main:
+    image:
+      uri: 637423178421.dkr.ecr.us-east-1.amazonaws.com/nestjs:latest
+    events:
+      - http:
+          method: ANY
+          path: /
+      - http:
+          method: ANY
+          path: /{proxy+}
+    environment:
+      DATABASE_URL: ${env:DATABASE_URL}
+      ACCESS_KEY_ID: ${env:ACCESS_KEY_ID}
+      SECRET_ACCESS_KEY: ${env:SECRET_ACCESS_KEY}
+      BUCKET_NAME: ${env:BUCKET_NAME}
+
+plugins:
+  - serverless-offline
+  - serverless-plugin-warmup

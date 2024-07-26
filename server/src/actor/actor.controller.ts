@@ -3,7 +3,7 @@ import { ActorService } from './actor.service';
 import { ApiTags, ApiOkResponse } from '@nestjs/swagger';
 import { Actor } from './entities/actor.entity';
 import { FileInterceptor } from '@nestjs/platform-express';
-import { AwsS3Service } from 'src/aws/aws.service';
+import { AwsS3Service } from '../aws/aws.service';
 
 @ApiTags('actor')
 @Controller('actor')

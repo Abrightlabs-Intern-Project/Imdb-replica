@@ -1,5 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
-import { Movie } from 'src/movie/entities/movie.entity';
+import { Movie } from '../../movie/entities/movie.entity';
 
 export class Genre {
   @ApiProperty()
