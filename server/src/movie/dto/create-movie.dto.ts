@@ -1,7 +1,5 @@
 import { ApiProperty } from '@nestjs/swagger';
 import { Country, Director, Writer } from '@prisma/client';
-import { Actor } from 'src/actor/entities/actor.entity';
-import { Genre } from 'src/genre/entities/genre.entity';
 import { IsArray, IsString, IsUrl } from 'class-validator';
 
 export class CreateMovieDto {
