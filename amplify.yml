@@ -1,42 +1,4 @@
 version: 1
-<<<<<<< HEAD
-applications:
-  - frontend:
-      phases:
-        preBuild:
-          commands:
-            - cd client
-            - npm install
-        build:
-          commands:
-            - npm run build
-      artifacts:
-        baseDirectory: client/dist
-        files:
-          - '**/*'
-      cache:
-        paths:
-          - client/node_modules/**/*
-  - backend:
-      phases:
-        preBuild:
-          commands:
-            - cd server
-            - npm install
-        build:
-          commands:
-            - npm run build
-        postBuild:
-          commands:
-            - npm run start:prod &
-      artifacts:
-        baseDirectory: server/dist
-        files:
-          - '**/*'
-      cache:
-        paths:
-          - server/node_modules/**/*
-=======
 frontend:
   phases:
     preBuild:
@@ -53,4 +15,3 @@ frontend:
   cache:
     paths:
       - client/node_modules/**/*
->>>>>>> 09f60e08fcc83ccd89ddf6f8bbc48f6b44b735b0
