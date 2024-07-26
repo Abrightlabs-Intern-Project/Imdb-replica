@@ -1,13 +1,13 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.handler = void 0;
-const aws_serverless_express_1 = require("aws-serverless-express");
 const middleware_1 = require("aws-serverless-express/middleware");
-const core_1 = require("@nestjs/core");
 const platform_express_1 = require("@nestjs/platform-express");
-const app_module_1 = require("./app.module");
 const express = require("express");
 const aws_sdk_1 = require("aws-sdk");
+const core_1 = require("@nestjs/core");
+const app_module_1 = require("./app.module");
+const aws_serverless_express_1 = require("aws-serverless-express");
 const binaryMimeTypes = [];
 let cachedServer;
 async function bootstrapServer() {

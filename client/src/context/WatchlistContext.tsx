@@ -4,7 +4,11 @@ import { useEffect } from "react";
 import axios from "axios";
 
 <<<<<<< HEAD
+<<<<<<< HEAD
 export const api_url = "https://nestjs-l8pdvdy47-ragulsuryas-projects.vercel.app";
+=======
+export const api_url = "http://localhost:3000";
+>>>>>>> 09f60e08fcc83ccd89ddf6f8bbc48f6b44b735b0
 =======
 export const api_url = "http://localhost:3000";
 >>>>>>> 09f60e08fcc83ccd89ddf6f8bbc48f6b44b735b0
