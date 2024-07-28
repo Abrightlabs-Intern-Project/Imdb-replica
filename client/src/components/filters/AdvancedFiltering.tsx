@@ -17,7 +17,7 @@ const AdvancedFiltering = () => {
 
   useEffect(() => {
     const fetchGenres = async () => {
-      const res = await axios.get("http://localhost:3000/genre")
+      const res = await axios.get(`${api_url}/genre`)
       setGenres(res.data)
     };
     fetchGenres();
