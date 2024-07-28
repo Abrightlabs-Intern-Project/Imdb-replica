@@ -105,7 +105,7 @@ const AddMovie = () => {
       const directorIds = [];
       for (const director of formState.directors) {
         const res = await axios.post(
-          "http://localhost:3000/director",
+          `${api_url}/director`,
           director
         );
         directorIds.push(res.data);
@@ -113,26 +113,26 @@ const AddMovie = () => {
 
       const writerIds = [];
       for (const writer of formState.writers) {
-        const res = await axios.post("http://localhost:3000/writer", writer);
+        const res = await axios.post(`${api_url}/writer`, writer);
         writerIds.push(res.data);
       }
 
       const countryIds = [];
       for (const country of formState.countries) {
-        const res = await axios.post("http://localhost:3000/country", country);
+        const res = await axios.post(`${api_url}/country`, country);
         countryIds.push(res.data);
       }
       
       const genreIds = [];
       for (const genre of formState.genres) {
-        const res = await axios.post("http://localhost:3000/genre", genre);
+        const res = await axios.post(`${api_url}/genre`, genre);
         genreIds.push(res.data);
       }
 
       const formData = new FormData();
       formData.append("poster", formState.poster);
       const uploadRes = await axios.post(
-        "http://localhost:3000/movies/upload",
+        `${api_url}/movies/upload`,
         formData,
         {
           headers: {
@@ -150,7 +150,7 @@ const AddMovie = () => {
         countries: countryIds,
         genres: genreIds,
       };
-      await axios.post("http://localhost:3000/movies", movieData);
+      await axios.post(`${api_url}/movies`, movieData);
       alert("Movie added successfully");
     } catch (err) {
       console.error(err);
