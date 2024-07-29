@@ -5,7 +5,7 @@ const MovieActor: FC<{ url: string; name: string; actorId: string }> = ({ url, n
   const imageUrl = `https://movie-assets.s3.amazonaws.com/${url}`
   return (
     <div className="flex items-center flex-col justify-center gap-3">
-      <Link to={`http://localhost:5173/actor/${actorId}`}>
+      <Link to={`https://main.d2cqlvazj6nhr8.amplifyapp.com/actor/${actorId}`}>
         <img
           src={imageUrl}
           className="object-cover w-[70px] h-[70px] lg:w-[100px] lg:h-[100px] rounded-full hover:cursor-pointer"

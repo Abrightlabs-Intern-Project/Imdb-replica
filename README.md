@@ -68,3 +68,6 @@ This project replicates IMDb, focusing on building a full-stack application with
 
 - **Customization**: Tailor the sections and content further based on your project's specific requirements and setup instructions.
 
+**URL**
+-https://main.d2cqlvazj6nhr8.amplifyapp.com
+
