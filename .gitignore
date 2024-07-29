@@ -1,3 +1,4 @@
 \node_modules
 \nestjs-api.pem
 server/.env
+nestjs-api.pem
