@@ -41,7 +41,7 @@ const SearchBar: FC<SearchBarProps> = ({ setResults }) => {
   }, [input, setResults]);
 
   return (
-    <div className="flex w-full px-10 md:px-0 md:w-[500px] lg:w-[600px]">
+    <div className="flex w-full px-10 md:px-0 md:w-[500px] lg:w-[600px] justify-center">
       <input
         className="rounded-l px-4 py-1 focus:outline-none w-full"
         type="text"

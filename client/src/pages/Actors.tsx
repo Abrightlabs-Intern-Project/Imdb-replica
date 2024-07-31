@@ -12,7 +12,7 @@ const Actors: FC = () => {
     const fetchMovies = async () => {
       try {
         const actorsData = await axios.get(`${api_url}/actor`);
-        setActors(actorsData.data);
+        setActors(actorsData.data); 
       } finally {
         setLoading(false);
       }
@@ -22,7 +22,7 @@ const Actors: FC = () => {
 
   if (loading) return <LoadingLogo />
   return (
-    <div className='bg-black flex flex-wrap gap-10 px-40 py-10 justify-around'>
+    <div className='bg-black flex flex-wrap gap-10 px-10 md:px-40 py-10 justify-around '>
         {actors.map((actor: Actor, index: number) => (
         <div key={index}>
           <ActorCard url={actor.imageUrl} name={actor.actorName} actorId={actor.actorId} page={true}/>

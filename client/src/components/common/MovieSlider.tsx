@@ -17,6 +17,7 @@ const MovieSlider: FC<{ data: Movie[] }> = ({ data }) => {
     slidesToScroll: 5,
     autoplay: true,
     autoplaySpeed: 10000,
+    arrows : false,
   };
 
   useEffect(() => {
@@ -25,8 +26,12 @@ const MovieSlider: FC<{ data: Movie[] }> = ({ data }) => {
         setSlidesToShow(1);
       } else if (window.matchMedia("(max-width: 640px)").matches) {
         setSlidesToShow(2);
-      } else if (window.matchMedia("(max-width: 1024px)").matches) {
+      } else if (window.matchMedia("(max-width: 900px)").matches) {
         setSlidesToShow(3);
+      } else if (window.matchMedia("(max-width: 1200px)").matches) {
+        setSlidesToShow(4);
+      } else if (window.matchMedia("(max-width: 1400px)").matches) {
+        setSlidesToShow(5);
       } else {
         setSlidesToShow(6);
       }

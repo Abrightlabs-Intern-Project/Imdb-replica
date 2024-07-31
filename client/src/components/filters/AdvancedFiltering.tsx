@@ -41,16 +41,16 @@ const AdvancedFiltering = () => {
 
 
   return (
-    <div className='px-40 py-5'>
+    <div className='px-2 lg:px-32 py-5'>
       <header className='flex flex-col gap-5'>
         <span className='text-4xl text-[#231e1e] font-semibold mt-5'>Advanced title search</span>
         <p>Discover IMDb's robust title search. Mix and match info to refine your searches. Looking for 1970s Canadian horror films rated above 6 by at least 100 users? Find them here. All fields below are optional, but at least one is needed for a search. For ranges (release date, votes), use 'min' for larger/after and 'max' for smaller/before. You can also press 'Enter' after checking a box or focusing on a field. To learn more please visit our <a className='text-blue-600 hover:underline' href="https://help.imdb.com/article/imdb/discover-watch/using-the-advanced-search-feature/GLUEUYWPQNPTEVPU#">help site</a> and <a className='text-blue-600 hover:underline' href="https://help.imdb.com/article/imdb/new-features-updates/advanced-search-redesign/G73SLJ6K33AA6NB5#">FAQs.</a></p>
       </header>
-      <div className='grid grid-cols-3 gap-10'>
-        <div className='my-8'>
-         <span className='text-xl font-semibold'>Search filters</span>
+      <div className='grid grid-cols-1 md:grid-cols-3 gap-10 '>
+        <div className='my-8 ml-8 md:ml-0'>
+         <span className='text-xl font-semibold w-30'>Search filters</span>
          <form action="">
-         <div className='col-span-1 flex flex-col gap-4 border px-4 py-3 shadow-md mt-5'>
+         <div className='col-span-1 flex flex-col gap-4 border px-4 py-3 shadow-md mt-5 '>
           <label>
             <span className='block text-sm font-semibold my-1'>Title</span>
             <input

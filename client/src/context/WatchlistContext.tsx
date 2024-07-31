@@ -3,7 +3,7 @@ import { useAuthenticator } from "@aws-amplify/ui-react";
 import { useEffect } from "react";
 import axios from "axios";
 
-export const api_url = "https://nestjs-auvgsklwc-ragulsuryas-projects.vercel.app";
+export const api_url = "https://nestjs-6aftsvolr-ragulsuryas-projects.vercel.app";
 
 type WatchlistProviderProps = {
   children: ReactNode;

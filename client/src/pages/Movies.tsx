@@ -26,7 +26,7 @@ const Movies = () => {
   if (loading) return <LoadingLogo/>
 
   return (
-    <div className="bg-black flex flex-wrap gap-10 px-40 py-10">
+    <div className="bg-black flex flex-wrap gap-5 px-10 md:px-40 py-10 justify-center">
       {movies.map((movie) => (
         <div key={movie.movieId} className="w-[200px]">
           <MovieCard movie={movie} />

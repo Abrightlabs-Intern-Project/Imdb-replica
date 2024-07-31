@@ -9,7 +9,7 @@ const ActorCard: FC<{ url: string; name: string; actorId: string, page: boolean 
       <Link to={`https://main.d2cqlvazj6nhr8.amplifyapp.com/actor/${actorId}`}>
         <img
           src={actorImageUrl}
-          className={`${page ? 'rounded-md h-[70px] w-[70px] lg:w-[200px] lg:h-[200px]' : 'rounded-full w-[70px] h-[70px] lg:w-[170px] lg:h-[170px]'} object-cover  object-top`}
+          className={`${page ? 'rounded-md h-[100px] w-[100px] sm:h-[125px] sm:w-[125px] md:h-[150px] md:w-[150px] lg:w-[200px] lg:h-[200px]' : 'rounded-full w-[100px] h-[100px] sm:h-[125px] sm:w-[125px] md:h-[150px] md:w-[150px] lg:w-[170px] lg:h-[170px]'} object-cover  object-top`}
         />
       </Link> 
       <span className={`${page ? 'text-white' : 'text-black'}`}>{name}</span>

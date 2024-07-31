@@ -44,7 +44,7 @@ const Home: FC = () => {
       </div>
 
       <div className="flex flex-col pt-6 ">
-        <span className="font-semibold text-xl pl-28 md:pl-32 lg:pl-48">
+        <span className="font-semibold text-xl pl-20 md:pl-32 lg:pl-48">
           <span className="text-yellow-400">|</span> Top picks{" "}
           <span className="text-yellow-400">&gt;</span>
         </span>
@@ -52,7 +52,7 @@ const Home: FC = () => {
           <MovieSlider data={movies} />
         </div>
       </div>
-      <div className="flex flex-col pt-6 gap-2  pl-28 md:pl-32 lg:pl-48">
+      <div className="flex flex-col pt-6 gap-2  pl-20 md:pl-32 lg:pl-48">
         <span className="font-semibold text-xl">
           <span className="text-yellow-400">|</span> More To Watch{" "}
         </span>
@@ -73,7 +73,7 @@ const Home: FC = () => {
         </div>
       </div>
       <div className="flex flex-col pt-6">
-        <span className="font-semibold text-xl pl-28 md:pl-32 lg:pl-48">
+        <span className="font-semibold text-xl pl-20 md:pl-32 lg:pl-48">
           <span className="text-yellow-400">|</span> Fan Favorites{" "}
           <span className="text-yellow-400">&gt;</span>
         </span>
@@ -82,7 +82,7 @@ const Home: FC = () => {
         </div>
       </div>
       <div className="flex flex-col py-6">
-        <span className="font-semibold text-xl pl-28 md:pl-32 lg:pl-48">
+        <span className="font-semibold text-xl pl-20 md:pl-32 lg:pl-48">
           <span className="text-yellow-400">|</span> Most Popular Actors{" "}
         </span>
         <div className=" flex justify-center">
@@ -90,7 +90,7 @@ const Home: FC = () => {
         </div>
       </div>
       <div className="flex flex-col py-6">
-        <span className="font-semibold text-xl pl-28 md:pl-32 lg:pl-48">
+        <span className="font-semibold text-xl pl-20 md:pl-32 lg:pl-48">
           <span className="text-yellow-400">|</span> Top 10 on IMDb this week{" "}
           <span className="text-yellow-400">&gt;</span>
         </span>

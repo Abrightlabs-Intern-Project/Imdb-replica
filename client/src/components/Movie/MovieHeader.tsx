@@ -35,7 +35,7 @@ const MovieHeader: FC<{movie: Movie; movieActors: Actor[]; movieDirectors: Direc
           </span>
         </div>
         <div className="flex flex-col py-2 gap-8 md:flex-row">
-          <img className="w-72" src={posterUrl} alt="" />
+          <img className="w-72 flex" src={posterUrl} alt="" />
           {videoId && (
             <div style={{ width: "100%" }}>
               <YouTube

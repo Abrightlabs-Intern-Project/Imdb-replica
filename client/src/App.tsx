@@ -51,7 +51,6 @@ const App: FC<{ signOut: any; user: any }> = ({ signOut, user }) => {
         userName: user.username,
         userId: user.userId,
       };
-      console.log(`${api_url}/user/login`)
       await axios.post(`${api_url}/user/login`, loginData);
     } catch (error) {
       console.log(error);

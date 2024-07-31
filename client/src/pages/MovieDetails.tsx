@@ -58,7 +58,7 @@ const MovieDetails: FC = () => {
           <UserReviews />
           <TechnicalSpecs movie={movieData} />
         </div>
-        <div className="col-span-1 pt-5 flex flex-col gap-5">
+        <div className="col-span-1 pt-5 flex flex-col gap-5 px-2">
           <span className="font-bold text-3xl">
             <span className="text-yellow-600">|</span> More to explore{" "}
           </span>

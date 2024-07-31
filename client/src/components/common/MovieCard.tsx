@@ -17,8 +17,8 @@ const MovieCard: FC<{ movie: Movie }> = ({ movie }) => {
   const posterUrl = `https://movie-assets.s3.amazonaws.com/${movie.poster}`
 
   return (
-    <div className="flex flex-col bg-[#1a1a1a] rounded">
-      <img className="w-full object-cover h-72 hover:cursor-pointer" onClick={ () => {
+    <div className="text-xs sm:text-sm md:text-lg flex flex-col bg-[#1a1a1a] rounded">
+      <img className="w-full object-cover hover:cursor-pointer sm:h-60 lg:h-72" onClick={ () => {
         navigate(`/movie/${movie.movieId}`)
         }} src={posterUrl} alt="" />
       <div className="flex flex-col gap-2 py-2 px-3">

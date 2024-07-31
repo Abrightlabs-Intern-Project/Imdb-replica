@@ -22,10 +22,10 @@ const SearchSuggestions: FC<SearchSuggestionsProps> = ({
         >
           <div className=" flex border border-black">
             <img src={`https://movie-assets.s3.amazonaws.com/${movie.poster}`}  className=" h-20 w-14" alt="" />
-            <div className="py- bg-[#201c1c]  hover:bg-[#383434] text-white text-lg px-4 flex flex-col w-full md:w-[400px] lg:w-[500px] text-start">
-              <div>{movie.title}</div>
-              <div className="text-sm">{movie.year}</div>
-              <div className="text-sm">{movie.awards}</div>
+            <div className="py- bg-[#201c1c]  hover:bg-[#383434] text-white px-4 flex flex-col w-full md:w-[400px] lg:w-[500px] text-start">
+              <div className="text:xs sm:text-lg">{movie.title}</div>
+              <div className="text:xs sm:text-sm">{movie.year}</div>
+              <div className="text:xs sm:text-sm hidden sm:block">{movie.awards}</div>
             </div>
           </div>
         </Link>
