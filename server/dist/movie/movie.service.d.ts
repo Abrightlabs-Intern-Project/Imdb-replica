@@ -27,13 +27,10 @@ export declare class MovieService {
         boxOffice: string;
     })[]>;
     find(movieId: string): Promise<{
-        countries: {
-            countryId: string;
-            countryName: string;
-        }[];
-        genres: {
-            genreId: string;
-            genreName: string;
+        actors: {
+            actorId: string;
+            actorName: string;
+            imageUrl: string;
         }[];
         directors: {
             directorId: string;
@@ -43,10 +40,13 @@ export declare class MovieService {
             writerId: string;
             writerName: string;
         }[];
-        actors: {
-            actorId: string;
-            actorName: string;
-            imageUrl: string;
+        genres: {
+            genreId: string;
+            genreName: string;
+        }[];
+        countries: {
+            countryId: string;
+            countryName: string;
         }[];
     } & {
         movieId: string;
